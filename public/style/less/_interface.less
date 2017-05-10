@@ -1,0 +1,120 @@
+// main: panel.less
+/*
+  interface
+*/
+
+html, body {
+  font-size: @font-size-base;
+  font-family: @font-family-base;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding: 0;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: .5rem;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.75rem;
+}
+h4 {
+  font-size: 1.5rem;
+}
+h5 {
+  font-size: 1.25rem;
+}
+h6 {
+  font-size: 1rem;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.close {
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+    cursor: pointer;
+    &:hover {
+      opacity: 1
+    }
+}
+
+.al-2x {
+  font-size: 2em;
+  margin-right: .2em;
+}
+
+.uid {
+  white-space: nowrap;
+}
+
+.split {
+  display: flex;
+  .box {
+    flex: 10;
+    padding-right: 1em;
+  }
+  .box:last-child {
+    padding-right: 0;
+  }
+
+  .box-2x {
+    flex: 20;
+  }
+
+  .box-3x {
+    flex: 30;
+  }
+}
+.main {
+  position: relative
+}
+
+.main-content {
+  position: relative;
+  margin: 2em auto;
+  & {
+    width: 90%;
+  }
+  &.start {
+    max-width: 1024px;
+  }
+}
+
+::-webkit-scrollbar
+{
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track
+{
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb
+{
+  background: rgba(0, 0, 0, 0.5);
+}

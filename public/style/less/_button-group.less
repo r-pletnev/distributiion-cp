@@ -1,0 +1,100 @@
+// main: panel.less
+/*
+  button-group
+*/
+
+// scss-lint:disable QualifyingElement
+
+// Make the div behave like a button
+.btn-group,
+.btn-group-vertical {
+  display: inline-flex;
+
+  > .btn {
+    position: relative;
+    flex: 0 1 auto;
+    margin-left: -@input-btn-border-width;
+
+    // Bring the hover, focused, and "active" buttons to the fron to overlay
+    // the borders properly
+    &:focus,
+    &:active,
+    &.active {
+      z-index: 2;
+    }
+  }
+}
+
+.btn-group > .btn:not(:first-child):not(:last-child) {
+  border-radius: 0;
+}
+
+.btn-group-sm > .btn { .btn-sm(); }
+.btn-group-lg > .btn { .btn-lg(); }
+
+.btn-group {
+  .btn:first-child:not(:last-child){
+    .round-left(@small-round);
+  }
+
+  .btn:last-child:not(:first-child){
+    .round-right(@small-round);
+  }
+
+  &-sm {
+    .btn:first-child:not(:last-child) {
+      .round-left(@small-round);
+    }
+
+    .btn:last-child:not(:first-child){
+      .round-right(@small-round);
+    }
+  }
+
+  &-lg {
+    .btn:first-child:not(:last-child) {
+      .round-left(@medium-round);
+    }
+
+    .btn:last-child:not(:first-child){
+      .round-right(@medium-round);
+    }
+  }
+}
+
+.btn-group-vertical {
+  flex-direction: column;
+  .btn {
+    margin-top: -@input-btn-border-width;
+    margin-left: 0;
+  }
+
+  .btn:first-child:not(:last-child){
+    .round-top(@small-round);
+  }
+
+  .btn:last-child:not(:first-child){
+    .round-bottom(@small-round);
+  }
+
+  &-sm {
+    .btn:first-child:not(:last-child) {
+      .round-top(@small-round);
+    }
+
+    .btn:last-child:not(:first-child){
+      .round-bottom(@small-round);
+    }
+  }
+
+  &-lg {
+    .btn:first-child:not(:last-child) {
+      .round-top(@medium-round);
+    }
+
+    .btn:last-child:not(:first-child){
+      .round-bottom(@medium-round);
+    }
+  }
+
+}

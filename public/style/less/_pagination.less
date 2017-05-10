@@ -1,0 +1,134 @@
+// main: panel.less
+/*
+  pagination
+*/
+
+@pagination-padding-y: @btn-padding-y;
+@pagination-padding-x: @btn-padding-x/2;
+
+@pagination-border-color: @input-border-color;
+@pagination-border-radius: @input-border-radius;
+@pagination-border-width: @input-btn-border-width;
+
+@pagination-bg: @white;
+@pagination-border: @btn-default-border;
+
+@pagination-default-color: @btn-default-color;
+
+.rc-pagination {
+  display: inline-flex;
+  align-content: center;
+  align-items: stretch;
+  user-select: none;
+  padding: 0;
+
+  a {
+    display: flex;
+    padding: @pagination-padding-y @pagination-padding-x;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .item() {
+    position: relative;
+    display: flex;
+    flex: 1;
+    margin: 0 .1em;
+    align-items: stretch;
+    justify-content: center;
+    line-height: 1;
+    border: @pagination-border-width solid @pagination-border-color;
+    background-color: @pagination-bg;
+    .round(3px);
+    box-sizing: border-box;
+    &:focus:not(&-active), &:active:not(&-active) {
+      background-color: lighten(@lightgray, 15%);
+      .box-shadow(0 0 0 2px, @lightgray, .5);
+    }
+  }
+
+  &-item {
+    .item();
+    .button-variant(@btn-secondary-color, @btn-secondary-bg, @btn-secondary-border);
+
+    a {
+      color: @pagination-default-color;
+    }
+
+    &-active {
+    .button-variant(@btn-warning-color, @btn-warning-bg, @btn-warning-border);
+      a {
+        color: @btn-warning-color;
+      }
+    }
+  }
+
+  &-jump-prev, &-jump-next {
+    .item;
+    width: 40px;
+    text-align: center;
+    border-color: transparent;
+    &:after {
+      content: "...";
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      z-index: 5;
+      cursor: pointer;
+    }
+
+    &:hover {
+      border-color: @pagination-border-color;
+      .button-variant(@btn-secondary-color, @btn-secondary-bg, @btn-secondary-border);
+    }
+
+  }
+
+  &-jump-prev {
+    &:hover {
+      &:after {
+        content: "«";
+      }
+    }
+  }
+
+  &-jump-next {
+    &:hover {
+      &:after {
+        content: "»";
+      }
+    }
+  }
+
+  &-prev, &-next {
+    .item;
+    .button-variant(@btn-secondary-color, @btn-secondary-bg, @btn-secondary-border);
+  }
+
+  &-prev {
+    a {
+      &:after {
+        content: "‹";
+        display: block;
+      }
+    }
+  }
+
+  &-next {
+    a {
+      &:after {
+        content: "›";
+        display: block;
+      }
+    }
+  }
+
+  &-disabled {
+    cursor: not-allowed;
+  }
+}

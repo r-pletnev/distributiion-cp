@@ -1,0 +1,117 @@
+// main: panel.less
+/*
+  input-group
+*/
+
+@input-group-addon-bg: lighten(@lightgray, 10%);
+@input-group-addon-border-color: @input-btn-border-color;
+
+
+.input-group {
+  position: relative;
+  display: flex;
+  width: 100%;
+
+  .form-control {
+    // Ensure that the input is always above the *appended* addon button for
+    // proper border colors.
+    position: relative;
+    z-index: 2;
+    flex: 1 1 auto;
+    flex-grow: 2;
+    // Add width 1% and flex-basis auto to ensure that button will not wrap out
+    // the column. Applies to IE Edge+ and Firefox. Chrome does not require this.
+    width: auto;
+    margin-bottom: 0;
+
+  }
+}
+
+
+.input-group-addon,
+.input-group-btn {
+  white-space: nowrap;
+  vertical-align: middle; // Match the inputs
+}
+
+
+// Sizing options
+//
+// Remix the default form control sizing classes into new ones for easier
+// manipulation.
+
+.input-group-lg > .form-control,
+.input-group-lg > .input-group-addon,
+.input-group-lg > .input-group-btn > .btn {
+  .form-control-lg();
+}
+.input-group-sm > .form-control,
+.input-group-sm > .input-group-addon,
+.input-group-sm > .input-group-btn > .btn {
+  .form-control-sm();
+}
+
+
+//
+// Text input groups
+//
+
+.input-group-addon {
+  display: flex;
+  align-items: center;
+  padding: @input-padding-y @input-padding-x;
+  font-size: @font-size-base; // Match inputs
+  color: @input-color;
+  text-align: center;
+  background-color: @input-group-addon-bg;
+  border: @input-btn-border-width solid @input-group-addon-border-color;
+  .round(@input-border-radius);
+
+  // Sizing
+  &.form-control-sm {
+    padding: @input-padding-y-sm @input-padding-x-sm;
+    font-size: @font-size-sm;
+    .round(@input-border-radius-sm);
+  }
+  &.form-control-lg {
+    padding: @input-padding-y-lg @input-padding-x-lg;
+    font-size: @font-size-lg;
+    .round(@input-border-radius-lg);
+  }
+
+  // scss-lint:disable QualifyingElement
+  // Nuke default margins from checkboxes and radios to vertically center within.
+  input[type="radio"],
+  input[type="checkbox"] {
+    margin-top: 0;
+  }
+  // scss-lint:enable QualifyingElement
+}
+
+
+//
+// Reset rounded corners
+//
+
+.input-group .form-control:not(:last-child),
+.input-group-addon:not(:last-child) {
+  .round-left(@small-round);
+}
+.input-group .form-control:not(:last-child),
+.input-group-addon:not(:last-child) {
+  border-right: 0;
+}
+
+.input-group .form-control:not(:first-child):not(:last-child),
+.input-group-addon:not(:first-child):not(:last-child) {
+  .round(0);
+}
+
+.input-group .form-control:not(:first-child),
+.input-group-addon:not(:first-child) {
+  .round-right(@small-round);
+}
+
+.form-control + .input-group-addon:not(:first-child) {
+  border-left: 0;
+}

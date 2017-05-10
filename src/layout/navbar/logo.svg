@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="256"
+   height="256"
+   id="svg4270"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   viewBox="0 0 256 256"
+   sodipodi:docname="antlace.svg"
+   inkscape:export-filename="/media/panda/Dev/Design/SVG/logos/antlace.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs4272" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="156.78234"
+     inkscape:cy="68.442086"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:document-units="px"
+     inkscape:grid-bbox="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1006"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:snap-grids="true"
+     inkscape:object-paths="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4359"
+       spacingx="16"
+       spacingy="16" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata4275">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     transform="translate(0,192)">
+    <path
+       style="fill:#f7931e;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 128,-190 a 7,7 0 0 0 -2.92383,0.65625 l -1.05469,0.5957 a 7,7 0 0 0 -0.0176,0.0117 l -104.119144,58.96875 -0.457032,0.25977 a 7,7 0 0 0 -0.01367,0.006 l -1.603515,0.90625 A 7,7 0 0 0 15,-123 l 0,10 0,3 0,92 0,3 0,10 a 7,7 0 0 0 2.810547,5.5957 l 1.603515,0.90625 a 7,7 0 0 0 0.01367,0.00586 l 0.457032,0.25977 104.119144,58.96875 a 7,7 0 0 0 0.0176,0.01172 l 1.05469,0.5957 A 7,7 0 0 0 128,62 a 7,7 0 0 0 2.92383,-0.65625 l 1.05469,-0.5957 a 7,7 0 0 0 0.0176,-0.01172 L 236.11523,1.76758 236.57227,1.50781 a 7,7 0 0 0 0.0137,-0.00586 L 238.18945,0.5957 A 7,7 0 0 0 241,-5 l 0,-10 0,-3 0,-92 0,-3 0,-10 a 7,7 0 0 0 -2.81055,-5.5957 l -1.60351,-0.90625 a 7,7 0 0 0 -0.0137,-0.006 l -0.45704,-0.25977 -104.11914,-58.96875 a 7,7 0 0 0 -0.0176,-0.0117 l -1.05469,-0.5957 A 7,7 0 0 0 128,-190 Z"
+       id="path5028" />
+    <path
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 128,-152 a 24,24 0 0 1 24,24 24,24 0 0 1 -9.60742,19.17578 l 9.82617,29.47852 A 48,48 0 0 1 160,-80 a 48,48 0 0 1 48,48 48,48 0 0 1 -48,48 48,48 0 0 1 -48,-48 48,48 0 0 1 0.68945,-7.76953 L 83.169922,-49.60938 A 24,24 0 0 1 64,-40 24,24 0 0 1 40,-64 24,24 0 0 1 64,-88 24,24 0 0 1 88,-64 l 29.47266,9.82422 a 48,48 0 0 1 20.3457,-20.36719 L 128,-104 a 24,24 0 0 1 -24,-24 24,24 0 0 1 24,-24 z"
+       id="path4361" />
+  </g>
+</svg>

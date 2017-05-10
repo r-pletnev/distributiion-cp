@@ -1,0 +1,54 @@
+// main: panel.less
+/*
+  tags
+*/
+@tag-bg: @lightgray;
+@tag-remove-bg: @danger;
+@tag-hover-bg: darken(@tag-bg, 5%);
+@tag-active-bg: @primary;
+
+@tag-padding-y: @btn-padding-y-sm;
+@tag-padding-x: @btn-padding-y;
+@tag-round: @small-round;
+
+@tag-remove-margin: 0;
+
+.tags {
+  display: flex;
+  margin-top: @tag-padding-y;
+  user-select: none;
+  .tag {
+    display: flex;
+    margin-right: .25em;
+    flex-wrap: wrap;
+    .text {
+      padding: @tag-padding-y @tag-padding-x;
+      .round(@tag-round);
+      background-color: @tag-bg;
+      cursor: default;
+      &:not(:last-child):first-child {
+        .round-left(@tag-round);
+      }
+      &:hover {
+        background-color: @tag-hover-bg;
+      }
+    }
+    &.active {
+      .text, .text:hover {
+        color: @white;
+        background-color: @tag-active-bg;
+      }
+    }
+    .tag-remove {
+      padding: @tag-padding-y @tag-padding-x;
+      margin-left: @tag-remove-margin;
+      background-color: @tag-bg;
+      .round-right(@tag-round);
+      cursor: pointer;
+      &:hover {
+        color: @white;
+        background-color: @danger;
+      }
+    }
+  }
+}

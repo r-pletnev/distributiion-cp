@@ -1,0 +1,60 @@
+// main: panel.less
+/*
+  dropdowns
+*/
+
+@tab-border-width: .15em;
+@tab-active-border-color: @warning;
+
+@tab-padding-y: @btn-padding-y * 2;
+@tab-padding-x: @btn-padding-x;
+
+@font-size-tab-icon: 24px;
+
+@tab-content-padding-y: @btn-padding-y * 2;
+@tab-content-padding-x: @btn-padding-x;
+
+.tabs {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.tabs-scroll {
+  display: flex;
+  position: relative;
+  .tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    position: relative;
+    padding: @tab-padding-y @tab-padding-x;
+    font-size: @font-size-base;
+    border-bottom: @tab-border-width solid transparent;
+    white-space: nowrap;
+    cursor: pointer;
+    .transition(all);
+    &.active {
+      border-color: @tab-active-border-color;
+    }
+    .icon {
+      display: none;
+    }
+
+    @media only screen and (max-width: 800px) {
+      .icon {
+        display: block;
+        margin-right: 0;
+        font-size: @font-size-tab-icon;
+      }
+      .text {
+        display: none;
+      }
+    }
+  }
+}
+
+.tab-content {
+  padding: @tab-content-padding-y @tab-content-padding-x;
+}

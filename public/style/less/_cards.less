@@ -1,0 +1,59 @@
+// main: panel.less
+/*
+  cards
+*/
+
+@card-border-radius: @medium-round;
+@card-bg: @white;
+@card-border-width: 1px;
+@card-border-color: @lightgray;
+
+@card-spacer-y: 1em;
+@card-spacer-x: 1em;
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -(@card-spacer-y / 2);
+  //align-items: flex-start;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  margin: @card-spacer-y / 2;
+  flex: 1 2 20em;
+  flex-direction: column;
+  min-height: 10em;
+  background-color: @card-bg;
+  border: @card-border-width solid @card-border-color;
+  .round(@card-border-radius);
+}
+
+.card-block {
+  // Enable `flex-grow: 1` for decks and groups so that card blocks take up
+  // as much space as possible, ensuring footers are aligned to the bottom.
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  padding: @card-spacer-x;
+  p {
+    flex: 2;
+  }
+  a {
+    align-self: flex-start;
+  }
+}
+
+.card-title {
+  margin-bottom: @card-spacer-y;
+}
+
+.card-subtitle {
+  margin-top: -(@card-spacer-y / 2);
+  margin-bottom: 0;
+}
+
+.card-text:last-child {
+  margin-bottom: 0;
+}

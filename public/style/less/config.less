@@ -1,0 +1,86 @@
+// main: panel.less
+
+// border-radius
+.round(@radius) {
+  -webkit-border-radius: @arguments;
+  -moz-border-radius: @arguments;
+  border-radius: @arguments;
+};
+
+.round-top(@radius) {
+  @rounded: @radius @radius 0 0;
+  -webkit-border-radius: @rounded;
+  -moz-border-radius: @rounded;
+  border-radius: @rounded;
+};
+
+.round-bottom(@radius) {
+  @rounded: 0 0 @radius @radius;
+  -webkit-border-radius: @rounded;
+  -moz-border-radius: @rounded;
+  border-radius: @rounded;
+}
+
+.round-left(@radius) {
+  @rounded: @radius 0 0 @radius;
+  -webkit-border-radius: @rounded;
+  -moz-border-radius: @rounded;
+  border-radius: @rounded;
+}
+
+.round-right(@radius) {
+  @rounded: 0 @radius @radius 0;
+  -webkit-border-radius: @rounded;
+  -moz-border-radius: @rounded;
+  border-radius: @rounded;
+}
+
+.transition(@transition, @time: .25s, @delay: 0) {
+  @config: @transition @time ease-out @delay;
+  -webkit-transition: @config;
+  -moz-transition: @config;
+  -transition: @config;
+};
+
+.box-shadow(@size, @color: @dark, @opacity: 0) {
+  @shadow-color: rgba(red(@color),green(@color),blue(@color), @opacity);
+  @shadow: @size @shadow-color;
+  -webkit-box-shadow: @shadow;
+  -moz-box-shadow: @shadow;
+  box-shadow: @shadow;
+}
+
+.gradient(@color1, @color2, @dir: to top) {
+  @gradient: @dir, @color2, @color1;
+  background-image: -webkit-linear-gradient(@gradient);
+  background-image: -moz-linear-gradient(@gradient);
+  background-image: linear-gradient(@gradient);
+}
+
+// interface
+@font-size-base: 14px;
+@font-family-base: "Open Sans";
+@font-color-base: #333;
+
+
+// round
+@small-round: 3px;
+@medium-round: 5px;
+@big-round: 7px;
+
+// colors
+@lightgray: #ccc;
+@gray: #999;
+@lightdark: #666;
+@dark: #333;
+@success: #5cb85c;
+@primary: #0275d8;
+@danger: #d9534f;
+@warning: #f0ad4e;
+@white: #ffffff;
+@input-btn-border-color: #cccccc;
+
+@select-bg1: darken(@white, 1%);
+@select-bg2: darken(@white, 4%);
+
+@text-muted: @gray;

@@ -1,0 +1,294 @@
+// main: panel.less
+/*
+  forms
+*/
+
+@input-padding-y: @btn-padding-y;
+@input-padding-x: @btn-padding-x - 10;
+@input-line-height: 1;
+@input-color: @font-color-base;
+@input-bg: @white;
+@input-border-color: @lightgray;
+@input-border-radius: @btn-border-radius;
+@input-color-placeholder:0;
+@input-bg-disabled: aliceblue;
+
+@input-color-focus: @dark;
+@input-bg-focus: @white;
+@input-border-focus: lighten(@primary, 30%);
+@input-box-shadow-focus: lighten(@primary, 30%);
+
+@input-padding-y-sm: @btn-padding-y-sm;
+@input-padding-x-sm: @btn-padding-x-sm - 10;
+@input-height-sm: @button-height-sm;
+@input-border-radius-sm: @btn-border-radius-sm;
+
+@input-height: @button-height;
+
+@input-padding-y-lg: @btn-padding-y-lg;
+@input-padding-x-lg: @btn-padding-x-lg;
+@input-height-lg: @button-height-lg;
+@input-border-radius-lg: @btn-border-radius-lg;
+
+@form-text-margin-top: .5em;
+@form-group-margin-bottom: @form-text-margin-top * 3;
+
+@form-check-input-gutter: 0;
+@form-check-input-margin-y: .5em;
+@form-check-margin-bottom: .1em;
+
+@hint-color: darken(@danger, 10%);
+@hint-padding-y: .1em;
+@hint-padding-x: 0;
+
+select.form-control-sm {
+  &:not([size]):not([multiple]) {
+    height: @input-height-sm;
+  }
+}
+
+.form-control-lg {
+  padding: @input-padding-y-lg @input-padding-x-lg;
+  font-size: @font-size-lg;
+  @include border-radius(@input-border-radius-lg);
+}
+
+select.form-control-lg {
+  &:not([size]):not([multiple]) {
+    height: @input-height-lg;
+  }
+}
+
+.form-control {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  flex: 1;
+  padding: @input-padding-y @input-padding-x;
+  font-size: @font-size-base;
+  line-height: @input-line-height;
+  color: @input-color;
+  border: @input-btn-border-width solid @input-border-color;
+  box-sizing: border-box;
+  .round(@input-border-radius);
+
+  &:not(textarea) {
+    height: @input-height;
+  }
+
+  &:not(.dropdown) {
+    background-color: @input-bg;
+    background-image: none;
+    background-position: calc(100% - .5em)!important;
+    background-clip: padding-box;
+  }
+
+  //@include box-shadow(@input-box-shadow);
+  //@include transition(@input-transition);
+
+  // Unstyle the caret on `<select>`s in IE10+.
+  &::-ms-expand {
+    background-color: transparent;
+    border: 0;
+  }
+
+  &::placeholder {
+    color: @input-color-placeholder;
+    opacity: 1;
+  }
+
+  &:focus {
+    color: @input-color-focus;
+    background-color: @input-bg-focus;
+    border-color: @input-border-focus;
+    outline: none;
+    .box-shadow(0 0 2px 2px, @input-box-shadow-focus, .5);
+    z-index: 5
+  }
+
+  &-error {
+    border-color: lighten(@danger, 15%)!important;
+    .box-shadow(0 0 2px 2px, @danger, .5)!important;
+  }
+
+  &:disabled,
+  &[readonly] {
+    background-color: @input-bg-disabled;
+    opacity: 1;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+select.form-control {
+  &:not([size]):not([multiple]) {
+    //@select-border-width: (@input-btn-border-width * 2);
+    //height: calc(@input-height + @select-border-width);
+
+    .gradient(@select-bg1, @select-bg2);
+  }
+
+  &:focus::-ms-value {
+    color: @input-color;
+    background-color: @input-bg;
+  }
+
+  &:not([size]):not([multiple]):hover {
+    .gradient(@select-bg1, darken(@select-bg2, 5%));
+  }
+
+  &:not([size]):not([multiple]):focus {
+    .gradient(darken(@select-bg2, 5%), darken(@select-bg2, 5%));
+    .box-shadow(0 0 2px 2px, @input-box-shadow-focus, .8);
+    z-index: 5
+  }
+
+}
+
+textarea.form-control {
+  resize: vertical;
+}
+
+.form-control-file,
+.form-control-range {
+  display: block;
+  width: 100%;
+  padding: @input-padding-y @input-padding-x;
+  box-sizing: border-box;
+}
+
+.form-control-static {
+  padding-top: @input-padding-y;
+  padding-bottom: @input-padding-y;
+  margin-bottom: 0; // match inputs if this class comes on inputs with default margins
+  line-height: @input-line-height;
+  height: @input-height;
+  border: solid transparent;
+  border-width: @input-btn-border-width 0;
+
+  &.form-control-sm,
+  &.form-control-lg {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+
+// Form control sizing
+//
+// Build on `.form-control` with modifier classes to decrease or increase the
+// height and font-size of form controls.
+//
+// The `.form-group-* form-control` variations are sadly duplicated to avoid the
+// issue documented in https://github.com/twbs/bootstrap/issues/15074.
+
+.form-control-sm {
+  padding: @input-padding-y-sm @input-padding-x-sm;
+  font-size: @font-size-sm;
+  height: @input-height-sm;
+  .round(@input-border-radius-sm);
+}
+
+select.form-control-sm {
+  &:not([size]):not([multiple]) {
+    height: @input-height-sm;
+  }
+}
+
+.form-control-lg {
+  padding: @input-padding-y-lg @input-padding-x-lg;
+  font-size: @font-size-lg;
+  height: @input-height-lg;
+  .round(@input-border-radius-lg);
+}
+
+select.form-control-lg {
+  &:not([size]):not([multiple]) {
+    height: @input-height-lg;
+  }
+}
+select.form-control {
+  &[size],
+  &[multiple] {
+    height: auto;
+  }
+}
+
+
+// Form groups
+//
+// Designed to help with the organization and spacing of vertical forms. For
+// horizontal forms, use the predefined grid classes.
+
+.form-group {
+  margin-bottom: @form-group-margin-bottom;
+  .group {
+    position: relative;
+  }
+  .hint-error {
+    display: block;
+    margin-top: 6px;
+    padding: @hint-padding-y @hint-padding-x;
+    color: @hint-color;
+  }
+}
+
+.form-text {
+  display: block;
+  margin-top: @form-text-margin-top;
+  color: @text-muted;
+}
+
+
+.form-check {
+  position: relative;
+  display: block;
+  margin-bottom: @form-check-margin-bottom;
+
+  &.disabled {
+    .form-check-label {
+      color: @text-muted;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.form-check-label {
+  padding-left: @form-check-input-gutter;
+  margin-bottom: 0; // Override default `<label>` bottom margin
+  cursor: pointer;
+}
+
+.form-check-input {
+  position: absolute;
+  margin-top: @form-check-input-margin-y;
+  margin-left: -@form-check-input-gutter;
+
+  &:only-child {
+    position: static;
+  }
+}
+
+form {
+  .form-group > label {
+    display: flex;
+    font-size: 1.2em;
+    padding-bottom: .25em;
+  }
+  fieldset {
+    padding: 0;
+    border: 0;
+  }
+
+  legend {
+    display: flex;
+    width: 100%;
+    padding: 0;
+    font-size: 1.2em;
+    padding-bottom: .25em;
+    line-height: inherit;
+  }
+}

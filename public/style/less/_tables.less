@@ -1,0 +1,409 @@
+// main: panel.less
+/*
+  tables
+*/
+
+@spacer: 0;
+
+@table-cell-padding: @btn-padding-y*2;
+
+@table-sm-cell-padding: @table-cell-padding/2;
+
+@table-border-width: 1px;
+@table-border-color: @lightgray;
+
+@table-bg-accent: @lightgray;
+@table-bg-hover: @dark;
+
+@tr-selected-bg: lighten(spin(@warning, 10%), 25%);
+
+table {
+  border-spacing: 0 0;
+  border-collapse: collapse;
+}
+
+.table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: @spacer;
+
+  th,
+  td {
+    padding: @table-cell-padding;
+    vertical-align: top;
+    text-align: left;
+    border-top: @table-border-width solid @table-border-color;
+  }
+
+  thead th {
+    vertical-align: bottom;
+    border-bottom: (2 * @table-border-width) solid @table-border-color;
+  }
+
+  tbody + tbody {
+    border-top: (2 * @table-border-width) solid @table-border-color;
+  }
+  &-item {
+    td {
+      vertical-align: middle;
+    }
+    .checkbox {
+      padding: 0;
+      width: 1%;
+      flex-shrink: 1;
+      vertical-align: middle;
+      label {
+        display: inline-flex;
+        align-items: center;
+        height: 100%;
+        padding: @table-cell-padding;
+      }
+      .select-all {
+        display: none;
+        margin-left: @table-cell-padding;
+      }
+    }
+    td.info {
+      font-size: .8em
+    }
+    .id,
+    .info,
+    .option {
+      width: 1%;
+      white-space: nowrap;
+    }
+    .position {
+      padding: 0;
+    }
+    td.name > a {
+      font-size: 1.3em;
+      color: @link-color;
+      text-decoration: none;
+      padding-bottom: .25em;
+      outline: none;
+      &:after {
+        content: "";
+        display: block;
+        width: 100%;
+      }
+    }
+
+    tr.selected {
+      background-color: @tr-selected-bg;
+    }
+    @media only screen and (max-width: 320px) {
+      .option {
+        flex: 5!important;
+      }
+    }
+    @media only screen and (max-width: 480px) {
+      .info {
+        padding-top: 0;
+        flex: 1 100%;
+        width: 100%;
+      }
+    }
+    @media only screen and (max-width: 640px) {
+      & thead {
+        th:not(.checkbox) {
+          display: none!important;
+        }
+        th.checkbox {
+          display: flex;
+          width: 100%;
+          label {
+            width: 100%;
+          }
+          .select-all {
+            display: block;
+          }
+        }
+      }
+      & tbody {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        border: 0;
+        tr {
+          display: flex;
+          flex: 1% auto;
+          flex-wrap: wrap;
+          td {
+            border: 0;
+          }
+          border-top: @table-border-width solid @table-border-color;
+          .checkbox {
+            order: 10;
+            flex: auto;
+            align-items: center;
+            justify-content: center;
+            label {
+              padding-top: 0;
+              align-items: center;
+              justify-content: center;
+              box-sizing: border-box;
+            }
+          }
+          .position {
+            flex: 1 100%;
+            width: 100%;
+            order: 5;
+          }
+          .name {
+            order: -1;
+            flex-grow: 3;
+          }
+          .info {
+            flex-grow: 2;
+          }
+          .option {
+            flex-grow: 10;
+            padding-top: 0;
+            padding-left: 0;
+            order: 20;
+          }
+        }
+      }
+    }
+  }
+}
+
+.table-item-btn {
+  margin-bottom: @table-cell-padding;
+}
+
+//
+// Condensed table w/ half padding
+//
+
+.table-sm {
+  th,
+  td {
+    padding: @table-sm-cell-padding;
+  }
+
+  .checkbox {
+    padding: 0;
+    label {
+      padding: @table-sm-cell-padding;
+    }
+  }
+}
+
+
+// Bordered version
+//
+// Add borders all around the table and between all the columns.
+
+.table-bordered {
+  border: @table-border-width solid @table-border-color;
+
+  th,
+  td {
+    border: @table-border-width solid @table-border-color;
+  }
+
+  thead {
+    th,
+    td {
+      border-bottom-width: (2 * @table-border-width);
+    }
+  }
+}
+
+
+// Zebra-striping
+//
+// Default zebra-stripe styles (alternating gray and transparent backgrounds)
+
+.table-striped {
+  tbody tr:nth-of-type(odd) {
+    background-color: @table-bg-accent;
+  }
+}
+
+
+// Hover effect
+//
+// Placed here since it has to come after the potential zebra striping
+
+.table-hover {
+  tbody tr {
+    &:hover {
+      background-color: @table-bg-hover;
+    }
+  }
+}
+
+.table-three {
+  display: table;
+  cursor: default;
+  user-select: none;
+  border-collapse: collapse;
+  width: auto;
+  thead th {
+    border: 0;
+  }
+  .table-three-root th {
+    border-left: @table-border-width solid @lightdark;
+    border-right: @table-border-width solid @lightdark;
+    background-color: @dark;
+    text-align: center;
+    padding: @table-cell-padding;
+    font-size: 1.4em;
+    color: @gray;
+  }
+  table {
+    width: 100%;
+    table {
+        td, th {
+          padding: @table-cell-padding*0.5 @table-cell-padding;
+          vertical-align: middle;
+        }
+        td:last-child {
+          padding: 0;
+        }
+    }
+  }
+  a {
+    display: inline-block;
+    padding: @table-cell-padding;
+    text-decoration: none;
+    color: @danger;
+  }
+  & th,
+  & td {
+    padding: 0;
+    border: 0;
+    font-weight: normal;
+    vertical-align: top;
+  }
+
+  .table tbody tr.active {
+    color: @white;
+    background-color: @primary;
+    a {
+      color: @white;
+    }
+  }
+
+  .table-three-box {
+    border-left: @table-border-width solid @gray;
+    border-right: @table-border-width solid @gray;
+    border-bottom: @table-border-width solid @gray;
+    th {
+      background-color: lighten(@dark, 10%);
+      color: @white;
+      border-right: @table-border-width solid @gray;
+      padding: @table-cell-padding*0.5 @table-cell-padding;
+      &:last-child {
+        border: 0;
+      }
+    }
+    .table-container th {
+      color: @lightdark;
+      border: 0;
+      height: 50px;
+      box-sizing: border-box;
+      background-color: darken(@white, 10%);
+    }
+  }
+
+  td[contenteditable] {
+    background: @dark;
+    color: @white;
+  }
+
+  .table-container {
+    min-height: 40vh;
+    max-height: 40vh;
+    overflow-y: auto;
+    font-size: .88em;
+    border-bottom: @table-border-width solid @lightgray;
+  }
+
+  .table-three-items:not(:first-child) {
+    border-left: @table-border-width solid @lightgray;
+  }
+
+  .add-item {
+    margin: @table-cell-padding;
+    padding: @table-cell-padding*0.5 @table-cell-padding;
+    border: 1px dashed @lightgray;
+    color: @gray;
+    font-size: .9em;
+    text-align: center;
+    .round(.25em);
+    cursor: pointer;
+    &:hover {
+      background-color: lighten(@lightgray, 10%);
+    }
+  }
+}
+
+// Table backgrounds
+//
+// Exact selectors below required to override `.table-striped` and prevent
+// inheritance to nested tables.
+
+// Generate the contextual variants
+/*
+@include table-row-variant(active, @table-bg-active);
+@include table-row-variant(success, @state-success-bg);
+@include table-row-variant(info, @state-info-bg);
+@include table-row-variant(warning, @state-warning-bg);
+@include table-row-variant(danger, @state-danger-bg);
+*/
+
+// Inverse styles
+//
+// Same table markup, but inverted color scheme: dark background and light text.
+/*
+.thead-inverse {
+  th {
+    color: @table-inverse-color;
+    background-color: @table-inverse-bg;
+  }
+}
+
+.thead-default {
+  th {
+    color: @table-head-color;
+    background-color: @table-head-bg;
+  }
+}
+
+.table-inverse {
+  color: @table-inverse-color;
+  background-color: @table-inverse-bg;
+
+  th,
+  td,
+  thead th {
+    border-color: @body-bg;
+  }
+
+  &.table-bordered {
+    border: 0;
+  }
+}
+
+
+
+// Responsive tables
+//
+// Add `.table-responsive` to `.table`s and we'll make them mobile friendly by
+// enabling horizontal scrolling. Only applies <768px. Everything above that
+// will display normally.
+
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar; // See https://github.com/twbs/bootstrap/pull/10057
+
+  // Prevent double border on horizontal scroll due to use of `display: block;`
+  &.table-bordered {
+    border: 0;
+  }
+}*/
