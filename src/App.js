@@ -1,7 +1,10 @@
 import React from "react";
 import MainPage from "./cabinet";
+import EditDevices from "./cabinet/EditDevices";
+import EditModels from "./cabinet/EditModels";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import PageLayout from "./layout";
+import urls from "./urls";
 
 const NoMatch = ({ location }) => (
   <div>
@@ -15,7 +18,9 @@ const App = props => {
     <BrowserRouter>
       <PageLayout>
         <Switch>
-          <Route path="/home" component={MainPage} />
+          <Route path="/" exact component={MainPage} />
+          <Route path={urls.models} component={EditModels} />
+          <Route path={urls.devices} component={EditDevices} />
           <Route component={NoMatch} />
         </Switch>
       </PageLayout>

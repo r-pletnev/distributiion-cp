@@ -1,11 +1,19 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { rootReducer } from "../reducers";
+import axios from "axios";
+import axiosMiddleware from "redux-axios-middleware";
+import logger from "redux-logger";
+
+// const client = axios.create({
+//   baseURL: "https://develop.antlace.com:10124",
+//   responseType: "json"
+// });
 
 export default function configureStore() {
   let middlewares = [thunkMiddleware];
   if (process.env.NODE_ENV !== "production") {
-    // middlewares = middlewares.concat(require('redux-logger')())
+    middlewares = middlewares.concat(logger);
   }
   const composeEnhancers = process.env.NODE_ENV !== "production" &&
     typeof window === "object" &&

@@ -1,6 +1,9 @@
 import React from "react";
 import Card from "../components/Card";
 import urls from "../urls";
+import { connect } from "react-redux";
+import { fetchAllDevices } from "../actions/devices";
+import { fetchAllModels } from "../actions/models";
 
 const items = [
   {
@@ -45,32 +48,39 @@ const items = [
   }
 ];
 
-const MainPage = _ => {
-  const cards = items.map((elm, index) => (
-    <Card title={elm.title} text={elm.text} to={elm.to} key={index} />
-  ));
-  return (
-    <div className="main-content start">
-      <div className="split">
-        <div className="box">
-          <h2>Distributions</h2>
-          <div className="cards">
-            <Card
-              title="Edit Distributions"
-              to="#"
-              text="Управление распределениями для выбранного профиля"
-            />
+class MainPage extends React.Component {
+  componentDidMount() {
+    this.props.dispatch(fetchAllDevices());
+    this.props.dispatch(fetchAllModels());
+  }
+
+  render() {
+    const cards = items.map((elm, index) => (
+      <Card title={elm.title} text={elm.text} to={elm.to} key={index} />
+    ));
+    return (
+      <div className="main-content start">
+        <div className="split">
+          <div className="box">
+            <h2>Distributions</h2>
+            <div className="cards">
+              <Card
+                title="Edit Distributions"
+                to="#"
+                text="Управление распределениями для выбранного профиля"
+              />
+            </div>
           </div>
-        </div>
-        <div className="box box-3x">
-          <h2>Items of Distributions</h2>
-          <div className="cards">
-            {cards}
+          <div className="box box-3x">
+            <h2>Items of Distributions</h2>
+            <div className="cards">
+              {cards}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
-export default MainPage;
+export default connect()(MainPage);
