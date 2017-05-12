@@ -12,14 +12,14 @@ const items = [
     to: urls.devices
   },
   {
-    title: "Orientations",
-    text: "Управление ориентацией экрана",
-    to: urls.orientations
-  },
-  {
     title: "Models",
     text: "Управление моделями девайсов",
     to: urls.models
+  },
+  {
+    title: "Screens",
+    text: "Управление разрешениями экрана",
+    to: urls.screens
   },
   {
     title: "OS",

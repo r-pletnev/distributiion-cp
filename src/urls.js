@@ -1,6 +1,6 @@
 const urls = {
   devices: "/devices",
-  orientations: "/orientations",
+  screens: "/screens",
   models: "/models",
   os: "/os",
   os_versions: "/os-versions/",

@@ -11,6 +11,13 @@ class TableView extends React.Component {
     this.closeModals = this.closeModals.bind(this);
   }
 
+  componentDidMount() {
+    const { onMountAction } = this.props;
+    if (onMountAction) {
+      onMountAction();
+    }
+  }
+
   openCreateModal() {
     this.setState({ showCreateModal: true });
   }
@@ -22,13 +29,14 @@ class TableView extends React.Component {
   }
 
   render() {
-    const { title, createBtnLabel, headRow, rows } = this.props;
+    const { title, createBtnLabel, headRow, rows, specialForm } = this.props;
     return (
       <div className="main-content">
         <AddModal
           show={this.state.showCreateModal}
           onClose={this.closeModals}
           items={rows}
+          SpecialForm={specialForm}
           {...this.props}
         />
         <h2 className="card-title">{title}</h2>
@@ -48,11 +56,17 @@ class TableView extends React.Component {
 }
 
 TableView.propTypes = {
+  // table props
   title: PropTypes.string,
   createBtnLabel: PropTypes.string,
   headRow: PropTypes.array,
   rows: PropTypes.array,
-  // form's props
+  onMountAction: PropTypes.func,
+
+  // form by itself
+  specialForm: PropTypes.func,
+
+  // or props for defaultForm
   doubleName: PropTypes.string,
   action: PropTypes.func,
   nameLabel: PropTypes.string,

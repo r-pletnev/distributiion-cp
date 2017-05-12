@@ -1,0 +1,2 @@
+export const ADD_OS_SUCCESS = "ADD_OS_SUCCESS";
+export const GET_OSES_SUCCESS = "GET_OSES_SUCCESS";

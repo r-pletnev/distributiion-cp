@@ -2046,3 +2046,10 @@ table {
   width: 900px;
 }
 
+.selectDiv select {
+    flex: 1;
+    font-size: 24px;
+    padding: 5px 8px;
+    border: 1px solid #ccc;
+    width: 100%;
+    }

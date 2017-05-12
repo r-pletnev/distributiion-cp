@@ -1,6 +1,6 @@
 import React from "react";
 import TableView from "../components/TableView";
-import { fetchAddDevice } from "../actions/devices";
+import { fetchAddDevice, fetchAllDevices } from "../actions/devices";
 import { connect } from "react-redux";
 import { getDevices } from "../reducers/devices";
 
@@ -15,6 +15,7 @@ const TableRow = ({ elm }) => {
 
 const EditDevices = props => {
   const rows = props.devices.map(elm => <TableRow elm={elm} />);
+  const onEnter = () => props.dispatch(fetchAllDevices());
 
   return (
     <TableView
@@ -23,8 +24,9 @@ const EditDevices = props => {
       headRow={["ID", "Device type"]}
       rows={rows}
       action={fetchAddDevice}
-      nameLabel="Device types"
+      nameLabel="Device type"
       nameBtn="Send"
+      onMountAction={onEnter}
     />
   );
 };

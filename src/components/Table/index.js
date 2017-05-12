@@ -7,9 +7,11 @@ const Table = props => {
   const getHead = () =>
     headRow.map((elm, index) => {
       if (index === 0) {
-        return <th className="id">{elm}</th>;
+        return <th className="id" key={index}>{elm}</th>;
+      } else if (headRow.length === index) {
+        return <th colSpan="2" key={index}>{elm}</th>;
       } else {
-        return <th colSpan="2">{elm}</th>;
+        return <th key={index}>{elm}</th>;
       }
     });
 

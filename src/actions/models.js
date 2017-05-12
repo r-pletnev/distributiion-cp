@@ -1,12 +1,12 @@
 import { AddModel, GetModels } from "../api/models";
 import { ADD_MODEL_SUCCESS, GET_ALL_MODEL_SUCCESS } from "../constants/models";
 
-export function fetchAllModels(device_id) {
-  const device = { device_id };
+export function fetchAllModels() {
+  const device = {};
   return dispatch => {
     return GetModels(device)
       .then(response => {
-        dispatch(fetchAllModelSuccess({ ...response.data, ...device }));
+        dispatch(fetchAllModelSuccess(response.data));
       })
       .catch(error => {
         console.log(error);
@@ -30,11 +30,13 @@ export function fetchAllModelSuccess(payload) {
 
 export function fetchAddModel(model, onSuccess) {
   const { device_id } = model;
+  const device = { device_id: Number(device_id) };
+  model = { ...model, ...{ device } };
   return dispatch => {
     return AddModel(model)
       .then(response => {
         onSuccess();
-        dispatch(addModelSuccess({ ...response.data, ...{ device_id } }));
+        dispatch(addModelSuccess({ ...response.data, ...device }));
       })
       .catch(error => {
         console.log(error);

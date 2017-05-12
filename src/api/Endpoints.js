@@ -12,3 +12,6 @@ export const GET_DEVICES_URL = "/get_devices";
 
 export const ADD_MODEL_URL = "/add_model";
 export const GET_MODELS_URL = "/get_models";
+
+export const ADD_OS_URL = "/add_os";
+export const GET_OSES_URL = "/get_oses";

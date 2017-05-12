@@ -34,3 +34,11 @@ export default function deviceState(state = initialState, action) {
 export function getDevices(state) {
   return state.devices.entities;
 }
+
+export function getDeviceById(state) {
+  const devices = getDevices(state);
+  return id => {
+    const isEqual = elm => elm.id === id;
+    return devices.find(isEqual);
+  };
+}
