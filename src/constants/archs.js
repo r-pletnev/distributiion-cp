@@ -1,0 +1,2 @@
+export const ADD_ARCH_SUCCESS = "ADD_ARCH_SUCCESS";
+export const GET_ARHCS_SUCCESS = "GET_ARCHS_SUCCESS";

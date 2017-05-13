@@ -15,3 +15,6 @@ export const GET_MODELS_URL = "/get_models";
 
 export const ADD_OS_URL = "/add_os";
 export const GET_OSES_URL = "/get_oses";
+
+export const ADD_ARCH_URL = "/add_arch";
+export const GET_ARCHS_URL = "/get_archs";

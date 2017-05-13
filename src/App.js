@@ -3,6 +3,7 @@ import MainPage from "./cabinet";
 import EditDevices from "./cabinet/EditDevices";
 import EditOses from "./cabinet/EditOses";
 import EditModels from "./cabinet/EditModels";
+import EditArchs from "./cabinet/EditArchs";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import PageLayout from "./layout";
 import urls from "./urls";
@@ -23,6 +24,7 @@ const App = props => {
           <Route path={urls.models} component={EditModels} />
           <Route path={urls.devices} component={EditDevices} />
           <Route path={urls.os} component={EditOses} />
+          <Route path={urls.os_arch} component={EditArchs} />
           <Route component={NoMatch} />
         </Switch>
       </PageLayout>

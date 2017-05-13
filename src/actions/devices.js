@@ -16,7 +16,7 @@ export function fetchAllDevices() {
   };
 }
 
-export function fetchAllDevicesSuccess(payload) {
+function fetchAllDevicesSuccess(payload) {
   const devices = payload.map(elm => ({ id: elm.device_id, name: elm.name }));
   return {
     type: GET_ALL_DEVICES_SUCCESS,

@@ -11,8 +11,8 @@ const itemsArray = [
   },
   {
     icon: "",
-    type: "Orientations",
-    to: urls.orientations
+    type: "Screens",
+    to: urls.screens
   },
   {
     icon: "",
