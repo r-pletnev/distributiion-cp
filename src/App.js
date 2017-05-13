@@ -1,9 +1,13 @@
 import React from "react";
 import MainPage from "./cabinet";
 import EditDevices from "./cabinet/EditDevices";
+import EditScreens from "./cabinet/EditScreens";
 import EditOses from "./cabinet/EditOses";
 import EditModels from "./cabinet/EditModels";
 import EditArchs from "./cabinet/EditArchs";
+import EditBrowsers from "./cabinet/EditBrowsers";
+import EditOsVersions from "./cabinet/EditOsVersions";
+import EditBrowserVersions from "./cabinet/EditBrowserVersions";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import PageLayout from "./layout";
 import urls from "./urls";
@@ -25,6 +29,10 @@ const App = props => {
           <Route path={urls.devices} component={EditDevices} />
           <Route path={urls.os} component={EditOses} />
           <Route path={urls.os_arch} component={EditArchs} />
+          <Route path={urls.os_versions} component={EditOsVersions} />
+          <Route path={urls.screens} component={EditScreens} />
+          <Route path={urls.browsers} component={EditBrowsers} />
+          <Route path={urls.browser_versions} component={EditBrowserVersions} />
           <Route component={NoMatch} />
         </Switch>
       </PageLayout>

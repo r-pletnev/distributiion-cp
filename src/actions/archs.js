@@ -21,9 +21,9 @@ function GetArchsSuccess(payload) {
   };
 }
 
-export function fetchAddArch(name, onSuccess) {
+export function fetchAddArch(arch, onSuccess) {
   return dispatch => {
-    return AddArch({ name })
+    return AddArch(arch)
       .then(response => {
         onSuccess();
         dispatch(AddArchSuccess(response.data));

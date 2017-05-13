@@ -1,7 +1,8 @@
-import { AddDevice, GetDevices } from "../api/devices";
+import { AddDevice, GetDevices, RemoveDevices } from "../api/devices";
 import {
   ADD_DEVICE_SUCCEES,
-  GET_ALL_DEVICES_SUCCESS
+  GET_ALL_DEVICES_SUCCESS,
+  REMOVE_DEVICES_SUCCESS
 } from "../constants/devices";
 
 export function fetchAllDevices() {
@@ -45,5 +46,24 @@ function addDeviceSuccess(payload) {
       id: device_id,
       name
     }
+  };
+}
+
+export function fetchRemoveDevices(devices) {
+  return dispatch => {
+    return RemoveDevices(devices)
+      .then(response => {
+        dispatch(removeDevicesSuccess(devices));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+}
+
+function removeDevicesSuccess(payload) {
+  return {
+    type: REMOVE_DEVICES_SUCCESS,
+    payload
   };
 }

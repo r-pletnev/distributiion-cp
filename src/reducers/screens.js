@@ -1,21 +1,21 @@
-import { GET_ALL_MODEL_SUCCESS, ADD_MODEL_SUCCESS } from "../constants/models";
+import { GET_SCREENS_SUCCESS, ADD_SCREEN_SUCCESS } from "../constants/screens";
 
 const initialState = {
   entities: []
 };
 
-export default function modelState(state = initialState, action) {
+export default function screenState(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case GET_ALL_MODEL_SUCCESS: {
+    case GET_SCREENS_SUCCESS: {
       return {
         ...state,
         entities: payload
       };
     }
 
-    case ADD_MODEL_SUCCESS: {
+    case ADD_SCREEN_SUCCESS: {
       return {
         ...state,
         entities: [...state.entities, payload]
@@ -28,14 +28,14 @@ export default function modelState(state = initialState, action) {
   }
 }
 
-export function getModels(state) {
-  return state.models.entities;
+export function getScreens(state) {
+  return state.screens.entities;
 }
 
-export function getModelById(state) {
-  const models = getModels(state);
+export function getScreenById(state) {
+  const items = getScreens(state);
   return id => {
     const isEqual = elm => elm.id === id;
-    return models.find(isEqual);
+    return items.find(isEqual);
   };
 }

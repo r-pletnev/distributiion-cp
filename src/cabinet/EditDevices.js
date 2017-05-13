@@ -1,14 +1,20 @@
 import React from "react";
-import TableView from "../components/TableView";
-import { fetchAddDevice, fetchAllDevices } from "../actions/devices";
 import { connect } from "react-redux";
+import TableView from "../components/TableView";
+import {
+  fetchAddDevice,
+  fetchAllDevices,
+  fetchRemoveDevices
+} from "../actions/devices";
 import { getDevices } from "../reducers/devices";
+import { ButtonBlock } from "../components/ButtonOptions";
 
 const TableRow = ({ elm }) => {
   return (
     <tr key={elm.id}>
       <td className="id">{elm.id}</td>
       <td>{elm.name}</td>
+      <ButtonBlock onRemoveClick={fetchRemoveDevices([elm.id])} />
     </tr>
   );
 };

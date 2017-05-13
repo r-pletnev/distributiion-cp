@@ -1,7 +1,8 @@
 import React from "react";
-import TableView from "../../components/TableView";
 import { connect } from "react-redux";
+import TableView from "../../components/TableView";
 import { fetchAllModels } from "../../actions/models";
+import { fetchAllDevices } from "../../actions/devices";
 import { getModels } from "../../reducers/models";
 import { getDeviceById } from "../../reducers/devices";
 import AddModelForm from "./form";
@@ -11,14 +12,16 @@ const TableRow = props => {
   return (
     <tr key={elm.id}>
       <td className="id">{elm.id}</td>
+      <td>todo device_id</td>
       <td>{elm.name}</td>
     </tr>
   );
 };
 
 const EditDevices = props => {
-  const rows = props.models.map(elm => <TableRow elm={elm} />);
+  const rows = props.models.map(elm => <TableRow elm={elm} device={elm.id} />);
   const onEnter = () => {
+    props.dispatch(fetchAllDevices());
     props.dispatch(fetchAllModels());
   };
 
@@ -26,7 +29,7 @@ const EditDevices = props => {
     <TableView
       title="Edit Models"
       createBtnLabel="Create model"
-      headRow={["ID", "Model Name"]}
+      headRow={["ID", "Device Type", "Model Name"]}
       rows={rows}
       specialForm={AddModelForm}
       onMountAction={onEnter}

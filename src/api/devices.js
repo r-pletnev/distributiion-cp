@@ -7,3 +7,7 @@ export function AddDevice(data) {
 export function GetDevices() {
   return api.client.get(api.GET_DEVICES_URL);
 }
+
+export function RemoveDevices(data) {
+  return api.client.post(api.REMOVE_DEVIVES_URL, data);
+}

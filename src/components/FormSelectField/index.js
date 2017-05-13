@@ -10,7 +10,7 @@ const SelectField = props => {
     <div>
       <label>{props.label}</label>
       <div className="selectDiv">
-        <Field name={props.name} component="select">
+        <Field name={props.name} component="select" disabled={props.disabled}>
           <option value="">Select item</option>
           {options}
         </Field>
@@ -22,7 +22,8 @@ const SelectField = props => {
 SelectField.propTypes = {
   name: PropTypes.string.isRequired,
   options: PropTypes.array.isRequired,
-  label: PropTypes.string
+  label: PropTypes.string,
+  disabled: PropTypes.bool
 };
 
 export default SelectField;

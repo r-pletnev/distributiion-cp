@@ -1,8 +1,10 @@
 import React from "react";
-import TableView from "../components/TableView";
-import { fetchAddArch, fetchAllArchs } from "../actions/archs";
 import { connect } from "react-redux";
-import { getArchs } from "../reducers/archs";
+import TableView from "../../components/TableView";
+import AddArchForm from "./form";
+import { fetchAllOsVersions } from "../../actions/os_versions";
+import { fetchAllArchs } from "../../actions/archs";
+import { getArchs } from "../../reducers/archs";
 
 const TableRow = ({ elm }) => {
   return (
@@ -15,17 +17,17 @@ const TableRow = ({ elm }) => {
 
 const EditArchs = props => {
   const rows = props.archs.map(elm => <TableRow elm={elm} />);
-  const onEnter = () => props.dispatch(fetchAllArchs());
-
+  const onEnter = () => {
+    props.dispatch(fetchAllOsVersions());
+    props.dispatch(fetchAllArchs());
+  };
   return (
     <TableView
       title="Edit OS Architecture"
       createBtnLabel="Create OS architecture"
       headRow={["ID", "Architecture"]}
       rows={rows}
-      action={fetchAddArch}
-      nameLabel="OS architecture"
-      nameBtn="Send"
+      specialForm={AddArchForm}
       onMountAction={onEnter}
     />
   );
