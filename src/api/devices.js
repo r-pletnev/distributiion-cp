@@ -9,5 +9,5 @@ export function GetDevices() {
 }
 
 export function RemoveDevices(data) {
-  return api.client.post(api.REMOVE_DEVIVES_URL, data);
+  return api.client.post(api.REMOVE_DEVICES_URL, data);
 }

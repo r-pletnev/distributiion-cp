@@ -1,7 +1,9 @@
 import {
   GET_BROWSER_VERSIONS_SUCCESS,
-  ADD_BROWSER_VERSION_SUCCESS
+  ADD_BROWSER_VERSION_SUCCESS,
+  REMOVE_BROWSER_VERSIONS_SUCCESS
 } from "../constants/browser_versions";
+import { filterById } from "../utils/ramda";
 
 const initialState = {
   entities: []
@@ -23,6 +25,9 @@ export default function browserVersionState(state = initialState, action) {
         ...state,
         entities: [...state.entities, payload]
       };
+    }
+    case REMOVE_BROWSER_VERSIONS_SUCCESS: {
+      return filterById(payload, state);
     }
 
     default: {

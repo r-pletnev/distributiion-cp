@@ -7,3 +7,7 @@ export function AddBrowser(data) {
 export function GetBrowsers() {
   return api.client.get(api.GET_BROWSERS_URL);
 }
+
+export function RemoveBrowsers(data) {
+  return api.client.post(api.REMOVE_BROWSERS_URL, data);
+}

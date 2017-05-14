@@ -4,20 +4,26 @@ import { Link } from "react-router-dom";
 
 const ButtonBlock = props => {
   return (
-    <td className="options">
-      <Link to="#" onClick={props.onEditClick} className="btn btn-secondary">
-        <i className="al-edit" />
-      </Link>
-      <Link
-        to="#"
-        onClick={props.onDublicateClick}
-        className="btn btn-secondary"
-      >
-        <i className="al-dublicate" />
-      </Link>
-      <Link to="#" onClick={props.onRemoveClick} className="btn btn-secondary">
-        <i className="al-trash" />
-      </Link>
+    <td className="option">
+      <div className="btn-group">
+        <Link to="#" onClick={props.onEditClick} className="btn btn-secondary">
+          <i className="al-edit" />
+        </Link>
+        <Link
+          to="#"
+          onClick={props.onDublicateClick}
+          className="btn btn-secondary"
+        >
+          <i className="al-duplicate" />
+        </Link>
+        <Link
+          to="#"
+          onClick={props.onRemoveClick}
+          className="btn btn-secondary"
+        >
+          <i className="al-trash" />
+        </Link>
+      </div>
     </td>
   );
 };

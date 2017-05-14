@@ -1,5 +1,9 @@
-import { AddArch, GetArchs } from "../api/archs";
-import { ADD_ARCH_SUCCESS, GET_ARHCS_SUCCESS } from "../constants/archs";
+import { AddArch, GetArchs, RemoveArchs } from "../api/archs";
+import {
+  ADD_ARCH_SUCCESS,
+  GET_ARHCS_SUCCESS,
+  REMOVE_ARCHS_SUCCESS
+} from "../constants/archs";
 
 export function fetchAllArchs() {
   return dispatch => {
@@ -42,5 +46,24 @@ function AddArchSuccess(payload) {
       id: arch_id,
       name
     }
+  };
+}
+
+export function fetchRemoveArchs(archs) {
+  return dispatch => {
+    return RemoveArchs(archs)
+      .then(response => {
+        dispatch(removeArchsSuccess(archs));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+}
+
+function removeArchsSuccess(payload) {
+  return {
+    type: REMOVE_ARCHS_SUCCESS,
+    payload
   };
 }

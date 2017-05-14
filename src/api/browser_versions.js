@@ -7,3 +7,7 @@ export function AddBrowserVersion(data) {
 export function GetBrowserVersions() {
   return api.client.get(api.GET_BROWSER_VERSIONS_URL);
 }
+
+export function RemoveBrowserVersions(data) {
+  return api.client.post(api.REMOVE_BROWSER_VERSIONS_URL, data);
+}

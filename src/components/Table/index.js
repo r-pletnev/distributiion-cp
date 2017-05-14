@@ -8,7 +8,7 @@ const Table = props => {
     headRow.map((elm, index) => {
       if (index === 0) {
         return <th className="id" key={index}>{elm}</th>;
-      } else if (headRow.length === index) {
+      } else if (headRow.length === index + 1) {
         return <th colSpan="2" key={index}>{elm}</th>;
       } else {
         return <th key={index}>{elm}</th>;

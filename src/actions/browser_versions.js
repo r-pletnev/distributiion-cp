@@ -1,7 +1,12 @@
-import { AddBrowserVersion, GetBrowserVersions } from "../api/browser_versions";
+import {
+  AddBrowserVersion,
+  GetBrowserVersions,
+  RemoveBrowserVersions
+} from "../api/browser_versions";
 import {
   ADD_BROWSER_VERSION_SUCCESS,
-  GET_BROWSER_VERSIONS_SUCCESS
+  GET_BROWSER_VERSIONS_SUCCESS,
+  REMOVE_BROWSER_VERSIONS_SUCCESS
 } from "../constants/browser_versions";
 
 export function fetchAllBrowserVersions() {
@@ -64,5 +69,24 @@ function addBrowserVersionSuccess(payload) {
       sub_version,
       browser_id
     }
+  };
+}
+
+export function fetchRemoveBrowserVersions(items) {
+  return dispatch => {
+    return RemoveBrowserVersions(items)
+      .then(response => {
+        dispatch(removeBrowserVersionsSuccess(items));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+}
+
+function removeBrowserVersionsSuccess(payload) {
+  return {
+    type: REMOVE_BROWSER_VERSIONS_SUCCESS,
+    payload
   };
 }

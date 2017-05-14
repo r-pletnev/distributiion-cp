@@ -3,14 +3,15 @@ import { connect } from "react-redux";
 import TableView from "../../components/TableView";
 import { fetchAllOses } from "../../actions/oses";
 import { fetchAllOsVersions } from "../../actions/os_versions";
-import { fetchAllBrowsers } from "../../actions/browsers";
+import { fetchAllBrowsers, fetchRemoveBrowsers } from "../../actions/browsers";
 import { getBrowsers } from "../../reducers/browsers";
 import { getOsByOsVersionId } from "../../reducers/oses";
 import { getOsVersionById } from "../../reducers/os_versions";
 import AddBrowserForm from "./form";
+import ButtonBlock from "../../components/ButtonOptions";
 
 const TableRow = props => {
-  const { elm, os, version } = props;
+  const { elm, os, version, onRemove } = props;
   return (
     <tr key={elm.id}>
       <td className="id">{elm.id}</td>
@@ -18,6 +19,7 @@ const TableRow = props => {
       <td>{elm.name}</td>
       <td>{elm.panel_height}</td>
       <td>{elm.template}</td>
+      <ButtonBlock onRemoveClick={onRemove([elm.id])} />
     </tr>
   );
 };
@@ -28,6 +30,7 @@ const EditBrowsers = props => {
       elm={elm}
       os={props.osByOsVersionId(elm.os_version_id)}
       version={props.osVersionById(elm.os_version_id)}
+      onRemove={ids => () => props.dispatch(fetchRemoveBrowsers(ids))}
     />
   ));
   const onEnter = () => {

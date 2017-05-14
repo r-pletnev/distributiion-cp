@@ -1,4 +1,9 @@
-import { GET_ARHCS_SUCCESS, ADD_ARCH_SUCCESS } from "../constants/archs";
+import {
+  GET_ARHCS_SUCCESS,
+  ADD_ARCH_SUCCESS,
+  REMOVE_ARCHS_SUCCESS
+} from "../constants/archs";
+import { filterById } from "../utils/ramda";
 
 const initialState = {
   entities: []
@@ -20,6 +25,10 @@ export default function archState(state = initialState, action) {
         ...state,
         entities: [...state.entities, payload]
       };
+    }
+
+    case REMOVE_ARCHS_SUCCESS: {
+      return filterById(payload, state);
     }
 
     default: {

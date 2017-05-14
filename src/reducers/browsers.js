@@ -1,8 +1,9 @@
 import {
   GET_BROWSERS_SUCCESS,
   ADD_BROWSER_SUCCESS,
-  REMOVE_DEVICES_SUCCESS
+  REMOVE_BROWSERS_SUCCESS
 } from "../constants/browsers";
+import { filterById } from "../utils/ramda";
 
 const initialState = {
   entities: []
@@ -26,11 +27,8 @@ export default function browserState(state = initialState, action) {
       };
     }
 
-    case REMOVE_DEVICES_SUCCESS: {
-      return {
-        ...state,
-        entities: state.entities.filter(elm => !payload.includes(elm.id))
-      };
+    case REMOVE_BROWSERS_SUCCESS: {
+      return filterById(payload, state);
     }
 
     default: {

@@ -7,3 +7,7 @@ export function AddOSVersion(data) {
 export function GetOSVersions() {
   return api.client.get(api.GET_OS_VERSIONS_URL);
 }
+
+export function RemoveOSVersions(data) {
+  return api.client.post(api.REMOVE_OS_VERSIONS_URL, data);
+}

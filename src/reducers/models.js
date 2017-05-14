@@ -1,4 +1,9 @@
-import { GET_ALL_MODEL_SUCCESS, ADD_MODEL_SUCCESS } from "../constants/models";
+import {
+  GET_ALL_MODEL_SUCCESS,
+  ADD_MODEL_SUCCESS,
+  REMOVE_MODELS_SUCCESS
+} from "../constants/models";
+import { filterById } from "../utils/ramda";
 
 const initialState = {
   entities: []
@@ -20,6 +25,10 @@ export default function modelState(state = initialState, action) {
         ...state,
         entities: [...state.entities, payload]
       };
+    }
+
+    case REMOVE_MODELS_SUCCESS: {
+      return filterById(payload, state);
     }
 
     default: {

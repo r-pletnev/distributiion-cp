@@ -1,5 +1,9 @@
-import { AddModel, GetModels } from "../api/models";
-import { ADD_MODEL_SUCCESS, GET_ALL_MODEL_SUCCESS } from "../constants/models";
+import { AddModel, GetModels, RemoveModels } from "../api/models";
+import {
+  ADD_MODEL_SUCCESS,
+  GET_ALL_MODEL_SUCCESS,
+  REMOVE_MODELS_SUCCESS
+} from "../constants/models";
 
 export function fetchAllModels() {
   const device = {};
@@ -55,5 +59,24 @@ function addModelSuccess(payload) {
       height,
       device_id
     }
+  };
+}
+
+export function fetchRemoveModels(items) {
+  return dispatch => {
+    return RemoveModels(items)
+      .then(response => {
+        dispatch(removeModelsSuccess(items));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+}
+
+function removeModelsSuccess(payload) {
+  return {
+    type: REMOVE_MODELS_SUCCESS,
+    payload
   };
 }
