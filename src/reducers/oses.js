@@ -1,5 +1,10 @@
 import { getOsVersions } from "../reducers/os_versions";
-import { GET_OSES_SUCCESS, ADD_OS_SUCCESS } from "../constants/oses";
+import {
+  GET_OSES_SUCCESS,
+  ADD_OS_SUCCESS,
+  REMOVE_OSES_SUCCESS
+} from "../constants/oses";
+import { filterById } from "../utils/ramda";
 
 const initialState = {
   entities: []
@@ -21,6 +26,10 @@ export default function osState(state = initialState, action) {
         ...state,
         entities: [...state.entities, payload]
       };
+    }
+
+    case REMOVE_OSES_SUCCESS: {
+      return filterById(payload, state);
     }
 
     default: {

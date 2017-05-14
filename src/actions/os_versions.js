@@ -1,7 +1,12 @@
-import { AddOSVersion, GetOSVersions } from "../api/os_versions";
+import {
+  AddOSVersion,
+  GetOSVersions,
+  RemoveOSVersions
+} from "../api/os_versions";
 import {
   ADD_OS_VERSION_SUCCESS,
-  GET_OS_VERSIONS_SUCCESS
+  GET_OS_VERSIONS_SUCCESS,
+  REMOVE_OS_VERSIONS_SUCCESS
 } from "../constants/os_versions";
 
 export function fetchAllOsVersions() {
@@ -51,5 +56,24 @@ function addOsVersionSuccess(payload) {
       name,
       panel_height
     }
+  };
+}
+
+export function fetchRemoveOSVersions(items) {
+  return dispatch => {
+    return RemoveOSVersions(items)
+      .then(response => {
+        dispatch(removeOSVersionsSuccess(items));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+}
+
+function removeOSVersionsSuccess(payload) {
+  return {
+    type: REMOVE_OS_VERSIONS_SUCCESS,
+    payload
   };
 }

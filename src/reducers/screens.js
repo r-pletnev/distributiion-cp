@@ -1,4 +1,9 @@
-import { GET_SCREENS_SUCCESS, ADD_SCREEN_SUCCESS } from "../constants/screens";
+import {
+  GET_SCREENS_SUCCESS,
+  ADD_SCREEN_SUCCESS,
+  REMOVE_SCREENS_SUCCESS
+} from "../constants/screens";
+import { filterById } from "../utils/ramda";
 
 const initialState = {
   entities: []
@@ -20,6 +25,10 @@ export default function screenState(state = initialState, action) {
         ...state,
         entities: [...state.entities, payload]
       };
+    }
+
+    case REMOVE_SCREENS_SUCCESS: {
+      return filterById(payload, state);
     }
 
     default: {

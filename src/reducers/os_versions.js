@@ -1,7 +1,9 @@
 import {
   GET_OS_VERSIONS_SUCCESS,
-  ADD_OS_VERSION_SUCCESS
+  ADD_OS_VERSION_SUCCESS,
+  REMOVE_OS_VERSIONS_SUCCESS
 } from "../constants/os_versions";
+import { filterById } from "../utils/ramda";
 
 const initialState = {
   entities: []
@@ -23,6 +25,10 @@ export default function osVersionState(state = initialState, action) {
         ...state,
         entities: [...state.entities, payload]
       };
+    }
+
+    case REMOVE_OS_VERSIONS_SUCCESS: {
+      return filterById(payload, state);
     }
 
     default: {

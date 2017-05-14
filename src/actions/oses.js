@@ -1,5 +1,9 @@
-import { AddOS, GetOSES } from "../api/oses";
-import { ADD_OS_SUCCESS, GET_OSES_SUCCESS } from "../constants/oses";
+import { AddOS, GetOSES, RemoveOSES } from "../api/oses";
+import {
+  ADD_OS_SUCCESS,
+  GET_OSES_SUCCESS,
+  REMOVE_OSES_SUCCESS
+} from "../constants/oses";
 
 export function fetchAllOses() {
   return dispatch => {
@@ -42,5 +46,24 @@ function addOSSuccess(payload) {
       id: os_id,
       name
     }
+  };
+}
+
+export function fetchRemoveOSES(items) {
+  return dispatch => {
+    return RemoveOSES(items)
+      .then(response => {
+        dispatch(removeOSESSuccess(items));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+}
+
+function removeOSESSuccess(payload) {
+  return {
+    type: REMOVE_OSES_SUCCESS,
+    payload
   };
 }
