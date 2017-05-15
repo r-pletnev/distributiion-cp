@@ -1,3 +1,4 @@
+import R from 'ramda'
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -15,32 +16,31 @@ let AddScreenForm = props => {
     props.destroy();
   };
   const submitForm = values => {
-    return props.dispatch(
-      fetchAddScreen(
-        { ...values, ...{ os_id: Number(values.os_id) } },
-        closeForm
-      )
-    );
+    return props.dispatch(fetchAddScreen(R.evolve({model_id: Number, width: Number, height: Number}, values), closeForm));
   };
 
   return (
     <div className="popup-content">
       <form className="form" onSubmit={handleSubmit(submitForm)}>
         <FormSelectField name="model_id" label="Model" options={props.models} />
-        <FormField
-          name="name"
-          type="text"
-          label="OS version name"
-          autoComplete="off"
-        />
-        <FormField
-          name="panel_height"
-          type="number"
-          label="Panel height"
-          autoComplete="on"
-          minValue={1}
-          maxValue={300}
-        />
+        <div className='split'>
+          <div className='box'>
+            <FormField
+              name='width'
+              type='number'
+              label='Width'
+              minValue={1}
+            />
+          </div>
+          <div className='box'>
+            <FormField
+              name='height'
+              type='number'
+              label='Height'
+              minValue={1}
+            />
+          </div>
+        </div>
         <div className="popup-bottom">
           <button
             className="btn btn-success"

@@ -31,12 +31,11 @@ function fetchAllScreensSuccess(payload) {
 }
 
 export function fetchAddScreen(screen, onSuccess) {
-  const { model_id } = screen;
   return dispatch => {
-    return fetchAddScreen(screen)
+    return AddScreen(screen)
       .then(response => {
         onSuccess();
-        dispatch(addScreenSuccess({ ...response.data, ...{ model_id } }));
+        dispatch(addScreenSuccess(response.data));
       })
       .catch(error => {
         console.log(error);
