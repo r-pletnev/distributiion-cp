@@ -27,6 +27,10 @@ export const ADD_OS_VERSION_URL = "/add_os_version";
 export const GET_OS_VERSIONS_URL = "/get_os_versions";
 export const REMOVE_OS_VERSIONS_URL = "/remove_os_versions";
 
+export const ADD_OS_PANEL_URL = "/add_os_panel";
+export const GET_OS_PANELS_URL = "/get_os_panels";
+export const REMOVE_OS_PANELS_URL = "/remove_os_panels";
+
 export const ADD_SCREEN_URL = "/add_screen";
 export const GET_SCREENS_URL = "/get_screens";
 export const REMOVE_SCREENS_URL = "/remove_screens";

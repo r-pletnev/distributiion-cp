@@ -1,4 +1,4 @@
-import R from 'ramda'
+import R from "ramda";
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -23,21 +23,24 @@ let AddScreenForm = props => {
     <div className="popup-content">
       <form className="form" onSubmit={handleSubmit(submitForm)}>
         <FormSelectField name="model_id" label="Model" options={props.models} />
-        <div className='split'>
-          <div className='box'>
+        <div className="split">
+          <div className="box">
             <FormField
-              name='width'
-              type='number'
-              label='Width'
+              name="width"
+              type="number"
+              label="Width"
               minValue={1}
+              maxValue={3000}
             />
           </div>
-          <div className='box'>
+          <div className="box">
             <FormField
-              name='height'
-              type='number'
-              label='Height'
+              name="height"
+              type="number"
+              label="height"
+              autoComplete="on"
               minValue={1}
+              maxValue={3000}
             />
           </div>
         </div>

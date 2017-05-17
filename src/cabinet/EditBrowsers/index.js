@@ -15,10 +15,7 @@ const TableRow = props => {
   return (
     <tr key={elm.id}>
       <td className="id">{elm.id}</td>
-      <td>{`${os.name} ${version.name}`}</td>
       <td>{elm.name}</td>
-      <td>{elm.panel_height}</td>
-      <td>{elm.template}</td>
       <ButtonBlock onRemoveClick={onRemove([elm.id])} />
     </tr>
   );
@@ -43,7 +40,7 @@ const EditBrowsers = props => {
     <TableView
       title="Edit Browsers"
       createBtnLabel="Create Browser"
-      headRow={["ID", "OS", "Browser name", "Panel height", "Template"]}
+      headRow={["ID", "Browser name"]}
       rows={rows}
       specialForm={AddBrowserForm}
       onMountAction={onEnter}

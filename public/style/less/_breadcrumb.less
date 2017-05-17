@@ -1,0 +1,24 @@
+// main: panel.less
+/*
+  breadcrumb
+*/
+
+.breadcrumb {
+  padding: 0 @btn-padding-x;
+  border: @input-btn-border-width solid @input-btn-border-color;
+  .round(@small-round);
+  margin-bottom: @btn-padding-y*4;
+  ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    li {
+      padding: @btn-padding-y*2 @btn-padding-x/4;
+      &:not(:last-child):after {
+        content: "»";
+        margin-left: @btn-padding-x/2;
+      }
+    }
+  }
+}

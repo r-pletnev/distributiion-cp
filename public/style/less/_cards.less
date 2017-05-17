@@ -15,16 +15,18 @@
   display: flex;
   flex-wrap: wrap;
   margin: 0 -(@card-spacer-y / 2);
-  //align-items: flex-start;
+  //justify-content: center;
+  justify-content: space-around;
 }
 
 .card {
   position: relative;
   display: flex;
   margin: @card-spacer-y / 2;
-  flex: 1 2 20em;
+  flex: 2 2 15em;
   flex-direction: column;
   min-height: 10em;
+  max-width: 230px;
   background-color: @card-bg;
   border: @card-border-width solid @card-border-color;
   .round(@card-border-radius);
@@ -37,16 +39,47 @@
   flex-direction: column;
   flex: 1 1 auto;
   padding: @card-spacer-x;
+  align-items: center;
+  text-align: center;
   p {
     flex: 2;
+    text-align: center;
   }
   a {
-    align-self: flex-start;
+    align-self: stretch;
+    justify-content: center;
   }
 }
 
+.card-image {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 10em;
+    background: @lightgray;
+    padding: 1em;
+    margin: -1em -1em 1em;
+    text-align: center;
+    vertical-align: middle;
+    i {
+      display: flex;
+      align-self: center;
+      align-items: center;
+      justify-content: center;
+      height: 10em;
+      width: 10em;
+      line-height: 10em;
+      .round(50%);
+      background-color: @white;
+      color: @lightgray;
+      &::before {
+        font-size: 5em;
+      }
+    }
+}
+
 .card-title {
-  margin-bottom: @card-spacer-y;
+  margin-bottom: @card-spacer-y/2;
 }
 
 .card-subtitle {

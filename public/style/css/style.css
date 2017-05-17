@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'antlace-cp';
-  src:  url('../fonts/antlace-cp.eot?qebedm');
-  src:  url('../fonts/antlace-cp.eot?qebedm#iefix') format('embedded-opentype'),
-    url('../fonts/antlace-cp.ttf?qebedm') format('truetype'),
-    url('../fonts/antlace-cp.woff?qebedm') format('woff'),
-    url('../fonts/antlace-cp.svg?qebedm#antlace-cp') format('svg');
+  src:  url('../fonts/antlace-cp.eot?soutqp');
+  src:  url('../fonts/antlace-cp.eot?soutqp#iefix') format('embedded-opentype'),
+    url('../fonts/antlace-cp.ttf?soutqp') format('truetype'),
+    url('../fonts/antlace-cp.woff?soutqp') format('woff'),
+    url('../fonts/antlace-cp.svg?soutqp#antlace-cp') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,339 +24,390 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.al-calendar:before {
+.al-admin:before {
   content: "\e900";
 }
-.al-caret-down:before {
+.al-browser:before {
   content: "\e901";
 }
-.al-caret-left:before {
+.al-browser-version:before {
   content: "\e902";
 }
-.al-caret-right:before {
+.al-calendar:before {
   content: "\e903";
 }
-.al-caret-up:before {
+.al-caret-down:before {
   content: "\e904";
 }
-.al-channel:before {
+.al-caret-left:before {
   content: "\e905";
 }
-.al-channel-control:before {
+.al-caret-right:before {
   content: "\e906";
 }
-.al-channel-plus:before {
+.al-caret-up:before {
   content: "\e907";
 }
-.al-channel-remove:before {
+.al-channel:before {
   content: "\e908";
 }
-.al-checked:before {
+.al-channel-control:before {
   content: "\e909";
 }
-.al-drone:before {
+.al-channel-plus:before {
   content: "\e90a";
 }
-.al-drone-control:before {
+.al-channel-remove:before {
   content: "\e90b";
 }
-.al-drone-minus:before {
+.al-check:before {
   content: "\e90c";
 }
-.al-drone-plus:before {
+.al-close:before {
   content: "\e90d";
 }
-.al-drone-shutdown:before {
+.al-cookies:before {
   content: "\e90e";
 }
-.al-exchange:before {
+.al-cyborg:before {
   content: "\e90f";
 }
-.al-exchange-control:before {
+.al-device:before {
   content: "\e910";
 }
-.al-exchange-minus:before {
+.al-distribution:before {
   content: "\e911";
 }
-.al-exchange-plus:before {
+.al-drone:before {
   content: "\e912";
 }
-.al-expander:before {
+.al-drone-control:before {
   content: "\e913";
 }
-.al-expander-open:before {
+.al-drone-minus:before {
   content: "\e914";
 }
-.al-filter-ip:before {
+.al-drone-plus:before {
   content: "\e915";
 }
-.al-filter-ip-control:before {
+.al-drone-shutdown:before {
   content: "\e916";
 }
-.al-filter-ip-plus:before {
+.al-duplicate:before {
   content: "\e917";
 }
-.al-filter-ip-remove:before {
+.al-edit:before {
   content: "\e918";
 }
-.al-geofilter:before {
+.al-exchanger:before {
   content: "\e919";
 }
-.al-geofilter-control:before {
+.al-exchanger-access:before {
   content: "\e91a";
 }
-.al-geofilter-plus:before {
+.al-exchanger-buy:before {
   content: "\e91b";
 }
-.al-geofilter-remove:before {
+.al-exchanger-control:before {
   content: "\e91c";
 }
-.al-history:before {
+.al-exchanger-create:before {
   content: "\e91d";
 }
-.al-home:before {
+.al-exchanger-remove:before {
   content: "\e91e";
 }
-.al-ip-location:before {
+.al-exchanger-sell:before {
   content: "\e91f";
 }
-.al-ip-location-control:before {
+.al-expander:before {
   content: "\e920";
 }
-.al-ip-location-plus:before {
+.al-expander-open:before {
   content: "\e921";
 }
-.al-ip-location-remove:before {
+.al-geofilter:before {
   content: "\e922";
 }
-.al-ip-range:before {
+.al-geofilter-control:before {
   content: "\e923";
 }
-.al-ip-range-control:before {
+.al-geofilter-create:before {
   content: "\e924";
 }
-.al-ip-range-plus:before {
+.al-geofilter-remove:before {
   content: "\e925";
 }
-.al-ip-range-remove:before {
+.al-group:before {
   content: "\e926";
 }
-.al-ip-type-proxy:before {
+.al-group-control:before {
   content: "\e927";
 }
-.al-ip-type-proxy-disallow:before {
+.al-group-create:before {
   content: "\e928";
 }
-.al-ip-type-proxy-only:before {
+.al-group-remove:before {
   content: "\e929";
 }
-.al-ip-type-static:before {
+.al-history:before {
   content: "\e92a";
 }
-.al-ip-type-static-control:before {
+.al-home:before {
   content: "\e92b";
 }
-.al-ip-type-static-disallow:before {
+.al-ipfilter:before {
   content: "\e92c";
 }
-.al-ip-type-static-only:before {
+.al-ipfilter-control:before {
   content: "\e92d";
 }
-.al-level:before {
+.al-ipfilter-create:before {
   content: "\e92e";
 }
-.al-level-control:before {
+.al-ipfilter-remove:before {
   content: "\e92f";
 }
-.al-level-plus:before {
+.al-ip-i-proxy:before {
   content: "\e930";
 }
-.al-level-remove:before {
+.al-ip-i-static:before {
   content: "\e931";
 }
-.al-limit:before {
+.al-iprange:before {
   content: "\e932";
 }
-.al-mail:before {
+.al-iprange-control:before {
   content: "\e933";
 }
-.al-mail-control:before {
+.al-iprange-create:before {
   content: "\e934";
 }
-.al-mailings:before {
+.al-iprange-remove:before {
   content: "\e935";
 }
-.al-mailings-control:before {
+.al-level:before {
   content: "\e936";
 }
-.al-mailings-plus:before {
+.al-level-control:before {
   content: "\e937";
 }
-.al-mailings-remove:before {
+.al-level-plus:before {
   content: "\e938";
 }
-.al-mail-plus:before {
+.al-level-remove:before {
   content: "\e939";
 }
-.al-mail-remove:before {
+.al-limit:before {
   content: "\e93a";
 }
-.al-navbar:before {
+.al-location:before {
   content: "\e93b";
 }
-.al-pause:before {
+.al-location-create:before {
   content: "\e93c";
 }
-.al-play:before {
+.al-location-remove:before {
   content: "\e93d";
 }
-.al-purse:before {
+.al-mail:before {
   content: "\e93e";
 }
-.al-purse-control:before {
+.al-mail-control:before {
   content: "\e93f";
 }
-.al-purse-minus:before {
+.al-mailings:before {
   content: "\e940";
 }
-.al-purse-plus:before {
+.al-mailings-control:before {
   content: "\e941";
 }
-.al-purse-remove:before {
+.al-mailings-plus:before {
   content: "\e942";
 }
-.al-rank:before {
+.al-mailings-remove:before {
   content: "\e943";
 }
-.al-ranl-control:before {
+.al-mail-plus:before {
   content: "\e944";
 }
-.al-refresh:before {
+.al-mail-remove:before {
   content: "\e945";
 }
-.al-rename:before {
+.al-model:before {
   content: "\e946";
 }
-.al-repo:before {
+.al-navbar:before {
   content: "\e947";
 }
-.al-repo-control:before {
+.al-orientation:before {
   content: "\e948";
 }
-.al-settings:before {
+.al-os:before {
   content: "\e949";
 }
-.al-shutdown:before {
+.al-os-control:before {
   content: "\e94a";
 }
-.al-sign-out:before {
+.al-os-version:before {
   content: "\e94b";
 }
-.al-software:before {
+.al-pause:before {
   content: "\e94c";
 }
-.al-statistic:before {
+.al-play:before {
   content: "\e94d";
 }
-.al-stop:before {
+.al-profile:before {
   content: "\e94e";
 }
-.al-system:before {
+.al-profiles:before {
   content: "\e94f";
 }
-.al-tags:before {
+.al-purse:before {
   content: "\e950";
 }
-.al-tags-control:before {
+.al-purse-access:before {
   content: "\e951";
 }
-.al-tags-plus:before {
+.al-purse-buy:before {
   content: "\e952";
 }
-.al-tags-remove:before {
+.al-purse-control:before {
   content: "\e953";
 }
-.al-task:before {
+.al-purse-create:before {
   content: "\e954";
 }
-.al-task-control:before {
+.al-purse-remove:before {
   content: "\e955";
 }
-.al-task-minus:before {
+.al-purse-sell:before {
   content: "\e956";
 }
-.al-task-plus:before {
+.al-rank:before {
   content: "\e957";
 }
-.al-task-remove:before {
+.al-ranl-control:before {
   content: "\e958";
 }
-.al-task-shutdown:before {
+.al-refresh:before {
   content: "\e959";
 }
-.al-time-targeting:before {
+.al-rename:before {
   content: "\e95a";
 }
-.al-time-targeting-control:before {
+.al-repo:before {
   content: "\e95b";
 }
-.al-time-targeting-plus:before {
+.al-repo-control:before {
   content: "\e95c";
 }
-.al-time-targeting-remove:before {
+.al-screen:before {
   content: "\e95d";
 }
-.al-trash:before {
+.al-settings:before {
   content: "\e95e";
 }
-.al-user:before {
+.al-shield:before {
   content: "\e95f";
 }
-.al-user-access:before {
+.al-shutdown:before {
   content: "\e960";
 }
-.al-user-admin:before {
+.al-sign-out:before {
+  content: "\e961";
+}
+.al-software:before {
+  content: "\e962";
+}
+.al-star:before {
   content: "\e963";
 }
-.al-user-control:before {
+.al-statistic:before {
   content: "\e964";
 }
-.al-user-minus:before {
+.al-stop:before {
   content: "\e965";
 }
-.al-user-not-allow:before {
+.al-tags:before {
   content: "\e966";
 }
-.al-user-plus:before {
+.al-tags-control:before {
   content: "\e967";
 }
-.al-user-remove:before {
+.al-tags-plus:before {
   content: "\e968";
 }
-.al-users-group:before {
+.al-tags-remove:before {
   content: "\e969";
 }
-.al-users-group-control:before {
+.al-task:before {
   content: "\e96a";
 }
-.al-users-group-plus:before {
+.al-task-control:before {
   content: "\e96b";
 }
-.al-users-group-remove:before {
+.al-task-minus:before {
   content: "\e96c";
 }
-.al-worker:before {
+.al-task-plus:before {
   content: "\e96d";
 }
-.al-worker-control:before {
+.al-task-remove:before {
   content: "\e96e";
 }
-.al-worker-minus:before {
+.al-task-shutdown:before {
   content: "\e96f";
 }
-.al-worker-plus:before {
+.al-time:before {
   content: "\e970";
 }
-.al-worker-shutdown:before {
+.al-time-targeting:before {
   content: "\e971";
+}
+.al-time-targeting-control:before {
+  content: "\e972";
+}
+.al-time-targeting-plus:before {
+  content: "\e973";
+}
+.al-time-targeting-remove:before {
+  content: "\e974";
+}
+.al-trash:before {
+  content: "\e975";
+}
+.al-user:before {
+  content: "\e976";
+}
+.al-user-access:before {
+  content: "\e977";
+}
+.al-user-control:before {
+  content: "\e978";
+}
+.al-user-create:before {
+  content: "\e979";
+}
+.al-user-o:before {
+  content: "\e97a";
+}
+.al-user-remove:before {
+  content: "\e97b";
+}
+.al-worker:before {
+  content: "\e97c";
+}
+.al-worker-control:before {
+  content: "\e97d";
+}
+.al-worker-minus:before {
+  content: "\e97e";
+}
+.al-worker-plus:before {
+  content: "\e97f";
+}
+.al-worker-shutdown:before {
+  content: "\e980";
 }

@@ -169,7 +169,7 @@ table {
 }
 
 .table-item-btn {
-  margin-bottom: @table-cell-padding;
+  margin: @table-cell-padding*2 0;
 }
 
 //
@@ -236,11 +236,31 @@ table {
 }
 
 .table-three {
+
   display: table;
   cursor: default;
   user-select: none;
   border-collapse: collapse;
-  width: auto;
+  width: 100%;
+
+
+  @media only screen and (max-width: 1440px) {
+    display: flex;
+    flex-direction: column;
+    & > tbody > tr {
+      width: 100%;
+      display: table;
+    }
+    & > tbody > tr > td {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 2em;
+    }
+    .table-three-root {
+      display: none;
+    }
+  }
+
   thead th {
     border: 0;
   }
@@ -260,16 +280,23 @@ table {
           padding: @table-cell-padding*0.5 @table-cell-padding;
           vertical-align: middle;
         }
+        td.option {
+          width: 1%;
+          white-space: nowrap;
+        }
         td:last-child {
           padding: 0;
         }
     }
   }
-  a {
+  td > a {
     display: inline-block;
-    padding: @table-cell-padding;
+    padding: @table-cell-padding @table-cell-padding/2;
     text-decoration: none;
-    color: @danger;
+    color: @primary;
+    &.al-close {
+      color: @danger;
+    }
   }
   & th,
   & td {
@@ -281,7 +308,7 @@ table {
 
   .table tbody tr.active {
     color: @white;
-    background-color: @primary;
+    background-color: @primary!important;
     a {
       color: @white;
     }
@@ -303,7 +330,6 @@ table {
     .table-container th {
       color: @lightdark;
       border: 0;
-      height: 50px;
       box-sizing: border-box;
       background-color: darken(@white, 10%);
     }

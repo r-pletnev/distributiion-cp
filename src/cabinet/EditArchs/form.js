@@ -15,28 +15,14 @@ let AddArchForm = props => {
     props.destroy();
   };
   const submitForm = values => {
-    return props.dispatch(
-      fetchAddArch(
-        { ...values, ...{ os_version_id: Number(values.os_version_id) } },
-        closeForm
-      )
-    );
+    return props.dispatch(fetchAddArch(values, closeForm));
   };
 
   return (
     <div className="popup-content">
       <form className="form" onSubmit={handleSubmit(submitForm)}>
-        <FormSelectField
-          name="os_version_id"
-          label="OS version"
-          options={props.os_versions}
-        />
-        <FormField
-          name="name"
-          type="text"
-          label="Enter name"
-          autoComplete="off"
-        />
+        <FormField name="name" type="text" label="Name" autoComplete="off" />
+        <FormField name="content" type="text" label="Content" />
         <div className="popup-bottom">
           <button
             className="btn btn-success"

@@ -8,6 +8,8 @@ import EditArchs from "./cabinet/EditArchs";
 import EditBrowsers from "./cabinet/EditBrowsers";
 import EditOsVersions from "./cabinet/EditOsVersions";
 import EditBrowserVersions from "./cabinet/EditBrowserVersions";
+import EditBrowserPanels from "./cabinet/EditBrowserPanels";
+import EditOsPanels from "./cabinet/EditOsPanels";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import PageLayout from "./layout";
 import urls from "./urls";
@@ -25,6 +27,7 @@ const App = props => {
       <PageLayout>
         <Switch>
           <Route path="/" exact component={MainPage} />
+          <Route path={urls.os_panels} component={EditOsPanels} />
           <Route path={urls.models} component={EditModels} />
           <Route path={urls.devices} component={EditDevices} />
           <Route path={urls.os} component={EditOses} />
@@ -33,6 +36,10 @@ const App = props => {
           <Route path={urls.screens} component={EditScreens} />
           <Route path={urls.browsers} component={EditBrowsers} />
           <Route path={urls.browser_versions} component={EditBrowserVersions} />
+          <Route
+            path={urls.browser_panel_versions}
+            component={EditBrowserPanels}
+          />
           <Route component={NoMatch} />
         </Switch>
       </PageLayout>

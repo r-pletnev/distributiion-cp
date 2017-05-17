@@ -21,7 +21,8 @@ function fetchAllScreensSuccess(payload) {
   const screens = payload.map(elm => ({
     id: elm.screen_id,
     width: elm.width,
-    height: elm.height
+    height: elm.height,
+    model_id: elm.model_id
   }));
 
   return {

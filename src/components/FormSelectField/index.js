@@ -1,6 +1,7 @@
 import React from "react";
 import { Field } from "redux-form";
 import PropTypes from "prop-types";
+import "./style.css";
 
 const SelectField = props => {
   const options = props.options.map(elm => (

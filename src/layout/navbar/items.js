@@ -36,6 +36,11 @@ const itemsArray = [
   },
   {
     icon: "",
+    type: "OS panel",
+    to: urls.os_panels
+  },
+  {
+    icon: "",
     type: "Browsers",
     to: urls.browsers
   },

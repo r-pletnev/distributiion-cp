@@ -5,21 +5,21 @@ import PropTypes from "prop-types";
 import { reduxForm } from "redux-form";
 import FormField from "../../components/FormField";
 import FormSelectField from "../../components/FormSelectField";
-import { fetchAddBrowser } from "../../actions/browsers";
+import { fetchAddOsPanel } from "../../actions/os_panels";
 import { getOses } from "../../reducers/oses";
 import { getOsVersions } from "../../reducers/os_versions";
 
-let AddBrowserForm = props => {
+let AddOsPanelForm = props => {
   const { handleSubmit, pristine, submitting, error } = props;
+
   const closeForm = () => {
     props.closeForm();
     props.destroy();
   };
   const submitForm = values => {
-    const myValues = R.omit(["os_id"], values);
     return props.dispatch(
-      fetchAddBrowser(
-        { ...myValues, ...{ os_version_id: Number(myValues.os_version_id) } },
+      fetchAddOsPanel(
+        R.evolve({ os_id: Number, os_version_id: Number }, values),
         closeForm
       )
     );
@@ -28,11 +28,19 @@ let AddBrowserForm = props => {
   return (
     <div className="popup-content">
       <form className="form" onSubmit={handleSubmit(submitForm)}>
+        <FormSelectField name="os_id" label="Select OS" options={props.oses} />
+        <FormSelectField
+          name="os_version_id"
+          label="Select OS Version"
+          options={props.os_versions}
+        />
         <FormField
-          name="name"
-          type="text"
-          label="Browser name"
-          autoComplete="off"
+          name="size"
+          type="number"
+          label="Os panel height"
+          autoComplete="on"
+          minValue={1}
+          maxValue={300}
         />
         <div className="popup-bottom">
           <button
@@ -48,9 +56,9 @@ let AddBrowserForm = props => {
   );
 };
 
-AddBrowserForm = reduxForm({
-  form: "AddBrowserForm"
-})(AddBrowserForm);
+AddOsPanelForm = reduxForm({
+  form: "AddOsPanelForm"
+})(AddOsPanelForm);
 
 function mapStateToProps(state) {
   return {
@@ -59,4 +67,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(AddBrowserForm);
+export default connect(mapStateToProps)(AddOsPanelForm);

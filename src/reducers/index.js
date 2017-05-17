@@ -5,6 +5,7 @@ import models from "./models";
 import oses from "./oses";
 import archs from "./archs";
 import os_versions from "./os_versions";
+import os_panels from "./os_panels";
 import screens from "./screens";
 import browsers from "./browsers";
 import browser_versions from "./browser_versions";
@@ -18,5 +19,6 @@ export const rootReducer = combineReducers({
   os_versions,
   screens,
   browsers,
+  os_panels,
   browser_versions
 });
