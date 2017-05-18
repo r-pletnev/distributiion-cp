@@ -3,7 +3,7 @@ import {
   ADD_DEVICE_SUCCEES,
   REMOVE_DEVICES_SUCCESS
 } from "../constants/devices";
-import { filterById } from "../utils/ramda";
+import { filterById, sortById } from "../utils/ramda";
 
 const initialState = {
   entities: []
@@ -16,14 +16,14 @@ export default function deviceState(state = initialState, action) {
     case GET_ALL_DEVICES_SUCCESS: {
       return {
         ...state,
-        entities: payload
+        entities: sortById(payload)
       };
     }
 
     case ADD_DEVICE_SUCCEES: {
       return {
         ...state,
-        entities: [...state.entities, payload]
+        entities: sortById([...state.entities, payload])
       };
     }
 

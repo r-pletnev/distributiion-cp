@@ -16,13 +16,17 @@ let AddScreenForm = props => {
     props.destroy();
   };
   const submitForm = values => {
-    return props.dispatch(fetchAddScreen(R.evolve({model_id: Number, width: Number, height: Number}, values), closeForm));
+    return props.dispatch(
+      fetchAddScreen(
+        R.evolve({ width: Number, height: Number }, values),
+        closeForm
+      )
+    );
   };
 
   return (
     <div className="popup-content">
       <form className="form" onSubmit={handleSubmit(submitForm)}>
-        <FormSelectField name="model_id" label="Model" options={props.models} />
         <div className="split">
           <div className="box">
             <FormField

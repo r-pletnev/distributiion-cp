@@ -4,7 +4,7 @@ import {
   ADD_OS_SUCCESS,
   REMOVE_OSES_SUCCESS
 } from "../constants/oses";
-import { filterById } from "../utils/ramda";
+import { filterById, sortById } from "../utils/ramda";
 
 const initialState = {
   entities: []
@@ -17,14 +17,14 @@ export default function osState(state = initialState, action) {
     case GET_OSES_SUCCESS: {
       return {
         ...state,
-        entities: payload
+        entities: sortById(payload)
       };
     }
 
     case ADD_OS_SUCCESS: {
       return {
         ...state,
-        entities: [...state.entities, payload]
+        entities: sortById([...state.entities, payload])
       };
     }
 

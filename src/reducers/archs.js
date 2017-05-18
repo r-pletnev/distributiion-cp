@@ -3,7 +3,7 @@ import {
   ADD_ARCH_SUCCESS,
   REMOVE_ARCHS_SUCCESS
 } from "../constants/archs";
-import { filterById } from "../utils/ramda";
+import { filterById, sortById } from "../utils/ramda";
 
 const initialState = {
   entities: []
@@ -16,14 +16,14 @@ export default function archState(state = initialState, action) {
     case GET_ARHCS_SUCCESS: {
       return {
         ...state,
-        entities: payload
+        entities: sortById(payload)
       };
     }
 
     case ADD_ARCH_SUCCESS: {
       return {
         ...state,
-        entities: [...state.entities, payload]
+        entities: sortById([...state.entities, payload])
       };
     }
 

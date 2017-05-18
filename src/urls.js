@@ -8,7 +8,8 @@ const urls = {
   os_arch: "/os-arch",
   browsers: "/browsers",
   browser_versions: "/browser-versions",
-  browser_panel_versions: "/browser-panel-verisons"
+  browser_panel_versions: "/browser-panels",
+  templates: "/templates"
 };
 
 export default urls;

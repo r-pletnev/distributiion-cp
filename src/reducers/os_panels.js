@@ -3,7 +3,7 @@ import {
   ADD_OS_PANEL_SUCCESS,
   REMOVE_OS_PANELS_SUCCESS
 } from "../constants/os_panels";
-import { filterById } from "../utils/ramda";
+import { filterById, sortById } from "../utils/ramda";
 
 const initialState = {
   entities: []
@@ -16,14 +16,14 @@ export default function osPanelState(state = initialState, action) {
     case GET_OS_PANELS_SUCCESS: {
       return {
         ...state,
-        entities: payload
+        entities: sortById(payload)
       };
     }
 
     case ADD_OS_PANEL_SUCCESS: {
       return {
         ...state,
-        entities: [...state.entities, payload]
+        entities: sortById([...state.entities, payload])
       };
     }
 

@@ -65,6 +65,12 @@ const items = [
     text: "Управление панелями браузеров",
     to: urls.browser_panel_versions,
     image: "al-browser-panel"
+  },
+  {
+    title: "UA templates",
+    text: "Управление шаблонами UA",
+    to: urls.templates,
+    image: "al-browser-ua-template"
   }
 ];
 

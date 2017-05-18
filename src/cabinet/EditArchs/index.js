@@ -12,6 +12,7 @@ const TableRow = ({ elm, onRemove }) => {
     <tr key={elm.id}>
       <td className="id">{elm.id}</td>
       <td>{elm.name}</td>
+      <td>{elm.payload}</td>
       <ButtonBlock onRemoveClick={onRemove([elm.id])} />
     </tr>
   );
@@ -32,7 +33,7 @@ const EditArchs = props => {
     <TableView
       title="Edit OS Architecture"
       createBtnLabel="Create OS architecture"
-      headRow={["ID", "Architecture"]}
+      headRow={["ID", "Architecture", "Payload"]}
       rows={rows}
       specialForm={AddArchForm}
       onMountAction={onEnter}

@@ -13,7 +13,6 @@ const TableRow = props => {
   return (
     <tr key={elm.id}>
       <td className="id">{elm.id}</td>
-      <td>{"/os_panel/ - не содержит id os и id os_version"} </td>
       <td>{elm.size}</td>
       <ButtonBlock onRemoveClick={onRemove([elm.id])} />
     </tr>
@@ -36,8 +35,8 @@ const EditOsPanels = props => {
   return (
     <TableView
       title="Edit OS Panels"
-      createBtnLabel="Create Os panel height"
-      headRow={["ID", "OS", "Height"]}
+      createBtnLabel="Create Os panel"
+      headRow={["ID", "Height"]}
       rows={rows}
       specialForm={AddOsPanelForm}
       onMountAction={onEnter}

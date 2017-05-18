@@ -10,6 +10,7 @@ import EditOsVersions from "./cabinet/EditOsVersions";
 import EditBrowserVersions from "./cabinet/EditBrowserVersions";
 import EditBrowserPanels from "./cabinet/EditBrowserPanels";
 import EditOsPanels from "./cabinet/EditOsPanels";
+import EditTemplates from "./cabinet/EditTemplates";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import PageLayout from "./layout";
 import urls from "./urls";
@@ -36,6 +37,7 @@ const App = props => {
           <Route path={urls.screens} component={EditScreens} />
           <Route path={urls.browsers} component={EditBrowsers} />
           <Route path={urls.browser_versions} component={EditBrowserVersions} />
+          <Route path={urls.templates} component={EditTemplates} />
           <Route
             path={urls.browser_panel_versions}
             component={EditBrowserPanels}

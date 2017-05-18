@@ -18,7 +18,11 @@ export function fetchAllArchs() {
 }
 
 function GetArchsSuccess(payload) {
-  const archs = payload.map(elm => ({ id: elm.arch_id, name: elm.name }));
+  const archs = payload.map(elm => ({
+    id: elm.arch_id,
+    name: elm.name,
+    payload: elm.payload
+  }));
   return {
     type: GET_ARHCS_SUCCESS,
     payload: archs
@@ -39,12 +43,12 @@ export function fetchAddArch(arch, onSuccess) {
 }
 
 function AddArchSuccess(payload) {
-  const { arch_id, name } = payload;
+  const { arch_id, ...rest } = payload;
   return {
     type: ADD_ARCH_SUCCESS,
     payload: {
       id: arch_id,
-      name
+      ...rest
     }
   };
 }

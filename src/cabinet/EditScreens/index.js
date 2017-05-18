@@ -9,11 +9,10 @@ import AddOsVerisionForm from "./form";
 import ButtonBlock from "../../components/ButtonOptions";
 
 const TableRow = props => {
-  const { elm, onRemove, model } = props;
+  const { elm, onRemove } = props;
   return (
     <tr key={elm.id}>
       <td className="id">{elm.id}</td>
-      <td>{model ? model.id : "There is not such model"}</td>
       <td>{elm.width}</td>
       <td>{elm.height}</td>
       <ButtonBlock onRemoveClick={onRemove([elm.id])} />
@@ -26,7 +25,6 @@ const EditScreens = props => {
     <TableRow
       elm={elm}
       onRemove={ids => () => props.dispatch(fetchRemoveScreens(ids))}
-      model={props.modelById(elm.mo)}
     />
   ));
   const onEnter = () => {
@@ -38,7 +36,7 @@ const EditScreens = props => {
     <TableView
       title="Edit Screens"
       createBtnLabel="Create screen"
-      headRow={["ID", "Model", "Width", "Height"]}
+      headRow={["ID", "Width", "Height"]}
       rows={rows}
       specialForm={AddOsVerisionForm}
       onMountAction={onEnter}

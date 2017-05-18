@@ -25,7 +25,7 @@ function fetchAllOsVersionsSuccess(payload) {
   const os_versions = payload.map(elm => ({
     id: elm.os_version_id,
     name: elm.name,
-    panel_height: elm.panel_height,
+    payload: elm.payload,
     os_id: elm.os_id
   }));
   return {
@@ -48,13 +48,12 @@ export function fetchAddOsVersion(os_version, onSuccess) {
 }
 
 function addOsVersionSuccess(payload) {
-  const { os_version_id, name, panel_height } = payload;
+  const { os_version_id, ...rest } = payload;
   return {
     type: ADD_OS_VERSION_SUCCESS,
     payload: {
       id: os_version_id,
-      name,
-      panel_height
+      ...rest
     }
   };
 }

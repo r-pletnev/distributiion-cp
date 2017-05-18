@@ -1,13 +1,13 @@
 import React from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import { reduxForm } from "redux-form";
 import FormField from "../../components/FormField";
 import FormSelectField from "../../components/FormSelectField";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { fetchAddArch } from "../../actions/archs";
-import { getOsVersions } from "../../reducers/os_versions";
+import { fetchAddTemplate } from "../../actions/templates";
+import { getBrowsers } from "../../reducers/browsers";
 
-let AddArchForm = props => {
+let AddTemplateForm = props => {
   const { handleSubmit, pristine, submitting, error } = props;
 
   const closeForm = () => {
@@ -15,14 +15,19 @@ let AddArchForm = props => {
     props.destroy();
   };
   const submitForm = values => {
-    return props.dispatch(fetchAddArch(values, closeForm));
+    return props.dispatch(fetchAddTemplate(values, closeForm));
   };
 
   return (
     <div className="popup-content">
       <form className="form" onSubmit={handleSubmit(submitForm)}>
-        <FormField name="name" type="text" label="Name" autoComplete="off" />
-        <FormField name="payload" type="text" label="Payload" />
+        <FormSelectField
+          name="browser_id"
+          label="Select Browser"
+          options={props.browsers}
+        />
+        <FormField name="name" type="text" label="Template name" />
+        <FormField name="payload" type="textarea" label="Template" />
         <div className="popup-bottom">
           <button
             className="btn btn-success"
@@ -37,14 +42,14 @@ let AddArchForm = props => {
   );
 };
 
-AddArchForm = reduxForm({
-  form: "AddArchForm"
-})(AddArchForm);
+AddTemplateForm = reduxForm({
+  form: "AddTemplateForm"
+})(AddTemplateForm);
 
 function mapStateToProps(state) {
   return {
-    os_versions: getOsVersions(state)
+    browsers: getBrowsers(state)
   };
 }
 
-export default connect(mapStateToProps)(AddArchForm);
+export default connect(mapStateToProps)(AddTemplateForm);

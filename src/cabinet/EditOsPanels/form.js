@@ -17,23 +17,12 @@ let AddOsPanelForm = props => {
     props.destroy();
   };
   const submitForm = values => {
-    return props.dispatch(
-      fetchAddOsPanel(
-        R.evolve({ os_id: Number, os_version_id: Number }, values),
-        closeForm
-      )
-    );
+    return props.dispatch(fetchAddOsPanel(values, closeForm));
   };
 
   return (
     <div className="popup-content">
       <form className="form" onSubmit={handleSubmit(submitForm)}>
-        <FormSelectField name="os_id" label="Select OS" options={props.oses} />
-        <FormSelectField
-          name="os_version_id"
-          label="Select OS Version"
-          options={props.os_versions}
-        />
         <FormField
           name="size"
           type="number"
@@ -60,11 +49,11 @@ AddOsPanelForm = reduxForm({
   form: "AddOsPanelForm"
 })(AddOsPanelForm);
 
-function mapStateToProps(state) {
-  return {
-    oses: getOses(state),
-    os_versions: getOsVersions(state)
-  };
-}
+// function mapStateToProps(state) {
+//   return {
+//     oses: getOses(state),
+//     os_versions: getOsVersions(state)
+//   };
+// }
 
-export default connect(mapStateToProps)(AddOsPanelForm);
+export default connect()(AddOsPanelForm);

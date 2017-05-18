@@ -42,3 +42,11 @@ export const REMOVE_BROWSERS_URL = "/remove_browsers";
 export const ADD_BROWSER_VERSION_URL = "/add_browser_version";
 export const GET_BROWSER_VERSIONS_URL = "/get_browser_versions";
 export const REMOVE_BROWSER_VERSIONS_URL = "/remove_browser_versions";
+
+export const ADD_BROWSER_PANEL_URL = "/add_browser_panel";
+export const GET_BROWSER_PANELS_URL = "/get_browser_panels";
+export const REMOVE_BROWSER_PANELS_URL = "/remove_browser_panels";
+
+export const ADD_TEMPLATE_URL = "/add_template";
+export const GET_TEMPLATES_URL = "/get_templates";
+export const REMOVE_TEMPLATES_URL = "/remove_templates";

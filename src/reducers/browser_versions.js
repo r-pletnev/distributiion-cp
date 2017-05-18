@@ -3,7 +3,7 @@ import {
   ADD_BROWSER_VERSION_SUCCESS,
   REMOVE_BROWSER_VERSIONS_SUCCESS
 } from "../constants/browser_versions";
-import { filterById } from "../utils/ramda";
+import { filterById, sortById } from "../utils/ramda";
 
 const initialState = {
   entities: []
@@ -16,14 +16,14 @@ export default function browserVersionState(state = initialState, action) {
     case GET_BROWSER_VERSIONS_SUCCESS: {
       return {
         ...state,
-        entities: payload
+        entities: sortById(payload)
       };
     }
 
     case ADD_BROWSER_VERSION_SUCCESS: {
       return {
         ...state,
-        entities: [...state.entities, payload]
+        entities: sortById([...state.entities, payload])
       };
     }
     case REMOVE_BROWSER_VERSIONS_SUCCESS: {

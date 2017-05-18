@@ -1,33 +1,32 @@
 import {
-  GET_SCREENS_SUCCESS,
-  ADD_SCREEN_SUCCESS,
-  REMOVE_SCREENS_SUCCESS
-} from "../constants/screens";
+  GET_BROWSER_PANELS_SUCCESS,
+  ADD_BROWSER_PANEL_SUCCESS,
+  REMOVE_BROWSER_PANELS_SUCCESS
+} from "../constants/browser_panels";
 import { filterById, sortById } from "../utils/ramda";
 
 const initialState = {
   entities: []
 };
 
-export default function screenState(state = initialState, action) {
+export default function browserPanelState(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case GET_SCREENS_SUCCESS: {
+    case GET_BROWSER_PANELS_SUCCESS: {
       return {
         ...state,
         entities: sortById(payload)
       };
     }
 
-    case ADD_SCREEN_SUCCESS: {
+    case ADD_BROWSER_PANEL_SUCCESS: {
       return {
         ...state,
         entities: sortById([...state.entities, payload])
       };
     }
-
-    case REMOVE_SCREENS_SUCCESS: {
+    case REMOVE_BROWSER_PANELS_SUCCESS: {
       return filterById(payload, state);
     }
 
@@ -37,12 +36,12 @@ export default function screenState(state = initialState, action) {
   }
 }
 
-export function getScreens(state) {
-  return state.screens.entities;
+export function getBrowserPanels(state) {
+  return state.browser_panels.entities;
 }
 
-export function getScreenById(state) {
-  const items = getScreens(state);
+export function getBrowserPanelById(state) {
+  const items = getBrowserPanels(state);
   return id => {
     const isEqual = elm => elm.id === id;
     return items.find(isEqual);

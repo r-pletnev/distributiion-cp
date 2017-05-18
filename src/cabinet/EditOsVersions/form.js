@@ -33,14 +33,7 @@ let AddOsVerisionForm = props => {
           label="OS version name"
           autoComplete="off"
         />
-        <FormField
-          name="panel_height"
-          type="number"
-          label="Panel height"
-          autoComplete="on"
-          minValue={1}
-          maxValue={300}
-        />
+        <FormField name="payload" type="text" label="Payload" />
         <div className="popup-bottom">
           <button
             className="btn btn-success"

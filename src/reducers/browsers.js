@@ -3,7 +3,7 @@ import {
   ADD_BROWSER_SUCCESS,
   REMOVE_BROWSERS_SUCCESS
 } from "../constants/browsers";
-import { filterById } from "../utils/ramda";
+import { filterById, sortById } from "../utils/ramda";
 
 const initialState = {
   entities: []
@@ -16,14 +16,14 @@ export default function browserState(state = initialState, action) {
     case GET_BROWSERS_SUCCESS: {
       return {
         ...state,
-        entities: payload
+        entities: sortById(payload)
       };
     }
 
     case ADD_BROWSER_SUCCESS: {
       return {
         ...state,
-        entities: [...state.entities, payload]
+        entities: sortById([...state.entities, payload])
       };
     }
 

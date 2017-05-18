@@ -9,6 +9,8 @@ import os_panels from "./os_panels";
 import screens from "./screens";
 import browsers from "./browsers";
 import browser_versions from "./browser_versions";
+import browser_panels from "./browser_panels";
+import templates from "./templates";
 
 export const rootReducer = combineReducers({
   form: FormReducer,
@@ -20,5 +22,7 @@ export const rootReducer = combineReducers({
   screens,
   browsers,
   os_panels,
-  browser_versions
+  browser_versions,
+  browser_panels,
+  templates
 });
