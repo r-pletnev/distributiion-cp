@@ -1,12 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import TableView from "../../components/TableView";
-import {
-  fetchAllTemplates,
-  fetchRemoveTemplates
-} from "../../actions/templates";
+import { fetchRemoveTemplates } from "../../actions/templates";
 import { getTemplates } from "../../reducers/templates";
-import { fetchAllBrowsers } from "../../actions/browsers";
 import { getBrowserById } from "../../reducers/browsers";
 import AddTemplateForm from "./form";
 import ButtonBlock from "../../components/ButtonOptions";
@@ -16,7 +12,7 @@ const TableRow = props => {
   return (
     <tr key={elm.id}>
       <td className="id">{elm.id}</td>
-      <td>{browser.name}</td>
+      <td>{browser ? browser.name : null}</td>
       <td>{elm.name}</td>
       <td>{elm.payload}</td>
       <ButtonBlock onRemoveClick={onRemove([elm.id])} />
@@ -32,11 +28,6 @@ const EditTemplates = props => {
       browser={props.browserById(elm.browser_id)}
     />
   ));
-  const onEnter = () => {
-    props.dispatch(fetchAllBrowsers());
-    props.dispatch(fetchAllTemplates());
-  };
-
   return (
     <TableView
       title="Edit browser UA tempates"
@@ -44,7 +35,6 @@ const EditTemplates = props => {
       headRow={["ID", "Browser", "Name", "Template"]}
       rows={rows}
       specialForm={AddTemplateForm}
-      onMountAction={onEnter}
     />
   );
 };

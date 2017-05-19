@@ -70,7 +70,7 @@ const items = [
     title: "UA templates",
     text: "Управление шаблонами UA",
     to: urls.templates,
-    image: "al-browser-ua-template"
+    image: "al-ua-template"
   }
 ];
 

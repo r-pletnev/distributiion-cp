@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'antlace-cp';
-  src:  url('../fonts/antlace-cp.eot?soutqp');
-  src:  url('../fonts/antlace-cp.eot?soutqp#iefix') format('embedded-opentype'),
-    url('../fonts/antlace-cp.ttf?soutqp') format('truetype'),
-    url('../fonts/antlace-cp.woff?soutqp') format('woff'),
-    url('../fonts/antlace-cp.svg?soutqp#antlace-cp') format('svg');
+  src:  url('../fonts/antlace-cp.eot?v1fs2n');
+  src:  url('../fonts/antlace-cp.eot?v1fs2n#iefix') format('embedded-opentype'),
+    url('../fonts/antlace-cp.ttf?v1fs2n') format('truetype'),
+    url('../fonts/antlace-cp.woff?v1fs2n') format('woff'),
+    url('../fonts/antlace-cp.svg?v1fs2n#antlace-cp') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -30,384 +30,396 @@
 .al-browser:before {
   content: "\e901";
 }
-.al-browser-version:before {
+.al-browser-panel:before {
   content: "\e902";
 }
-.al-calendar:before {
+.al-browser-version:before {
   content: "\e903";
 }
-.al-caret-down:before {
+.al-calendar:before {
   content: "\e904";
 }
-.al-caret-left:before {
+.al-caret-down:before {
   content: "\e905";
 }
-.al-caret-right:before {
+.al-caret-left:before {
   content: "\e906";
 }
-.al-caret-up:before {
+.al-caret-right:before {
   content: "\e907";
 }
-.al-channel:before {
+.al-caret-up:before {
   content: "\e908";
 }
-.al-channel-control:before {
+.al-channel:before {
   content: "\e909";
 }
-.al-channel-plus:before {
+.al-channel-control:before {
   content: "\e90a";
 }
-.al-channel-remove:before {
+.al-channel-plus:before {
   content: "\e90b";
 }
-.al-check:before {
+.al-channel-remove:before {
   content: "\e90c";
 }
-.al-close:before {
+.al-check:before {
   content: "\e90d";
 }
-.al-cookies:before {
+.al-close:before {
   content: "\e90e";
 }
-.al-cyborg:before {
+.al-cookies:before {
   content: "\e90f";
 }
-.al-device:before {
+.al-cyborg:before {
   content: "\e910";
 }
-.al-distribution:before {
+.al-device:before {
   content: "\e911";
 }
-.al-drone:before {
+.al-distribution:before {
   content: "\e912";
 }
-.al-drone-control:before {
+.al-drone:before {
   content: "\e913";
 }
-.al-drone-minus:before {
+.al-drone-control:before {
   content: "\e914";
 }
-.al-drone-plus:before {
+.al-drone-minus:before {
   content: "\e915";
 }
-.al-drone-shutdown:before {
+.al-drone-plus:before {
   content: "\e916";
 }
-.al-duplicate:before {
+.al-drone-shutdown:before {
   content: "\e917";
 }
-.al-edit:before {
+.al-duplicate:before {
   content: "\e918";
 }
-.al-exchanger:before {
+.al-edit:before {
   content: "\e919";
 }
-.al-exchanger-access:before {
+.al-exchanger:before {
   content: "\e91a";
 }
-.al-exchanger-buy:before {
+.al-exchanger-access:before {
   content: "\e91b";
 }
-.al-exchanger-control:before {
+.al-exchanger-buy:before {
   content: "\e91c";
 }
-.al-exchanger-create:before {
+.al-exchanger-control:before {
   content: "\e91d";
 }
-.al-exchanger-remove:before {
+.al-exchanger-create:before {
   content: "\e91e";
 }
-.al-exchanger-sell:before {
+.al-exchanger-remove:before {
   content: "\e91f";
 }
-.al-expander:before {
+.al-exchanger-sell:before {
   content: "\e920";
 }
-.al-expander-open:before {
+.al-expander:before {
   content: "\e921";
 }
-.al-geofilter:before {
+.al-expander-open:before {
   content: "\e922";
 }
-.al-geofilter-control:before {
+.al-geofilter:before {
   content: "\e923";
 }
-.al-geofilter-create:before {
+.al-geofilter-control:before {
   content: "\e924";
 }
-.al-geofilter-remove:before {
+.al-geofilter-create:before {
   content: "\e925";
 }
-.al-group:before {
+.al-geofilter-remove:before {
   content: "\e926";
 }
-.al-group-control:before {
+.al-group:before {
   content: "\e927";
 }
-.al-group-create:before {
+.al-group-control:before {
   content: "\e928";
 }
-.al-group-remove:before {
+.al-group-create:before {
   content: "\e929";
 }
-.al-history:before {
+.al-group-remove:before {
   content: "\e92a";
 }
-.al-home:before {
+.al-history:before {
   content: "\e92b";
 }
-.al-ipfilter:before {
+.al-home:before {
   content: "\e92c";
 }
-.al-ipfilter-control:before {
+.al-ipfilter:before {
   content: "\e92d";
 }
-.al-ipfilter-create:before {
+.al-ipfilter-control:before {
   content: "\e92e";
 }
-.al-ipfilter-remove:before {
+.al-ipfilter-create:before {
   content: "\e92f";
 }
-.al-ip-i-proxy:before {
+.al-ipfilter-remove:before {
   content: "\e930";
 }
-.al-ip-i-static:before {
+.al-ip-i-proxy:before {
   content: "\e931";
 }
-.al-iprange:before {
+.al-ip-i-static:before {
   content: "\e932";
 }
-.al-iprange-control:before {
+.al-iprange:before {
   content: "\e933";
 }
-.al-iprange-create:before {
+.al-iprange-control:before {
   content: "\e934";
 }
-.al-iprange-remove:before {
+.al-iprange-create:before {
   content: "\e935";
 }
-.al-level:before {
+.al-iprange-remove:before {
   content: "\e936";
 }
-.al-level-control:before {
+.al-level:before {
   content: "\e937";
 }
-.al-level-plus:before {
+.al-level-control:before {
   content: "\e938";
 }
-.al-level-remove:before {
+.al-level-plus:before {
   content: "\e939";
 }
-.al-limit:before {
+.al-level-remove:before {
   content: "\e93a";
 }
-.al-location:before {
+.al-limit:before {
   content: "\e93b";
 }
-.al-location-create:before {
+.al-location:before {
   content: "\e93c";
 }
-.al-location-remove:before {
+.al-location-create:before {
   content: "\e93d";
 }
-.al-mail:before {
+.al-location-remove:before {
   content: "\e93e";
 }
-.al-mail-control:before {
+.al-mail:before {
   content: "\e93f";
 }
-.al-mailings:before {
+.al-mail-control:before {
   content: "\e940";
 }
-.al-mailings-control:before {
+.al-mailings:before {
   content: "\e941";
 }
-.al-mailings-plus:before {
+.al-mailings-control:before {
   content: "\e942";
 }
-.al-mailings-remove:before {
+.al-mailings-plus:before {
   content: "\e943";
 }
-.al-mail-plus:before {
+.al-mailings-remove:before {
   content: "\e944";
 }
-.al-mail-remove:before {
+.al-mail-plus:before {
   content: "\e945";
 }
-.al-model:before {
+.al-mail-remove:before {
   content: "\e946";
 }
-.al-navbar:before {
+.al-model:before {
   content: "\e947";
 }
-.al-orientation:before {
+.al-navbar:before {
   content: "\e948";
 }
-.al-os:before {
+.al-orientation:before {
   content: "\e949";
 }
-.al-os-control:before {
+.al-os:before {
   content: "\e94a";
 }
-.al-os-version:before {
+.al-os-control:before {
   content: "\e94b";
 }
-.al-pause:before {
+.al-os-panel:before {
   content: "\e94c";
 }
-.al-play:before {
+.al-os-version:before {
   content: "\e94d";
 }
-.al-profile:before {
+.al-pause:before {
   content: "\e94e";
 }
-.al-profiles:before {
+.al-play:before {
   content: "\e94f";
 }
-.al-purse:before {
+.al-profile:before {
   content: "\e950";
 }
-.al-purse-access:before {
+.al-profiles:before {
   content: "\e951";
 }
-.al-purse-buy:before {
+.al-purse:before {
   content: "\e952";
 }
-.al-purse-control:before {
+.al-purse-access:before {
   content: "\e953";
 }
-.al-purse-create:before {
+.al-purse-buy:before {
   content: "\e954";
 }
-.al-purse-remove:before {
+.al-purse-control:before {
   content: "\e955";
 }
-.al-purse-sell:before {
+.al-purse-create:before {
   content: "\e956";
 }
-.al-rank:before {
+.al-purse-remove:before {
   content: "\e957";
 }
-.al-ranl-control:before {
+.al-purse-sell:before {
   content: "\e958";
 }
-.al-refresh:before {
+.al-rank:before {
   content: "\e959";
 }
-.al-rename:before {
+.al-ranl-control:before {
   content: "\e95a";
 }
-.al-repo:before {
+.al-refresh:before {
   content: "\e95b";
 }
-.al-repo-control:before {
+.al-rename:before {
   content: "\e95c";
 }
-.al-screen:before {
+.al-repo:before {
   content: "\e95d";
 }
-.al-settings:before {
+.al-repo-control:before {
   content: "\e95e";
 }
-.al-shield:before {
+.al-screen:before {
   content: "\e95f";
 }
-.al-shutdown:before {
+.al-settings:before {
   content: "\e960";
 }
-.al-sign-out:before {
+.al-shield:before {
   content: "\e961";
 }
-.al-software:before {
+.al-shutdown:before {
   content: "\e962";
 }
-.al-star:before {
+.al-sign-out:before {
   content: "\e963";
 }
-.al-statistic:before {
+.al-software:before {
   content: "\e964";
 }
-.al-stop:before {
+.al-star:before {
   content: "\e965";
 }
-.al-tags:before {
+.al-stars:before {
   content: "\e966";
 }
-.al-tags-control:before {
+.al-statistic:before {
   content: "\e967";
 }
-.al-tags-plus:before {
+.al-stop:before {
   content: "\e968";
 }
-.al-tags-remove:before {
+.al-tags:before {
   content: "\e969";
 }
-.al-task:before {
+.al-tags-control:before {
   content: "\e96a";
 }
-.al-task-control:before {
+.al-tags-plus:before {
   content: "\e96b";
 }
-.al-task-minus:before {
+.al-tags-remove:before {
   content: "\e96c";
 }
-.al-task-plus:before {
+.al-task:before {
   content: "\e96d";
 }
-.al-task-remove:before {
+.al-task-control:before {
   content: "\e96e";
 }
-.al-task-shutdown:before {
+.al-task-minus:before {
   content: "\e96f";
 }
-.al-time:before {
+.al-task-plus:before {
   content: "\e970";
 }
-.al-time-targeting:before {
+.al-task-remove:before {
   content: "\e971";
 }
-.al-time-targeting-control:before {
+.al-task-shutdown:before {
   content: "\e972";
 }
-.al-time-targeting-plus:before {
+.al-time:before {
   content: "\e973";
 }
-.al-time-targeting-remove:before {
+.al-time-targeting:before {
   content: "\e974";
 }
-.al-trash:before {
+.al-time-targeting-control:before {
   content: "\e975";
 }
-.al-user:before {
+.al-time-targeting-plus:before {
   content: "\e976";
 }
-.al-user-access:before {
+.al-time-targeting-remove:before {
   content: "\e977";
 }
-.al-user-control:before {
+.al-trash:before {
   content: "\e978";
 }
-.al-user-create:before {
+.al-ua-template:before {
   content: "\e979";
 }
-.al-user-o:before {
+.al-user:before {
   content: "\e97a";
 }
-.al-user-remove:before {
+.al-user-access:before {
   content: "\e97b";
 }
-.al-worker:before {
+.al-user-control:before {
   content: "\e97c";
 }
-.al-worker-control:before {
+.al-user-create:before {
   content: "\e97d";
 }
-.al-worker-minus:before {
+.al-user-o:before {
   content: "\e97e";
 }
-.al-worker-plus:before {
+.al-user-remove:before {
   content: "\e97f";
 }
-.al-worker-shutdown:before {
+.al-worker:before {
   content: "\e980";
+}
+.al-worker-control:before {
+  content: "\e981";
+}
+.al-worker-minus:before {
+  content: "\e982";
+}
+.al-worker-plus:before {
+  content: "\e983";
+}
+.al-worker-shutdown:before {
+  content: "\e984";
 }

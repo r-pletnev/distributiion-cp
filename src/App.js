@@ -14,6 +14,7 @@ import EditTemplates from "./cabinet/EditTemplates";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import PageLayout from "./layout";
 import urls from "./urls";
+import * as hooks from "./uploader";
 
 const NoMatch = ({ location }) => (
   <div>
@@ -23,6 +24,7 @@ const NoMatch = ({ location }) => (
 );
 
 const App = props => {
+  const { store } = props;
   return (
     <BrowserRouter>
       <PageLayout>
@@ -37,7 +39,7 @@ const App = props => {
           <Route path={urls.screens} component={EditScreens} />
           <Route path={urls.browsers} component={EditBrowsers} />
           <Route path={urls.browser_versions} component={EditBrowserVersions} />
-          <Route path={urls.templates} component={EditTemplates} />
+          <Route path={urls.templates} render={hooks.loadTemplates(store)} />
           <Route
             path={urls.browser_panel_versions}
             component={EditBrowserPanels}

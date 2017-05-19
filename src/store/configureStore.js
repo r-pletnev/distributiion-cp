@@ -4,6 +4,7 @@ import { rootReducer } from "../reducers";
 import axios from "axios";
 import axiosMiddleware from "redux-axios-middleware";
 import logger from "redux-logger";
+import { autoRehydrate } from "redux-persist";
 
 // const client = axios.create({
 //   baseURL: "https://develop.antlace.com:10124",
@@ -27,7 +28,7 @@ export default function configureStore() {
 
   const store = createStore(
     rootReducer,
-    composeEnhancers(applyMiddleware(...middlewares))
+    composeEnhancers(applyMiddleware(...middlewares), autoRehydrate())
   );
   return store;
 }

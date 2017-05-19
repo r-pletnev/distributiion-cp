@@ -48,6 +48,11 @@ const itemsArray = [
     icon: "",
     type: "Browser versions",
     to: urls.browser_versions
+  },
+  {
+    icon: "",
+    type: "UA templates",
+    to: urls.templates
   }
 ];
 

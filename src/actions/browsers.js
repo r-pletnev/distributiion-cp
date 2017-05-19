@@ -20,10 +20,7 @@ export function fetchAllBrowsers() {
 function fetchAllBrowsersSuccess(payload) {
   const browsers = payload.map(elm => ({
     id: elm.browser_id,
-    name: elm.name,
-    panel_height: elm.panel_height,
-    template: elm.template,
-    os_version_id: elm.os_version_id
+    name: elm.name
   }));
 
   return {
