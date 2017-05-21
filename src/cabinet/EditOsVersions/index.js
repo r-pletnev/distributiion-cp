@@ -2,11 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import TableView from "../../components/TableView";
 import { getOsVersions } from "../../reducers/os_versions";
-import { fetchAllOses } from "../../actions/oses";
-import {
-  fetchAllOsVersions,
-  fetchRemoveOSVersions
-} from "../../actions/os_versions";
+import { fetchRemoveOSVersions } from "../../actions/os_versions";
 import { getOsById } from "../../reducers/oses";
 import AddOsVerisionForm from "./form";
 import ButtonBlock from "../../components/ButtonOptions";
@@ -32,10 +28,6 @@ const EditOsVersions = props => {
       os={props.osById(elm.os_id)}
     />
   ));
-  const onEnter = () => {
-    props.dispatch(fetchAllOses());
-    props.dispatch(fetchAllOsVersions());
-  };
 
   return (
     <TableView
@@ -44,7 +36,6 @@ const EditOsVersions = props => {
       headRow={["ID", "OS", "Version name", "Payload"]}
       rows={rows}
       specialForm={AddOsVerisionForm}
-      onMountAction={onEnter}
     />
   );
 };

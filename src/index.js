@@ -9,7 +9,7 @@ import { createTransform, persistStore } from "redux-persist";
 
 const store = configureStore();
 
-const myTransform = createTransform((inboundState, key) => {
+const resetFetchStatus = createTransform((inboundState, key) => {
   const notFetch = R.when(
     R.propSatisfies(R.equals(true), "fetchStatus"),
     R.assoc("fetchStatus", false)
@@ -17,7 +17,7 @@ const myTransform = createTransform((inboundState, key) => {
   return notFetch(inboundState);
 });
 
-persistStore(store, { transforms: [myTransform] });
+persistStore(store, { transforms: [resetFetchStatus] });
 
 ReactDOM.render(
   <Provider store={store}>

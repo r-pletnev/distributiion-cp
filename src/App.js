@@ -1,16 +1,5 @@
 import React from "react";
 import MainPage from "./cabinet";
-import EditDevices from "./cabinet/EditDevices";
-import EditScreens from "./cabinet/EditScreens";
-import EditOses from "./cabinet/EditOses";
-import EditModels from "./cabinet/EditModels";
-import EditArchs from "./cabinet/EditArchs";
-import EditBrowsers from "./cabinet/EditBrowsers";
-import EditOsVersions from "./cabinet/EditOsVersions";
-import EditBrowserVersions from "./cabinet/EditBrowserVersions";
-import EditBrowserPanels from "./cabinet/EditBrowserPanels";
-import EditOsPanels from "./cabinet/EditOsPanels";
-import EditTemplates from "./cabinet/EditTemplates";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import PageLayout from "./layout";
 import urls from "./urls";
@@ -30,20 +19,24 @@ const App = props => {
       <PageLayout>
         <Switch>
           <Route path="/" exact component={MainPage} />
-          <Route path={urls.os_panels} component={EditOsPanels} />
-          <Route path={urls.models} component={EditModels} />
-          <Route path={urls.devices} component={EditDevices} />
-          <Route path={urls.os} component={EditOses} />
-          <Route path={urls.os_arch} component={EditArchs} />
-          <Route path={urls.os_versions} component={EditOsVersions} />
-          <Route path={urls.screens} component={EditScreens} />
-          <Route path={urls.browsers} component={EditBrowsers} />
-          <Route path={urls.browser_versions} component={EditBrowserVersions} />
+          <Route path={urls.os_panels} render={hooks.loadOsPanels(store)} />
+          <Route path={urls.models} render={hooks.loadModels(store)} />
+          <Route path={urls.devices} render={hooks.loadDevices(store)} />
+          <Route path={urls.os} render={hooks.loadOses(store)} />
+          <Route path={urls.os_arch} render={hooks.loadArchs(store)} />
+          <Route path={urls.os_versions} render={hooks.loadOsVersions(store)} />
+          <Route path={urls.screens} render={hooks.loadScreens(store)} />
+          <Route path={urls.browsers} render={hooks.loadBrowsers(store)} />
+          <Route
+            path={urls.browser_versions}
+            render={hooks.loadBrowserVersions(store)}
+          />
           <Route path={urls.templates} render={hooks.loadTemplates(store)} />
           <Route
             path={urls.browser_panel_versions}
-            component={EditBrowserPanels}
+            render={hooks.loadBrowserPanels(store)}
           />
+          <Route path={urls.profiles} render={hooks.loadProfiles(store)} />
           <Route component={NoMatch} />
         </Switch>
       </PageLayout>

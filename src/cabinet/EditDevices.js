@@ -1,11 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import TableView from "../components/TableView";
-import {
-  fetchAddDevice,
-  fetchAllDevices,
-  fetchRemoveDevices
-} from "../actions/devices";
+import { fetchAddDevice, fetchRemoveDevices } from "../actions/devices";
 import { getDevices } from "../reducers/devices";
 import ButtonBlock from "../components/ButtonOptions";
 
@@ -26,7 +22,6 @@ const EditDevices = props => {
       onRemove={ids => () => props.dispatch(fetchRemoveDevices(ids))}
     />
   ));
-  const onEnter = () => props.dispatch(fetchAllDevices());
 
   return (
     <TableView
@@ -37,7 +32,6 @@ const EditDevices = props => {
       action={fetchAddDevice}
       nameLabel="Device type"
       nameBtn="Send"
-      onMountAction={onEnter}
     />
   );
 };

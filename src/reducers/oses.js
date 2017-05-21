@@ -7,7 +7,8 @@ import {
 import { filterById, sortById } from "../utils/ramda";
 
 const initialState = {
-  entities: []
+  entities: [],
+  fetchStatus: false
 };
 
 export default function osState(state = initialState, action) {
@@ -17,7 +18,8 @@ export default function osState(state = initialState, action) {
     case GET_OSES_SUCCESS: {
       return {
         ...state,
-        entities: sortById(payload)
+        entities: sortById(payload),
+        fetchStatus: true
       };
     }
 

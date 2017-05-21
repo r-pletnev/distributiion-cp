@@ -50,3 +50,5 @@ export const REMOVE_BROWSER_PANELS_URL = "/remove_browser_panels";
 export const ADD_TEMPLATE_URL = "/add_template";
 export const GET_TEMPLATES_URL = "/get_templates";
 export const REMOVE_TEMPLATES_URL = "/remove_templates";
+
+export const GET_PROFILES_URL = "/get_profiles";

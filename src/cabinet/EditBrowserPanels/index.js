@@ -1,10 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import TableView from "../../components/TableView";
-import {
-  fetchAllBrowserPanels,
-  fetchRemoveBrowserPanels
-} from "../../actions/browser_panels";
+import { fetchRemoveBrowserPanels } from "../../actions/browser_panels";
 import { getBrowserPanels } from "../../reducers/browser_panels";
 import AddBrowserPanelForm from "./form";
 import ButtonBlock from "../../components/ButtonOptions";
@@ -27,9 +24,6 @@ const EditBrowserPanels = props => {
       onRemove={ids => () => props.dispatch(fetchRemoveBrowserPanels(ids))}
     />
   ));
-  const onEnter = () => {
-    props.dispatch(fetchAllBrowserPanels());
-  };
 
   return (
     <TableView
@@ -38,7 +32,6 @@ const EditBrowserPanels = props => {
       headRow={["ID", "Size"]}
       rows={rows}
       specialForm={AddBrowserPanelForm}
-      onMountAction={onEnter}
     />
   );
 };

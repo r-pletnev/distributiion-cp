@@ -11,6 +11,7 @@ import browsers from "./browsers";
 import browser_versions from "./browser_versions";
 import browser_panels from "./browser_panels";
 import templates from "./templates";
+import profiles from "./profiles";
 
 export const rootReducer = combineReducers({
   form: FormReducer,
@@ -24,5 +25,6 @@ export const rootReducer = combineReducers({
   os_panels,
   browser_versions,
   browser_panels,
-  templates
+  templates,
+  profiles
 });

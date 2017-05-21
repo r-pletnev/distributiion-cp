@@ -1,11 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import TableView from "../../components/TableView";
-import { fetchAllBrowsers } from "../../actions/browsers";
-import {
-  fetchAllBrowserVersions,
-  fetchRemoveBrowserVersions
-} from "../../actions/browser_versions";
+import { fetchRemoveBrowserVersions } from "../../actions/browser_versions";
 import { getBrowserVersions } from "../../reducers/browser_versions";
 import { getBrowserById } from "../../reducers/browsers";
 import AddBrowserVersionForm from "./form";
@@ -27,17 +23,14 @@ const TableRow = props => {
 };
 
 const EditBrowserVersions = props => {
-  const rows = props.items.map(elm => (
+  const rows = props.items.map((elm, index) => (
     <TableRow
       elm={elm}
       browser={props.browserById(elm.browser_id)}
       onRemove={ids => () => props.dispatch(fetchRemoveBrowserVersions(ids))}
+      key={index}
     />
   ));
-  const onEnter = () => {
-    props.dispatch(fetchAllBrowsers());
-    props.dispatch(fetchAllBrowserVersions());
-  };
 
   return (
     <TableView
@@ -53,7 +46,6 @@ const EditBrowserVersions = props => {
       ]}
       rows={rows}
       specialForm={AddBrowserVersionForm}
-      onMountAction={onEnter}
     />
   );
 };

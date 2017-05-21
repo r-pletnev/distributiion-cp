@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import TableView from "../../components/TableView";
-import { fetchAllBrowsers, fetchRemoveBrowsers } from "../../actions/browsers";
+import { fetchRemoveBrowsers } from "../../actions/browsers";
 import { getBrowsers } from "../../reducers/browsers";
 import AddBrowserForm from "./form";
 import ButtonBlock from "../../components/ButtonOptions";
@@ -24,9 +24,6 @@ const EditBrowsers = props => {
       onRemove={ids => () => props.dispatch(fetchRemoveBrowsers(ids))}
     />
   ));
-  const onEnter = () => {
-    props.dispatch(fetchAllBrowsers());
-  };
 
   return (
     <TableView
@@ -35,7 +32,6 @@ const EditBrowsers = props => {
       headRow={["ID", "Browser name"]}
       rows={rows}
       specialForm={AddBrowserForm}
-      onMountAction={onEnter}
     />
   );
 };

@@ -2,8 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import TableView from "../../components/TableView";
 import AddArchForm from "./form";
-import { fetchAllOsVersions } from "../../actions/os_versions";
-import { fetchAllArchs, fetchRemoveArchs } from "../../actions/archs";
+import { fetchRemoveArchs } from "../../actions/archs";
 import { getArchs } from "../../reducers/archs";
 import ButtonBlock from "../../components/ButtonOptions";
 
@@ -25,10 +24,6 @@ const EditArchs = props => {
       onRemove={ids => () => props.dispatch(fetchRemoveArchs(ids))}
     />
   ));
-  const onEnter = () => {
-    props.dispatch(fetchAllOsVersions());
-    props.dispatch(fetchAllArchs());
-  };
   return (
     <TableView
       title="Edit OS Architecture"
@@ -36,7 +31,6 @@ const EditArchs = props => {
       headRow={["ID", "Architecture", "Payload"]}
       rows={rows}
       specialForm={AddArchForm}
-      onMountAction={onEnter}
     />
   );
 };

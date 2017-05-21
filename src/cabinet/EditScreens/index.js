@@ -2,8 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import TableView from "../../components/TableView";
 import { getScreens } from "../../reducers/screens";
-import { fetchAllScreens, fetchRemoveScreens } from "../../actions/screens";
-import { fetchAllModels } from "../../actions/models";
+import { fetchRemoveScreens } from "../../actions/screens";
 import { getModelById } from "../../reducers/models";
 import AddOsVerisionForm from "./form";
 import ButtonBlock from "../../components/ButtonOptions";
@@ -27,10 +26,6 @@ const EditScreens = props => {
       onRemove={ids => () => props.dispatch(fetchRemoveScreens(ids))}
     />
   ));
-  const onEnter = () => {
-    props.dispatch(fetchAllScreens());
-    props.dispatch(fetchAllModels());
-  };
 
   return (
     <TableView
@@ -39,7 +34,6 @@ const EditScreens = props => {
       headRow={["ID", "Width", "Height"]}
       rows={rows}
       specialForm={AddOsVerisionForm}
-      onMountAction={onEnter}
     />
   );
 };

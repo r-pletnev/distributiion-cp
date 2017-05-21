@@ -2,8 +2,6 @@ import React from "react";
 import Card from "../components/Card";
 import urls from "../urls";
 import { connect } from "react-redux";
-import { fetchAllDevices } from "../actions/devices";
-import { fetchAllModels } from "../actions/models";
 
 const items = [
   {
@@ -75,11 +73,6 @@ const items = [
 ];
 
 class MainPage extends React.Component {
-  componentDidMount() {
-    this.props.dispatch(fetchAllDevices());
-    this.props.dispatch(fetchAllModels());
-  }
-
   render() {
     const cards = items.map((elm, index) => (
       <Card
@@ -98,7 +91,7 @@ class MainPage extends React.Component {
             <div className="cards">
               <Card
                 title="Edit Distributions"
-                to="#"
+                to={urls.profiles}
                 text="Управление распределениями для выбранного профиля"
                 image="al-profiles"
               />

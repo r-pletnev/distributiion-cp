@@ -1,6 +1,6 @@
 import React from "react";
 import TableView from "../components/TableView";
-import { fetchAllOses, fetchAddOS, fetchRemoveOSES } from "../actions/oses";
+import { fetchAddOS, fetchRemoveOSES } from "../actions/oses";
 import { connect } from "react-redux";
 import { getOses } from "../reducers/oses";
 import ButtonBlock from "../components/ButtonOptions";
@@ -22,7 +22,6 @@ const EditOses = props => {
       onRemove={ids => () => props.dispatch(fetchRemoveOSES(ids))}
     />
   ));
-  const onEnter = () => props.dispatch(fetchAllOses());
 
   return (
     <TableView
@@ -33,7 +32,6 @@ const EditOses = props => {
       action={fetchAddOS}
       nameLabel="OS"
       nameBtn="Send"
-      onMountAction={onEnter}
     />
   );
 };

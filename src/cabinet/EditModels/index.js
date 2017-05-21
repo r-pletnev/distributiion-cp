@@ -1,8 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import TableView from "../../components/TableView";
-import { fetchAllModels, fetchRemoveModels } from "../../actions/models";
-import { fetchAllDevices } from "../../actions/devices";
+import { fetchRemoveModels } from "../../actions/models";
 import { getModels } from "../../reducers/models";
 import { getDeviceById } from "../../reducers/devices";
 import AddModelForm from "./form";
@@ -28,10 +27,6 @@ const EditDevices = props => {
       device={props.deviceById(elm.device_id)}
     />
   ));
-  const onEnter = () => {
-    props.dispatch(fetchAllDevices());
-    props.dispatch(fetchAllModels());
-  };
 
   return (
     <TableView
@@ -40,7 +35,6 @@ const EditDevices = props => {
       headRow={["ID", "Device Type", "Model Name"]}
       rows={rows}
       specialForm={AddModelForm}
-      onMountAction={onEnter}
     />
   );
 };

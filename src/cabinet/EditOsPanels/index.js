@@ -1,9 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import TableView from "../../components/TableView";
-import { fetchAllOses } from "../../actions/oses";
-import { fetchAllOsVersions } from "../../actions/os_versions";
-import { fetchAllOsPanels, fetchRemoveOsPanels } from "../../actions/os_panels";
+import { fetchRemoveOsPanels } from "../../actions/os_panels";
 import { getOsPanels, getOsPanelById } from "../../reducers/os_panels";
 import AddOsPanelForm from "./form";
 import ButtonBlock from "../../components/ButtonOptions";
@@ -26,11 +24,6 @@ const EditOsPanels = props => {
       onRemove={ids => () => props.dispatch(fetchRemoveOsPanels(ids))}
     />
   ));
-  const onEnter = () => {
-    props.dispatch(fetchAllOses());
-    props.dispatch(fetchAllOsVersions());
-    props.dispatch(fetchAllOsPanels());
-  };
 
   return (
     <TableView
@@ -39,7 +32,6 @@ const EditOsPanels = props => {
       headRow={["ID", "Height"]}
       rows={rows}
       specialForm={AddOsPanelForm}
-      onMountAction={onEnter}
     />
   );
 };
@@ -47,7 +39,6 @@ const EditOsPanels = props => {
 function mapStateToProps(state) {
   return {
     items: getOsPanels(state)
-    // osById: getOsById(state)
   };
 }
 

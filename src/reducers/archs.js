@@ -6,7 +6,8 @@ import {
 import { filterById, sortById } from "../utils/ramda";
 
 const initialState = {
-  entities: []
+  entities: [],
+  fetchStatus: false
 };
 
 export default function archState(state = initialState, action) {
@@ -16,7 +17,8 @@ export default function archState(state = initialState, action) {
     case GET_ARHCS_SUCCESS: {
       return {
         ...state,
-        entities: sortById(payload)
+        entities: sortById(payload),
+        fetchStatus: true
       };
     }
 
