@@ -2,16 +2,21 @@ import React from "react";
 import { connect } from "react-redux";
 import TableView from "../../components/TableView";
 import { getProfiles } from "../../reducers/profiles";
+import { Link } from "react-router-dom";
+import { withRouter } from "react-router";
+import urls from "../../urls";
 
-const TableRow = props => {
-  const { elm, index } = props;
+let TableRow = props => {
+  const { elm, index, match } = props;
   return (
     <tr key={index}>
       <td className="id">{index}</td>
-      <td>{elm.name}</td>
+      <td><Link to={`${match.url}/${elm.name}`}>{elm.name}</Link></td>
     </tr>
   );
 };
+
+TableRow = withRouter(TableRow);
 
 const EditProfiles = props => {
   const rows = props.items.map((elm, index) => (

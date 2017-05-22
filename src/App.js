@@ -1,9 +1,11 @@
 import React from "react";
 import MainPage from "./cabinet";
+import ProfilePage from "./profile";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import PageLayout from "./layout";
 import urls from "./urls";
 import * as hooks from "./uploader";
+import EditDistribution from "./profile/EditDistribution";
 
 const NoMatch = ({ location }) => (
   <div>
@@ -36,7 +38,13 @@ const App = props => {
             path={urls.browser_panel_versions}
             render={hooks.loadBrowserPanels(store)}
           />
-          <Route path={urls.profiles} render={hooks.loadProfiles(store)} />
+          <Route
+            path={urls.profiles}
+            exact
+            render={hooks.loadProfiles(store)}
+          />
+          <Route path={urls.profile} exact component={ProfilePage} />
+          <Route path={urls.distribution} component={EditDistribution} />
           <Route component={NoMatch} />
         </Switch>
       </PageLayout>

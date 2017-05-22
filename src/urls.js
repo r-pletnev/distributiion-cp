@@ -10,7 +10,9 @@ const urls = {
   browser_versions: "/browser-versions",
   browser_panel_versions: "/browser-panels",
   templates: "/templates",
-  profiles: "/profiles"
+  profiles: "/profiles",
+  profile: "/profiles/:name/",
+  distribution: "/profiles/:name/distribution"
 };
 
 export default urls;

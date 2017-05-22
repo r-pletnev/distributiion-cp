@@ -1,7 +1,6 @@
 import React from "react";
 import Card from "../components/Card";
 import urls from "../urls";
-import { connect } from "react-redux";
 
 const items = [
   {
@@ -109,4 +108,4 @@ class MainPage extends React.Component {
   }
 }
 
-export default connect()(MainPage);
+export default MainPage;
