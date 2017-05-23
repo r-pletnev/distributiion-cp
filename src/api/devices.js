@@ -11,3 +11,7 @@ export function GetDevices() {
 export function RemoveDevices(data) {
   return api.client.post(api.REMOVE_DEVICES_URL, data);
 }
+
+export function GetDevicePriorities(data) {
+  return api.client.post(api.GET_DEVICE_PRIORITIES_URL, data);
+}

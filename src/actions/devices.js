@@ -1,8 +1,14 @@
-import { AddDevice, GetDevices, RemoveDevices } from "../api/devices";
+import {
+  AddDevice,
+  GetDevices,
+  RemoveDevices,
+  GetDevicePriorities
+} from "../api/devices";
 import {
   ADD_DEVICE_SUCCEES,
   GET_ALL_DEVICES_SUCCESS,
-  REMOVE_DEVICES_SUCCESS
+  REMOVE_DEVICES_SUCCESS,
+  GET_DEVICE_PRIORITIES_SUCCESS
 } from "../constants/devices";
 
 export function fetchAllDevices() {
@@ -65,5 +71,28 @@ function removeDevicesSuccess(payload) {
   return {
     type: REMOVE_DEVICES_SUCCESS,
     payload
+  };
+}
+
+export function fetchDevicePriorities(profile) {
+  return dispatch => {
+    return GetDevicePriorities(profile)
+      .then(response => {
+        dispatch(getDevicePrioritiesSuccess(response.payload));
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+}
+
+function getDevicePrioritiesSuccess(payload) {
+  const priorities = payload.map(elm => ({
+    id: elm.device_id,
+    priority: elm.priority
+  }));
+  return {
+    type: GET_DEVICE_PRIORITIES_SUCCESS,
+    payload: priorities
   };
 }

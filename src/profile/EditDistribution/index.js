@@ -1,13 +1,29 @@
 import React from "react";
 import TableDistribution from "../../components/TableDistribution";
+import { getDevices, getDeviceById } from "../../reducers/devices";
+import { getModels, getModelById } from "../../reducers/models";
+import { connect } from "react-redux";
 
 const EditDistribution = props => {
   return (
     <div className="main-content">
       <h2>Распределение параметров окружения</h2>
-      <TableDistribution />
+      <TableDistribution {...props} />
     </div>
   );
 };
 
-export default EditDistribution;
+function mapStateToProps(state) {
+  return {
+    devices: {
+      items: getDevices(state),
+      byId: getDeviceById(state)
+    },
+    models: {
+      items: getModels(state),
+      byId: getModelById(state)
+    }
+  };
+}
+
+export default connect(mapStateToProps)(EditDistribution);

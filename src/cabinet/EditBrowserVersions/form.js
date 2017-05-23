@@ -17,7 +17,6 @@ let AddBrowserVersionForm = props => {
   const submitForm = values => {
     return props.dispatch(
       fetchAddBrowserVersion(
-        // { ...myValues, ...{ os_version_id: Number(myValues.os_version_id) } },
         R.evolve({ browser_id: Number }, values),
         closeForm
       )

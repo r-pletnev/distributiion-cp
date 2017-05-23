@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import PageLayout from "./layout";
 import urls from "./urls";
 import * as hooks from "./uploader";
-import EditDistribution from "./profile/EditDistribution";
+// import EditDistribution from "./profile/EditDistribution";
 
 const NoMatch = ({ location }) => (
   <div>
@@ -44,7 +44,10 @@ const App = props => {
             render={hooks.loadProfiles(store)}
           />
           <Route path={urls.profile} exact component={ProfilePage} />
-          <Route path={urls.distribution} component={EditDistribution} />
+          <Route
+            path={urls.distribution}
+            render={hooks.loadDistribution(store)}
+          />
           <Route component={NoMatch} />
         </Switch>
       </PageLayout>

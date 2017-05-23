@@ -1,7 +1,6 @@
 import React from "react";
 import Modal from "../Modal";
 import AddForm from "./form";
-// import SpecialForm from "../../cabinet/EditModels/form";
 import PropTypes from "prop-types";
 
 const AddModal = props => {

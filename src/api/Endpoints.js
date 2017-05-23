@@ -10,10 +10,14 @@ export const client = axios.create({
 export const ADD_DEVICE_URL = "/add_device";
 export const GET_DEVICES_URL = "/get_devices";
 export const REMOVE_DEVICES_URL = "/remove_devices";
+export const GET_DEVICE_PRIORITIES_URL = "/get_device_priorities";
+export const SET_DEVICE_PRIORITIES_URL = "/set_device_priorities";
 
 export const ADD_MODEL_URL = "/add_model";
 export const GET_MODELS_URL = "/get_models";
 export const REMOVE_MODELS_URL = "/remove_models";
+export const GET_MODEL_PRIORITIES_URL = "/get_model_priorities";
+export const SET_MODEL_PRIORITIES_URL = "/set_model_priorities";
 
 export const ADD_OS_URL = "/add_os";
 export const GET_OSES_URL = "/get_oses";

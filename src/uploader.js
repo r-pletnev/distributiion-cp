@@ -24,6 +24,7 @@ import EditOsPanels from "./cabinet/EditOsPanels";
 import { fetchAllOsPanels } from "./actions/os_panels";
 import EditArchs from "./cabinet/EditArchs";
 import { fetchAllArchs } from "./actions/archs";
+import EditDistribution from "./profile/EditDistribution";
 
 const render = Component =>
   fns =>
@@ -96,4 +97,21 @@ export const loadOsPanels = render(EditOsPanels)([
 export const loadArchs = render(EditArchs)([
   { action: fetchAllOsVersions, path: ["os_versions.fetchStatus"] },
   { action: fetchAllArchs, path: ["archs.fetchStatus"] }
+]);
+
+export const loadDistribution = render(EditDistribution)([
+  { action: fetchAllDevices, path: ["devices.fetchStatus"] },
+  { action: fetchAllModels, path: ["models.fetchStatus"] },
+  { action: fetchAllScreens, path: ["screens.fetchStatus"] },
+  { action: fetchAllOses, path: ["oses.fetchStatus"] },
+  { action: fetchAllOsVersions, path: ["os_versions.fetchStatus"] },
+  { action: fetchAllOsPanels, path: ["os_panels.fetchStatus"] },
+  { action: fetchAllArchs, path: ["archs.fetchStatus"] },
+  { action: fetchAllBrowsers, path: ["browsers.fetchStatus"] },
+  { action: fetchAllBrowserVersions, path: ["browser_versions.fetchStatus"] },
+  { action: fetchAllTemplates, path: ["templates.fetchStatus"] },
+  {
+    action: fetchAllBrowserPanels,
+    path: ["browser_panels.fetchStatus"]
+  }
 ]);

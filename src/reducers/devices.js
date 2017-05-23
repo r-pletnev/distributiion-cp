@@ -1,13 +1,16 @@
 import {
   GET_ALL_DEVICES_SUCCESS,
   ADD_DEVICE_SUCCEES,
-  REMOVE_DEVICES_SUCCESS
+  REMOVE_DEVICES_SUCCESS,
+  GET_DEVICE_PRIORITIES_SUCCESS
 } from "../constants/devices";
 import { filterById, sortById } from "../utils/ramda";
 
 const initialState = {
   entities: [],
-  fetchStatus: false
+  priorities: [],
+  fetchStatus: false,
+  priorityFetchStatus: false
 };
 
 export default function deviceState(state = initialState, action) {
@@ -19,6 +22,14 @@ export default function deviceState(state = initialState, action) {
         ...state,
         entities: sortById(payload),
         fetchStatus: true
+      };
+    }
+
+    case GET_DEVICE_PRIORITIES_SUCCESS: {
+      return {
+        ...state,
+        priorities: sortById(payload),
+        priorityFetchStatus: true
       };
     }
 
