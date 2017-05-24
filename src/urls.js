@@ -11,8 +11,8 @@ const urls = {
   browser_panel_versions: "/browser-panels",
   templates: "/templates",
   profiles: "/profiles",
-  profile: "/profiles/:name/",
-  distribution: "/profiles/:name/distribution"
+  profile: "/profiles/:profile_name/",
+  distribution: "/profiles/:profile_name/distribution"
 };
 
 export default urls;

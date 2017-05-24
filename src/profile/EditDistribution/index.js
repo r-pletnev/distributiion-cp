@@ -3,6 +3,7 @@ import TableDistribution from "../../components/TableDistribution";
 import { getDevices, getDeviceById } from "../../reducers/devices";
 import { getModels, getModelById } from "../../reducers/models";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 const EditDistribution = props => {
   return (
@@ -26,4 +27,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(EditDistribution);
+export default connect(mapStateToProps)(withRouter(EditDistribution));

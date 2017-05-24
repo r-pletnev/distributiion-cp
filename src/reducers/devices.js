@@ -8,7 +8,7 @@ import { filterById, sortById } from "../utils/ramda";
 
 const initialState = {
   entities: [],
-  priorities: [],
+  priorities: {},
   fetchStatus: false,
   priorityFetchStatus: false
 };
@@ -28,7 +28,7 @@ export default function deviceState(state = initialState, action) {
     case GET_DEVICE_PRIORITIES_SUCCESS: {
       return {
         ...state,
-        priorities: sortById(payload),
+        priorities: { ...state.priorities, ...payload },
         priorityFetchStatus: true
       };
     }
@@ -60,4 +60,8 @@ export function getDeviceById(state) {
     const isEqual = elm => elm.id === id;
     return devices.find(isEqual);
   };
+}
+
+export function getDevicePriorities(state, profile) {
+  return state.devices.priorities[profile];
 }

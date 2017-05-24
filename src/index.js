@@ -17,7 +17,17 @@ const resetFetchStatus = createTransform((inboundState, key) => {
   return notFetch(inboundState);
 });
 
-persistStore(store, { transforms: [resetFetchStatus] });
+const resetPriorityFetchStatus = createTransform((inboundState, key) => {
+  return R.when(
+    R.propSatisfies(R.equals(true), "priorityFetchStatus"),
+    R.assoc("priorityFetchStatus", false),
+    inboundState
+  );
+});
+
+persistStore(store, {
+  transforms: [resetFetchStatus, resetPriorityFetchStatus]
+});
 
 ReactDOM.render(
   <Provider store={store}>

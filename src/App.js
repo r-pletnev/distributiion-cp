@@ -5,7 +5,6 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import PageLayout from "./layout";
 import urls from "./urls";
 import * as hooks from "./uploader";
-// import EditDistribution from "./profile/EditDistribution";
 
 const NoMatch = ({ location }) => (
   <div>

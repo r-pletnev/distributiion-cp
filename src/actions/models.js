@@ -22,8 +22,7 @@ export function fetchAllModelSuccess(payload) {
   const models = payload.map(elm => ({
     id: elm.model_id,
     name: elm.name,
-    width: elm.width,
-    height: elm.height,
+    payload: elm.payload,
     device_id: elm.device_id
   }));
   return {
@@ -49,14 +48,13 @@ export function fetchAddModel(model, onSuccess) {
 }
 
 function addModelSuccess(payload) {
-  const { model_id, name, width, height, device_id } = payload;
+  const { model_id, name, device_id, ...rest } = payload;
   return {
     type: ADD_MODEL_SUCCESS,
     payload: {
       id: model_id,
       name,
-      width,
-      height,
+      payload: rest.payload,
       device_id
     }
   };

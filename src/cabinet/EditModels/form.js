@@ -32,6 +32,12 @@ let AddModelForm = props => {
           label="Enter Model name"
           autoComplete="off"
         />
+        <FormField
+          name="payload"
+          type="text"
+          label="UA string"
+          autoComplete="off"
+        />
         <div className="popup-bottom">
           <button
             className="btn btn-success"

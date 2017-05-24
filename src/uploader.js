@@ -16,6 +16,7 @@ import EditModels from "./cabinet/EditModels";
 import { fetchAllModels } from "./actions/models";
 import EditDevices from "./cabinet/EditDevices";
 import { fetchAllDevices } from "./actions/devices";
+import { fetchDevicePriorities } from "./actions/devices";
 import EditOses from "./cabinet/EditOses";
 import { fetchAllOses } from "./actions/oses";
 import EditOsVersions from "./cabinet/EditOsVersions";
@@ -26,16 +27,17 @@ import EditArchs from "./cabinet/EditArchs";
 import { fetchAllArchs } from "./actions/archs";
 import EditDistribution from "./profile/EditDistribution";
 
-const render = Component =>
+const render = (Component, rest) =>
   fns =>
     store =>
-      () => {
+      props => {
+        const { params } = props.match;
         const { dispatch, getState } = store;
         const state = getState();
         fns.forEach(elm => {
           const { action, always, path } = elm;
           const loaded = always ? false : getProp(path, state);
-          if (!loaded) dispatch(action());
+          if (!loaded) dispatch(action(params));
         });
         return <Component />;
       };
@@ -113,5 +115,6 @@ export const loadDistribution = render(EditDistribution)([
   {
     action: fetchAllBrowserPanels,
     path: ["browser_panels.fetchStatus"]
-  }
+  },
+  { action: fetchDevicePriorities, path: ["devices.priorityFetchStatus"] }
 ]);

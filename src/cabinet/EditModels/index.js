@@ -14,6 +14,7 @@ const TableRow = props => {
       <td className="id">{elm.id}</td>
       <td>{device ? device.name : "there isn't such device!"}</td>
       <td>{elm.name}</td>
+      <td>{elm.payload}</td>
       <ButtonBlock onRemoveClick={onRemove([elm.id])} />
     </tr>
   );
@@ -32,7 +33,7 @@ const EditDevices = props => {
     <TableView
       title="Edit Models"
       createBtnLabel="Create model"
-      headRow={["ID", "Device Type", "Model Name"]}
+      headRow={["ID", "Device Type", "Model Name", "UA string"]}
       rows={rows}
       specialForm={AddModelForm}
     />

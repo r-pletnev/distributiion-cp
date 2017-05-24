@@ -75,10 +75,11 @@ function removeDevicesSuccess(payload) {
 }
 
 export function fetchDevicePriorities(profile) {
+  const { profile_name } = profile;
   return dispatch => {
     return GetDevicePriorities(profile)
       .then(response => {
-        dispatch(getDevicePrioritiesSuccess(response.payload));
+        dispatch(getDevicePrioritiesSuccess(response.data, profile_name));
       })
       .catch(error => {
         console.error(error);
@@ -86,11 +87,17 @@ export function fetchDevicePriorities(profile) {
   };
 }
 
-function getDevicePrioritiesSuccess(payload) {
-  const priorities = payload.map(elm => ({
-    id: elm.device_id,
-    priority: elm.priority
-  }));
+function getDevicePrioritiesSuccess(payload, profile) {
+  const priorities = payload.reduce(
+    (acc, elm) => {
+      acc[profile] = [
+        ...acc[profile],
+        { id: elm.device_id, priority: elm.priority }
+      ];
+      return acc;
+    },
+    { [profile]: [] }
+  );
   return {
     type: GET_DEVICE_PRIORITIES_SUCCESS,
     payload: priorities
