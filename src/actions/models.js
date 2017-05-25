@@ -1,8 +1,14 @@
-import { AddModel, GetModels, RemoveModels } from "../api/models";
+import {
+  AddModel,
+  GetModels,
+  RemoveModels,
+  GetModelPriorities
+} from "../api/models";
 import {
   ADD_MODEL_SUCCESS,
   GET_ALL_MODEL_SUCCESS,
-  REMOVE_MODELS_SUCCESS
+  REMOVE_MODELS_SUCCESS,
+  GET_MODEL_PRIORITIES_SUCCESS
 } from "../constants/models";
 
 export function fetchAllModels() {
@@ -76,5 +82,35 @@ function removeModelsSuccess(payload) {
   return {
     type: REMOVE_MODELS_SUCCESS,
     payload
+  };
+}
+
+// query shape: profile_name, device_id
+export function fetchModelPriorities(query) {
+  return dispatch => {
+    return GetModelPriorities(query)
+      .then(response => {
+        dispatch(getModelPrioritiesSuccess(response.data, query));
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+}
+
+function getModelPrioritiesSuccess(payload, profile) {
+  const priorities = payload.reduce(
+    (acc, elm) => {
+      acc[profile] = [
+        ...acc[profile],
+        { id: elm.device_id, priority: elm.priority }
+      ];
+      return acc;
+    },
+    { [profile]: [] }
+  );
+  return {
+    type: GET_MODEL_PRIORITIES_SUCCESS,
+    payload: priorities
   };
 }

@@ -1,9 +1,14 @@
 import React from "react";
 import TableDistribution from "../../components/TableDistribution";
-import { getDevices, getDeviceById } from "../../reducers/devices";
+import {
+  getDevices,
+  getDeviceById,
+  getDevicePriorities
+} from "../../reducers/devices";
 import { getModels, getModelById } from "../../reducers/models";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { mapById } from "../../utils/ramda";
 
 const EditDistribution = props => {
   return (
@@ -14,17 +19,22 @@ const EditDistribution = props => {
   );
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
     devices: {
       items: getDevices(state),
-      byId: getDeviceById(state)
+      byId: getDeviceById(state),
+      priorities: mapById(
+        getDevicePriorities(state, ownProps.match.params.profile_name),
+        getDevices(state)
+      )
     },
     models: {
       items: getModels(state),
-      byId: getModelById(state)
+      byId: getModelById(state),
+      priorities: []
     }
   };
 }
 
-export default connect(mapStateToProps)(withRouter(EditDistribution));
+export default withRouter(connect(mapStateToProps)(EditDistribution));

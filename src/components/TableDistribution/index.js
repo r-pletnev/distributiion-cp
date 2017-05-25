@@ -2,16 +2,7 @@ import React from "react";
 import ThirdPart from "./thirdPart";
 import { Link } from "react-router-dom";
 import AddPriorityModal from "./AddPriorityModal";
-
-const SmallTableRow = props => (
-  <tr key={props.key}>
-    <td>{props.name}</td>
-    <td name="Приоритет">{props.priority}</td>
-    <td className="option">
-      <Link to="#" className="al-close" onClick={props.handleRemoveClick} />
-    </td>
-  </tr>
-);
+import SmallTableRow from "./SmallTableRow";
 
 const BigTableRow = props => {
   <tr key={props.key}>
@@ -29,15 +20,10 @@ const BigTableRow = props => {
   </tr>;
 };
 
-const DevicesPriority = [
-  { name: "Desktop", priority: 500 },
-  { name: "Tablet", priority: 1000 }
-];
-
 class TableDistribution extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { showDeviceModal: false };
+    this.state = { currentType: null, showDeviceModal: false };
     this.getFirstThird = this.getFirstThird.bind(this);
     this.getModals = this.getModals.bind(this);
     this.hideModals = this.hideModals.bind(this);
@@ -45,7 +31,7 @@ class TableDistribution extends React.Component {
   }
 
   openDeviceModal() {
-    this.setState({ showDeviceModal: true });
+    this.setState({ showDeviceModal: true, currentType: "devices" });
   }
 
   hideModals() {
@@ -53,14 +39,18 @@ class TableDistribution extends React.Component {
   }
 
   getFirstThird() {
-    const head = [<th key={0}>Devices(3)</th>, <th key={1}>Models(2)</th>];
+    const { devices, models } = this.props;
+    const head = [
+      <th key={0}>{`Devices(${devices.priorities.length})`}</th>,
+      <th key={1}>{`Models(${models.priorities.length})`}</th>
+    ];
     const rows = [
       {
         singleItemName: "Device",
         nameAddAttr: "add-device",
         addBtnText: "Add Device",
         handleOnClick: this.openDeviceModal,
-        rows: DevicesPriority.map((elm, index) => (
+        rows: devices.priorities.map((elm, index) => (
           <SmallTableRow {...elm} key={index} />
         ))
       }
@@ -75,7 +65,11 @@ class TableDistribution extends React.Component {
           show={this.state.showDeviceModal}
           onClose={this.hideModals}
           name="Устройство"
-          items={[]}
+          items={
+            this.state.currentType
+              ? this.props[this.state.currentType].items
+              : []
+          }
           action={null}
           fieldName="device_id"
         />

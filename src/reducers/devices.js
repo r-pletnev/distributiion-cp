@@ -4,7 +4,7 @@ import {
   REMOVE_DEVICES_SUCCESS,
   GET_DEVICE_PRIORITIES_SUCCESS
 } from "../constants/devices";
-import { filterById, sortById } from "../utils/ramda";
+import { filterById, sortById, defaultToEmptyArray } from "../utils/ramda";
 
 const initialState = {
   entities: [],
@@ -63,5 +63,5 @@ export function getDeviceById(state) {
 }
 
 export function getDevicePriorities(state, profile) {
-  return state.devices.priorities[profile];
+  return defaultToEmptyArray(state.devices.priorities[profile]);
 }
