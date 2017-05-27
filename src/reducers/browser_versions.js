@@ -1,12 +1,20 @@
 import {
   GET_BROWSER_VERSIONS_SUCCESS,
   ADD_BROWSER_VERSION_SUCCESS,
-  REMOVE_BROWSER_VERSIONS_SUCCESS
+  REMOVE_BROWSER_VERSIONS_SUCCESS,
+  GET_BROWSER_VERSION_PRIORITIES_SUCCESS
 } from "../constants/browser_versions";
-import { filterById, sortById } from "../utils/ramda";
+import {
+  filterById,
+  sortById,
+  defaultToEmptyArray,
+  mapById
+} from "../utils/ramda";
 
 const initialState = {
   entities: [],
+  priorities: {},
+  priorityFetchStatus: false,
   fetchStatus: false
 };
 
@@ -28,8 +36,17 @@ export default function browserVersionState(state = initialState, action) {
         entities: sortById([...state.entities, payload])
       };
     }
+
     case REMOVE_BROWSER_VERSIONS_SUCCESS: {
       return filterById(payload, state);
+    }
+
+    case GET_BROWSER_VERSION_PRIORITIES_SUCCESS: {
+      return {
+        ...state,
+        priorities: { ...state.priorities, ...payload },
+        priorityFetchStatus: true
+      };
     }
 
     default: {
@@ -48,4 +65,13 @@ export function getBrowserVersionById(state) {
     const isEqual = elm => elm.id === id;
     return items.find(isEqual);
   };
+}
+
+export function getBrowserVersionPriorities(state, profile) {
+  const priorities = defaultToEmptyArray(
+    state.browser_versions.priorities[profile]
+  );
+  const browser_versions = getBrowserVersions(state);
+  debugger;
+  return mapById(priorities, browser_versions);
 }

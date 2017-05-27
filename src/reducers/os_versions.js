@@ -1,7 +1,8 @@
 import {
   GET_OS_VERSIONS_SUCCESS,
   ADD_OS_VERSION_SUCCESS,
-  REMOVE_OS_VERSIONS_SUCCESS
+  REMOVE_OS_VERSIONS_SUCCESS,
+  GET_OS_VERSION_PRIORITIES_SUCCESS
 } from "../constants/os_versions";
 import {
   filterById,
@@ -40,7 +41,7 @@ export default function osVersionState(state = initialState, action) {
       return filterById(payload, state);
     }
 
-    case GET_OS_VERSIONS_SUCCESS: {
+    case GET_OS_VERSION_PRIORITIES_SUCCESS: {
       return {
         ...state,
         priorities: { ...state.priorities, ...payload },

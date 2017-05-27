@@ -71,7 +71,6 @@ function removeOSESSuccess(payload) {
 
 // query shape: profile_name, device_id, model_id
 export function fetchOsPriorities(query) {
-  debugger;
   return dispatch => {
     return GetOsPriorities(query)
       .then(response => {

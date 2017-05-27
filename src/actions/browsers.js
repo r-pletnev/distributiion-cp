@@ -1,8 +1,14 @@
-import { AddBrowser, GetBrowsers, RemoveBrowsers } from "../api/browsers";
+import {
+  AddBrowser,
+  GetBrowsers,
+  RemoveBrowsers,
+  GetBrowserPriorities
+} from "../api/browsers";
 import {
   ADD_BROWSER_SUCCESS,
   GET_BROWSERS_SUCCESS,
-  REMOVE_BROWSERS_SUCCESS
+  REMOVE_BROWSERS_SUCCESS,
+  GET_BROWSER_PRIORITIES_SUCCESS
 } from "../constants/browsers";
 
 export function fetchAllBrowsers() {
@@ -34,7 +40,6 @@ export function fetchAddBrowser(browser, onSuccess) {
     return AddBrowser(browser)
       .then(response => {
         onSuccess();
-        debugger;
         dispatch(addBrowserSuccess(response.data));
       })
       .catch(error => {
@@ -73,5 +78,44 @@ function removeBrowsersSuccess(payload) {
   return {
     type: REMOVE_BROWSERS_SUCCESS,
     payload
+  };
+}
+
+export function fetchBrowserPriorities(
+  { profile_name, device_id, model_id, os_id }
+) {
+  const query = arguments[0];
+  return dispatch => {
+    return GetBrowserPriorities(query)
+      .then(response => {
+        dispatch(getBrowserPrioritiesSuccess(response.data, query));
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+}
+
+function getBrowserPrioritiesSuccess(payload, { profile_name, ...restArgs }) {
+  const priorities = payload.reduce(
+    (acc, elm) => {
+      acc[profile_name] = [
+        ...acc[profile_name],
+        {
+          ...{
+            id: elm.browser_id,
+            priority: elm.priority,
+            template_id: elm.template_id
+          },
+          ...restArgs
+        }
+      ];
+      return acc;
+    },
+    { [profile_name]: [] }
+  );
+  return {
+    type: GET_BROWSER_PRIORITIES_SUCCESS,
+    payload: priorities
   };
 }

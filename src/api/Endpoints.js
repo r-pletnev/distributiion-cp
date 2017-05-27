@@ -46,10 +46,14 @@ export const REMOVE_SCREENS_URL = "/remove_screens";
 export const ADD_BROWSER_URL = "/add_browser";
 export const GET_BROWSERS_URL = "/get_browsers";
 export const REMOVE_BROWSERS_URL = "/remove_browsers";
+export const GET_BROWSER_PRIORITIES_URL = "/get_browser_priorities";
+export const SET_BROWSER_PRIORITIES_URL = "/set_browser_priorities";
 
 export const ADD_BROWSER_VERSION_URL = "/add_browser_version";
 export const GET_BROWSER_VERSIONS_URL = "/get_browser_versions";
 export const REMOVE_BROWSER_VERSIONS_URL = "/remove_browser_versions";
+export const GET_BROWSER_VERSION_PRIORITIES_URL = "/get_browser_version_priorities";
+export const SET_BROWSER_VERSION_PRIORITIES_URL = "/set_browser_version_priorities";
 
 export const ADD_BROWSER_PANEL_URL = "/add_browser_panel";
 export const GET_BROWSER_PANELS_URL = "/get_browser_panels";

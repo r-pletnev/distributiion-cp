@@ -1,12 +1,20 @@
 import {
   GET_BROWSERS_SUCCESS,
   ADD_BROWSER_SUCCESS,
-  REMOVE_BROWSERS_SUCCESS
+  REMOVE_BROWSERS_SUCCESS,
+  GET_BROWSER_PRIORITIES_SUCCESS
 } from "../constants/browsers";
-import { filterById, sortById } from "../utils/ramda";
+import {
+  filterById,
+  sortById,
+  defaultToEmptyArray,
+  mapById
+} from "../utils/ramda";
 
 const initialState = {
   entities: [],
+  priorities: {},
+  priorityFetchStatus: false,
   fetchStatus: false
 };
 
@@ -33,6 +41,14 @@ export default function browserState(state = initialState, action) {
       return filterById(payload, state);
     }
 
+    case GET_BROWSER_PRIORITIES_SUCCESS: {
+      return {
+        ...state,
+        priorities: { ...state.priorities, ...payload },
+        priorityFetchStatus: true
+      };
+    }
+
     default: {
       return state;
     }
@@ -49,4 +65,10 @@ export function getBrowserById(state) {
     const isEqual = elm => elm.id === id;
     return items.find(isEqual);
   };
+}
+
+export function getBrowserPriorities(state, profile) {
+  const priorities = defaultToEmptyArray(state.browsers.priorities[profile]);
+  const browsers = getBrowsers(state);
+  return mapById(priorities, browsers);
 }

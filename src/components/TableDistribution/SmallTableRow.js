@@ -1,6 +1,7 @@
 import React from "react";
 import cx from "classnames";
 import { Link } from "react-router-dom";
+import onClickOutside from "react-onclickoutside";
 
 class SmallTableRow extends React.Component {
   constructor(props) {
@@ -12,6 +13,10 @@ class SmallTableRow extends React.Component {
   handleOnRowClick() {
     this.props.action();
     this.setState({ active: true });
+  }
+
+  handleClickOutside(event) {
+    this.setState({ active: false });
   }
 
   render() {
@@ -35,4 +40,4 @@ class SmallTableRow extends React.Component {
   }
 }
 
-export default SmallTableRow;
+export default onClickOutside(SmallTableRow);

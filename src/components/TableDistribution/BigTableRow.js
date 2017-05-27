@@ -1,6 +1,7 @@
 import React from "react";
 import cx from "classnames";
 import { Link } from "react-router-dom";
+import onClickOutside from "react-onclickoutside";
 
 class BigTableRow extends React.Component {
   constructor(props) {
@@ -9,10 +10,13 @@ class BigTableRow extends React.Component {
     this.handleOnRowClick = this.handleOnRowClick.bind(this);
   }
   handleOnRowClick() {
-    debugger;
     this.props.action();
     this.setState({ active: true });
   }
+
+  handleClickOutside = event => {
+    this.setState({ active: false });
+  };
 
   render() {
     return (
@@ -41,4 +45,4 @@ class BigTableRow extends React.Component {
   }
 }
 
-export default BigTableRow;
+export default onClickOutside(BigTableRow);

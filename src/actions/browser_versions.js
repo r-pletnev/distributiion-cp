@@ -1,12 +1,14 @@
 import {
   AddBrowserVersion,
   GetBrowserVersions,
-  RemoveBrowserVersions
+  RemoveBrowserVersions,
+  GetBrowserVersionPriorities
 } from "../api/browser_versions";
 import {
   ADD_BROWSER_VERSION_SUCCESS,
   GET_BROWSER_VERSIONS_SUCCESS,
-  REMOVE_BROWSER_VERSIONS_SUCCESS
+  REMOVE_BROWSER_VERSIONS_SUCCESS,
+  GET_BROWSER_VERSION_PRIORITIES_SUCCESS
 } from "../constants/browser_versions";
 
 export function fetchAllBrowserVersions() {
@@ -88,5 +90,43 @@ function removeBrowserVersionsSuccess(payload) {
   return {
     type: REMOVE_BROWSER_VERSIONS_SUCCESS,
     payload
+  };
+}
+
+export function fetchBrowserVersionPriorities(
+  { profile_name, device_id, model_id, os_id, browser_id }
+) {
+  const query = arguments[0];
+  return dispatch => {
+    return GetBrowserVersionPriorities(query)
+      .then(response => {
+        dispatch(getBrowserVersionPrioritiesSuccess(response.data, query));
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+}
+
+function getBrowserVersionPrioritiesSuccess(
+  payload,
+  { profile_name, ...restArgs }
+) {
+  const priorities = payload.reduce(
+    (acc, elm) => {
+      acc[profile_name] = [
+        ...acc[profile_name],
+        {
+          ...{ id: elm.browser_version_id, priority: elm.priority },
+          ...restArgs
+        }
+      ];
+      return acc;
+    },
+    { [profile_name]: [] }
+  );
+  return {
+    type: GET_BROWSER_VERSION_PRIORITIES_SUCCESS,
+    payload: priorities
   };
 }

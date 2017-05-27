@@ -11,17 +11,30 @@ class TableDistribution extends React.Component {
       currentType: null,
       device_id: null,
       model_id: null,
+      os_id: null,
+      browser_id: null,
       showDeviceModal: false,
-      showModelModal: false
+      showModelModal: false,
+      showOsModal: false,
+      showOsVersionModal: false,
+      showBrowserModal: false
     };
     this.getFirstThird = this.getFirstThird.bind(this);
+    this.getSecondThird = this.getSecondThird.bind(this);
+    this.getLastThird = this.getLastThird.bind(this);
     this.getModals = this.getModals.bind(this);
     this.hideModals = this.hideModals.bind(this);
     this.openDeviceModal = this.openDeviceModal.bind(this);
     this.openModelModal = this.openModelModal.bind(this);
+    this.openOsModal = this.openOsModal.bind(this);
+    this.openBrowserModal = this.openBrowserModal.bind(this);
+    this.openOsVersionModal = this.openOsVersionModal.bind(this);
     this.getCurrentTypeItems = this.getCurrentTypeItems.bind(this);
     this.selectDevice = this.selectDevice.bind(this);
     this.selectModel = this.selectModel.bind(this);
+    this.selectOs = this.selectOs.bind(this);
+    this.selectOsVersion = this.selectOsVersion.bind(this);
+    this.selectBrowser = this.selectBrowser.bind(this);
   }
 
   openDeviceModal() {
@@ -29,11 +42,29 @@ class TableDistribution extends React.Component {
   }
 
   hideModals() {
-    this.setState({ showDeviceModal: false, showModelModal: false });
+    this.setState({
+      showDeviceModal: false,
+      showModelModal: false,
+      showOsModal: false,
+      showOsVersionModal: false,
+      showBrowserModal: false
+    });
   }
 
   openModelModal() {
     this.setState({ showModelModal: true, currentType: "models" });
+  }
+
+  openOsModal() {
+    this.setState({ showOsModal: true, currentType: "oses" });
+  }
+
+  openOsVersionModal() {
+    this.setState({ showOsVersionModal: true, currentType: "os_versions" });
+  }
+
+  openBrowserModal() {
+    this.setState({ showBrowserModal: true, currentType: "browsers" });
   }
 
   selectDevice(device_id) {
@@ -42,6 +73,18 @@ class TableDistribution extends React.Component {
 
   selectModel(model_id) {
     this.setState({ model_id });
+  }
+
+  selectOs(os_id) {
+    this.setState({ os_id });
+  }
+
+  selectOsVersion(os_version_id) {
+    this.setState({ os_version_id });
+  }
+
+  selectBrowser(browser_id) {
+    this.setState({ browser_id });
   }
 
   getFirstThird() {
@@ -89,7 +132,8 @@ class TableDistribution extends React.Component {
   }
 
   getSecondThird() {
-    const { oses, os_versions } = this.props;
+    const { oses, os_versions, onOsRowClick, onOsVersionRowClick } = this.props;
+
     const head = [
       <th key={0}>{`Oses(${oses.priorities.length})`}</th>,
       <th key={1}>{`OS Versions(${os_versions.priorities.length})`}</th>
@@ -101,11 +145,82 @@ class TableDistribution extends React.Component {
         addBtnText: "Add OS",
         handleOnClick: this.openOsModal,
         rows: oses.priorities.map((elm, index) => (
-          <SmallTableRow {...elm} key={index} rowKey={index} action={null} />
+          <SmallTableRow
+            {...elm}
+            key={index}
+            rowKey={index}
+            action={onOsRowClick(
+              elm.id,
+              this.state.device_id,
+              this.state.model_id,
+              this.selectOs
+            )}
+          />
+        ))
+      },
+      {
+        singleItemName: "OS Version",
+        nameAddAttr: "add-os-version",
+        addBtnText: "Add OS Version",
+        handleOnClick: this.openOsVersionModal,
+        rows: os_versions.priorities.map((elm, index) => (
+          <BigTableRow
+            {...elm}
+            key={index}
+            rowKey={index}
+            action={onOsVersionRowClick(
+              elm.id,
+              this.state.device_id,
+              this.state.model_id,
+              this.state.os_id,
+              this.selectOsVersion
+            )}
+          />
         ))
       }
     ];
 
+    return <ThirdPart headRow={head} rows={rows} />;
+  }
+
+  getLastThird() {
+    const { browsers, browser_versions, onBrowserRowClick } = this.props;
+    const head = [
+      <th key={0}>{`Browsers(${browsers.priorities.length})`}</th>,
+      <th key={1}>{`OS Versions(${browser_versions.priorities.length})`}</th>
+    ];
+    const rows = [
+      {
+        singleItemName: "Browser",
+        nameAddAttr: "add-browser",
+        addBtnText: "Add Browser",
+        handleOnClick: this.openBrowserModal,
+        rows: browsers.priorities.map((elm, index) => (
+          <SmallTableRow
+            {...elm}
+            key={index}
+            rowKey={index}
+            action={onBrowserRowClick(
+              elm.id,
+              this.state.device_id,
+              this.state.model_id,
+              this.state.os_id,
+              this.state.os_version_id,
+              this.selectBrowser
+            )}
+          />
+        ))
+      },
+      {
+        singleItemName: "Browser Version",
+        nameAddAttr: "add-browser-version",
+        addBtnText: "Add Browser Version",
+        handleOnClick: this.openBrowserVersionModal,
+        rows: browser_versions.priorities.map((elm, index) => (
+          <BigTableRow {...elm} key={index} rowKey={index} action={null} />
+        ))
+      }
+    ];
     return <ThirdPart headRow={head} rows={rows} />;
   }
 
@@ -154,6 +269,7 @@ class TableDistribution extends React.Component {
             <tr>
               {this.getFirstThird()}
               {this.getSecondThird()}
+              {this.getLastThird()}
             </tr>
           </tbody>
         </table>
