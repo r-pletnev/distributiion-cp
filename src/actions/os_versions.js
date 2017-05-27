@@ -1,12 +1,14 @@
 import {
   AddOSVersion,
   GetOSVersions,
-  RemoveOSVersions
+  RemoveOSVersions,
+  GetOsVersionPriorities
 } from "../api/os_versions";
 import {
   ADD_OS_VERSION_SUCCESS,
   GET_OS_VERSIONS_SUCCESS,
-  REMOVE_OS_VERSIONS_SUCCESS
+  REMOVE_OS_VERSIONS_SUCCESS,
+  GET_OS_VERSION_PRIORITIES_SUCCESS
 } from "../constants/os_versions";
 
 export function fetchAllOsVersions() {
@@ -74,5 +76,40 @@ function removeOSVersionsSuccess(payload) {
   return {
     type: REMOVE_OS_VERSIONS_SUCCESS,
     payload
+  };
+}
+
+export function fetchOsVersionPriorities({
+  profile_name,
+  device_id,
+  model_id,
+  os_id
+}) {
+  const query = arguments[0];
+  return dispatch => {
+    return GetOsVersionPriorities(query)
+      .then(response => {
+        dispatch(getOsVersionPrioritiesSuccess(response.data, query));
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+}
+
+function getOsVersionPrioritiesSuccess(payload, { profile_name, ...restArgs }) {
+  const priorities = payload.reduce(
+    (acc, elm) => {
+      acc[profile_name] = [
+        ...acc[profile_name],
+        { ...{ id: elm.os_version_id, priority: elm.priority }, ...restArgs }
+      ];
+      return acc;
+    },
+    { [profile_name]: [] }
+  );
+  return {
+    type: GET_OS_VERSION_PRIORITIES_SUCCESS,
+    payload: priorities
   };
 }

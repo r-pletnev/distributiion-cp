@@ -27,20 +27,17 @@ import EditArchs from "./cabinet/EditArchs";
 import { fetchAllArchs } from "./actions/archs";
 import EditDistribution from "./profile/EditDistribution";
 
-const render = (Component, rest) =>
-  fns =>
-    store =>
-      props => {
-        const { params } = props.match;
-        const { dispatch, getState } = store;
-        const state = getState();
-        fns.forEach(elm => {
-          const { action, always, path } = elm;
-          const loaded = always ? false : getProp(path, state);
-          if (!loaded) dispatch(action(params));
-        });
-        return <Component />;
-      };
+const render = (Component, rest) => fns => store => props => {
+  const { params } = props.match;
+  const { dispatch, getState } = store;
+  const state = getState();
+  fns.forEach(elm => {
+    const { action, always, path } = elm;
+    const loaded = always ? false : getProp(path, state);
+    if (!loaded) dispatch(action(params));
+  });
+  return <Component />;
+};
 
 export const loadTemplates = render(EditTemplates)([
   { action: fetchAllBrowsers, path: ["browsers.fetchStatus"] },
@@ -102,19 +99,19 @@ export const loadArchs = render(EditArchs)([
 ]);
 
 export const loadDistribution = render(EditDistribution)([
-  { action: fetchAllDevices, path: ["devices.fetchStatus"] },
-  { action: fetchAllModels, path: ["models.fetchStatus"] },
-  { action: fetchAllScreens, path: ["screens.fetchStatus"] },
-  { action: fetchAllOses, path: ["oses.fetchStatus"] },
-  { action: fetchAllOsVersions, path: ["os_versions.fetchStatus"] },
-  { action: fetchAllOsPanels, path: ["os_panels.fetchStatus"] },
-  { action: fetchAllArchs, path: ["archs.fetchStatus"] },
-  { action: fetchAllBrowsers, path: ["browsers.fetchStatus"] },
-  { action: fetchAllBrowserVersions, path: ["browser_versions.fetchStatus"] },
-  { action: fetchAllTemplates, path: ["templates.fetchStatus"] },
-  {
-    action: fetchAllBrowserPanels,
-    path: ["browser_panels.fetchStatus"]
-  },
+  // { action: fetchAllDevices, path: ["devices.fetchStatus"] },
+  // { action: fetchAllModels, path: ["models.fetchStatus"] },
+  // { action: fetchAllScreens, path: ["screens.fetchStatus"] },
+  // { action: fetchAllOses, path: ["oses.fetchStatus"] },
+  // { action: fetchAllOsVersions, path: ["os_versions.fetchStatus"] },
+  // { action: fetchAllOsPanels, path: ["os_panels.fetchStatus"] },
+  // { action: fetchAllArchs, path: ["archs.fetchStatus"] },
+  // { action: fetchAllBrowsers, path: ["browsers.fetchStatus"] },
+  // { action: fetchAllBrowserVersions, path: ["browser_versions.fetchStatus"] },
+  // { action: fetchAllTemplates, path: ["templates.fetchStatus"] },
+  // {
+  //   action: fetchAllBrowserPanels,
+  //   path: ["browser_panels.fetchStatus"]
+  // },
   { action: fetchDevicePriorities, path: ["devices.priorityFetchStatus"] }
 ]);

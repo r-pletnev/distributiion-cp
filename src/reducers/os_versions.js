@@ -3,10 +3,17 @@ import {
   ADD_OS_VERSION_SUCCESS,
   REMOVE_OS_VERSIONS_SUCCESS
 } from "../constants/os_versions";
-import { filterById, sortById } from "../utils/ramda";
+import {
+  filterById,
+  sortById,
+  mapById,
+  defaultToEmptyArray
+} from "../utils/ramda";
 
 const initialState = {
   entities: [],
+  priorities: {},
+  priorityFetchStatus: false,
   fetchStatus: false
 };
 
@@ -33,6 +40,14 @@ export default function osVersionState(state = initialState, action) {
       return filterById(payload, state);
     }
 
+    case GET_OS_VERSIONS_SUCCESS: {
+      return {
+        ...state,
+        priorities: { ...state.priorities, ...payload },
+        priorityFetchStatus: true
+      };
+    }
+
     default: {
       return state;
     }
@@ -49,4 +64,12 @@ export function getOsVersionById(state) {
     const isEqual = elm => elm.id === id;
     return os_versions.find(isEqual);
   };
+}
+
+export function _getOsVersionPriorities(state, profile) {
+  return defaultToEmptyArray(state.os_versions.priorities[profile]);
+}
+
+export function getOsVersionPriorities(state, profile) {
+  return mapById(_getOsVersionPriorities(state, profile), getOsVersions(state));
 }

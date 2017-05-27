@@ -22,6 +22,8 @@ export const SET_MODEL_PRIORITIES_URL = "/set_model_priorities";
 export const ADD_OS_URL = "/add_os";
 export const GET_OSES_URL = "/get_oses";
 export const REMOVE_OSES_URL = "/remove_oses";
+export const GET_OS_PRIORITIES_URL = "/get_os_priorities";
+export const SET_OS_PRIORITIES_URL = "/set_os_priorities";
 
 export const ADD_ARCH_URL = "/add_arch";
 export const GET_ARCHS_URL = "/get_archs";
@@ -30,6 +32,8 @@ export const REMOVE_ARCHS_URL = "/remove_archs";
 export const ADD_OS_VERSION_URL = "/add_os_version";
 export const GET_OS_VERSIONS_URL = "/get_os_versions";
 export const REMOVE_OS_VERSIONS_URL = "/remove_os_versions";
+export const GET_OS_VERSION_PRIORITIES_URL = "/get_os_version_priorities";
+export const SET_OS_VERSION_PRIORITIES_URL = "/set_os_version_priorities";
 
 export const ADD_OS_PANEL_URL = "/add_os_panel";
 export const GET_OS_PANELS_URL = "/get_os_panels";

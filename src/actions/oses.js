@@ -1,8 +1,9 @@
-import { AddOS, GetOSES, RemoveOSES } from "../api/oses";
+import { AddOS, GetOSES, RemoveOSES, GetOsPriorities } from "../api/oses";
 import {
   ADD_OS_SUCCESS,
   GET_OSES_SUCCESS,
-  REMOVE_OSES_SUCCESS
+  REMOVE_OSES_SUCCESS,
+  GET_OS_PRIORITIES_SUCCESS
 } from "../constants/oses";
 
 export function fetchAllOses() {
@@ -65,5 +66,36 @@ function removeOSESSuccess(payload) {
   return {
     type: REMOVE_OSES_SUCCESS,
     payload
+  };
+}
+
+// query shape: profile_name, device_id, model_id
+export function fetchOsPriorities(query) {
+  debugger;
+  return dispatch => {
+    return GetOsPriorities(query)
+      .then(response => {
+        dispatch(getOsPrioritiesSuccess(response.data, query));
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+}
+
+function getOsPrioritiesSuccess(payload, { profile_name, ...restArgs }) {
+  const priorities = payload.reduce(
+    (acc, elm) => {
+      acc[profile_name] = [
+        ...acc[profile_name],
+        { ...{ id: elm.os_id, priority: elm.priority }, ...restArgs }
+      ];
+      return acc;
+    },
+    { [profile_name]: [] }
+  );
+  return {
+    type: GET_OS_PRIORITIES_SUCCESS,
+    payload: priorities
   };
 }

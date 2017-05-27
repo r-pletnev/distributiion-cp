@@ -1,13 +1,21 @@
 import {
   GET_ALL_MODEL_SUCCESS,
   ADD_MODEL_SUCCESS,
-  REMOVE_MODELS_SUCCESS
+  REMOVE_MODELS_SUCCESS,
+  GET_MODEL_PRIORITIES_SUCCESS
 } from "../constants/models";
-import { filterById, sortById } from "../utils/ramda";
+import {
+  filterById,
+  sortById,
+  mapById,
+  defaultToEmptyArray
+} from "../utils/ramda";
 
 const initialState = {
   entities: [],
-  fetchStatus: false
+  priorities: {},
+  fetchStatus: false,
+  priorityFetchStatus: false
 };
 
 export default function modelState(state = initialState, action) {
@@ -33,6 +41,14 @@ export default function modelState(state = initialState, action) {
       return filterById(payload, state);
     }
 
+    case GET_MODEL_PRIORITIES_SUCCESS: {
+      return {
+        ...state,
+        priorities: { ...state.priorities, ...payload },
+        priorityFetchStatus: true
+      };
+    }
+
     default: {
       return state;
     }
@@ -49,4 +65,12 @@ export function getModelById(state) {
     const isEqual = elm => elm.id === id;
     return models.find(isEqual);
   };
+}
+
+export function _getModelPriorities(state, profile) {
+  return defaultToEmptyArray(state.models.priorities[profile]);
+}
+
+export function getModelPriorities(state, profile) {
+  return mapById(_getModelPriorities(state, profile), getModels(state));
 }

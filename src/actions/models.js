@@ -98,16 +98,16 @@ export function fetchModelPriorities(query) {
   };
 }
 
-function getModelPrioritiesSuccess(payload, profile) {
+function getModelPrioritiesSuccess(payload, { profile_name, device_id }) {
   const priorities = payload.reduce(
     (acc, elm) => {
-      acc[profile] = [
-        ...acc[profile],
-        { id: elm.device_id, priority: elm.priority }
+      acc[profile_name] = [
+        ...acc[profile_name],
+        { id: elm.model_id, priority: elm.priority, device_id }
       ];
       return acc;
     },
-    { [profile]: [] }
+    { [profile_name]: [] }
   );
   return {
     type: GET_MODEL_PRIORITIES_SUCCESS,

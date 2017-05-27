@@ -4,7 +4,12 @@ import {
   REMOVE_DEVICES_SUCCESS,
   GET_DEVICE_PRIORITIES_SUCCESS
 } from "../constants/devices";
-import { filterById, sortById, defaultToEmptyArray } from "../utils/ramda";
+import {
+  filterById,
+  sortById,
+  defaultToEmptyArray,
+  mapById
+} from "../utils/ramda";
 
 const initialState = {
   entities: [],
@@ -62,6 +67,12 @@ export function getDeviceById(state) {
   };
 }
 
-export function getDevicePriorities(state, profile) {
+export function _getDevicePriorities(state, profile) {
   return defaultToEmptyArray(state.devices.priorities[profile]);
+}
+
+export function getDevicePriorities(state, profile) {
+  const priors = _getDevicePriorities(state, profile);
+  const devs = getDevices(state);
+  return mapById(priors, devs);
 }

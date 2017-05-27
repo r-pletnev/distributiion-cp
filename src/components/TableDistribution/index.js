@@ -1,33 +1,27 @@
 import React from "react";
 import ThirdPart from "./thirdPart";
-import { Link } from "react-router-dom";
 import AddPriorityModal from "./AddPriorityModal";
 import SmallTableRow from "./SmallTableRow";
-
-const BigTableRow = props => {
-  <tr key={props.key}>
-    <td>{props.name}</td>
-    <td name="Приоритет">{props.priority}</td>
-    <td className="option">
-      <Link
-        to="#"
-        name="more-device"
-        className="al-navbar"
-        onClick={props.handleDetailClick}
-      />
-      <Link to="#" className="al-close" onClick={props.handleRemoveClick} />
-    </td>
-  </tr>;
-};
+import BigTableRow from "./BigTableRow";
 
 class TableDistribution extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { currentType: null, showDeviceModal: false };
+    this.state = {
+      currentType: null,
+      device_id: null,
+      model_id: null,
+      showDeviceModal: false,
+      showModelModal: false
+    };
     this.getFirstThird = this.getFirstThird.bind(this);
     this.getModals = this.getModals.bind(this);
     this.hideModals = this.hideModals.bind(this);
     this.openDeviceModal = this.openDeviceModal.bind(this);
+    this.openModelModal = this.openModelModal.bind(this);
+    this.getCurrentTypeItems = this.getCurrentTypeItems.bind(this);
+    this.selectDevice = this.selectDevice.bind(this);
+    this.selectModel = this.selectModel.bind(this);
   }
 
   openDeviceModal() {
@@ -35,11 +29,24 @@ class TableDistribution extends React.Component {
   }
 
   hideModals() {
-    this.setState({ showDeviceModal: false });
+    this.setState({ showDeviceModal: false, showModelModal: false });
+  }
+
+  openModelModal() {
+    this.setState({ showModelModal: true, currentType: "models" });
+  }
+
+  selectDevice(device_id) {
+    this.setState({ device_id });
+  }
+
+  selectModel(model_id) {
+    this.setState({ model_id });
   }
 
   getFirstThird() {
     const { devices, models } = this.props;
+    const { onDeviceRowClick, onModelRowClick } = this.props;
     const head = [
       <th key={0}>{`Devices(${devices.priorities.length})`}</th>,
       <th key={1}>{`Models(${models.priorities.length})`}</th>
@@ -51,11 +58,61 @@ class TableDistribution extends React.Component {
         addBtnText: "Add Device",
         handleOnClick: this.openDeviceModal,
         rows: devices.priorities.map((elm, index) => (
-          <SmallTableRow {...elm} key={index} />
+          <SmallTableRow
+            {...elm}
+            key={index}
+            rowKey={index}
+            action={onDeviceRowClick(elm.id, this.selectDevice)}
+          />
+        ))
+      },
+      {
+        singleItemName: "Model",
+        nameAddAttr: "add-model",
+        addBtnText: "Add Model",
+        handleOnClick: this.openModelModal,
+        rows: models.priorities.map((elm, index) => (
+          <BigTableRow
+            {...elm}
+            rowKey={index}
+            key={index}
+            action={onModelRowClick(
+              elm.id,
+              this.state.device_id,
+              this.selectModel
+            )}
+          />
         ))
       }
     ];
     return <ThirdPart headRow={head} rows={rows} />;
+  }
+
+  getSecondThird() {
+    const { oses, os_versions } = this.props;
+    const head = [
+      <th key={0}>{`Oses(${oses.priorities.length})`}</th>,
+      <th key={1}>{`OS Versions(${os_versions.priorities.length})`}</th>
+    ];
+    const rows = [
+      {
+        singleItemName: "OS",
+        nameAddAttr: "add-os",
+        addBtnText: "Add OS",
+        handleOnClick: this.openOsModal,
+        rows: oses.priorities.map((elm, index) => (
+          <SmallTableRow {...elm} key={index} rowKey={index} action={null} />
+        ))
+      }
+    ];
+
+    return <ThirdPart headRow={head} rows={rows} />;
+  }
+
+  getCurrentTypeItems() {
+    return this.state.currentType
+      ? this.props[this.state.currentType].items
+      : [];
   }
 
   getModals() {
@@ -65,13 +122,17 @@ class TableDistribution extends React.Component {
           show={this.state.showDeviceModal}
           onClose={this.hideModals}
           name="Устройство"
-          items={
-            this.state.currentType
-              ? this.props[this.state.currentType].items
-              : []
-          }
+          items={this.getCurrentTypeItems()}
           action={null}
           fieldName="device_id"
+        />
+        <AddPriorityModal
+          show={this.state.showModelModal}
+          onClose={this.hideModals}
+          name="Модель"
+          items={this.getCurrentTypeItems()}
+          action={null}
+          fieldName="model_id"
         />
       </div>
     );
@@ -90,7 +151,10 @@ class TableDistribution extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.getFirstThird()}
+            <tr>
+              {this.getFirstThird()}
+              {this.getSecondThird()}
+            </tr>
           </tbody>
         </table>
       </div>

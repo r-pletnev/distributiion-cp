@@ -10,26 +10,24 @@ const ItemTable = props => {
     handleOnClick
   } = props;
   return (
-    <tr>
-      <td className="table-three-items">
-        <div className="table-container">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>{singleItemName}</th>
-                <th colSpan="2">Приоритет</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows}
-            </tbody>
-          </table>
-        </div>
-        <div className="add-item" onClick={handleOnClick} name={nameAddAttr}>
-          {addBtnText}
-        </div>
-      </td>
-    </tr>
+    <td className="table-three-items">
+      <div className="table-container">
+        <table className="table">
+          <thead>
+            <tr>
+              <th>{singleItemName}</th>
+              <th colSpan="2">Приоритет</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows}
+          </tbody>
+        </table>
+      </div>
+      <div className="add-item" onClick={handleOnClick} name={nameAddAttr}>
+        {addBtnText}
+      </div>
+    </td>
   );
 };
 

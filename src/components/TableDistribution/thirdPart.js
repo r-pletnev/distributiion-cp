@@ -7,7 +7,7 @@ const ThirdPart = props => {
     <ItemTable {...elm} key={index} />
   ));
   return (
-    <tr className="table-three-box">
+    <td className="table-three-box">
       <table>
         <thead>
           <tr>{props.headRow}</tr>
@@ -16,7 +16,7 @@ const ThirdPart = props => {
           {items}
         </tbody>
       </table>
-    </tr>
+    </td>
   );
 };
 

@@ -17,6 +17,10 @@ const resetFetchStatus = createTransform((inboundState, key) => {
   return notFetch(inboundState);
 });
 
+const erasePriorities = createTransform((inboundState, key) => {
+  return R.assoc("priorities", {}, inboundState);
+});
+
 const resetPriorityFetchStatus = createTransform((inboundState, key) => {
   return R.when(
     R.propSatisfies(R.equals(true), "priorityFetchStatus"),
@@ -26,7 +30,7 @@ const resetPriorityFetchStatus = createTransform((inboundState, key) => {
 });
 
 persistStore(store, {
-  transforms: [resetFetchStatus, resetPriorityFetchStatus]
+  transforms: [resetFetchStatus, erasePriorities]
 });
 
 ReactDOM.render(

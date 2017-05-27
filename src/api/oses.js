@@ -11,3 +11,8 @@ export function GetOSES() {
 export function RemoveOSES(data) {
   return api.client.post(api.REMOVE_OSES_URL, data);
 }
+
+export function GetOsPriorities(data) {
+  debugger;
+  return api.client.post(api.GET_OS_PRIORITIES_URL, data);
+}

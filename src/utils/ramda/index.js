@@ -3,7 +3,8 @@ import R from "ramda";
 export const filterById = R.curry((ids, state) =>
   R.evolve({
     entities: R.filter(elm => !ids.includes(elm.id))
-  })(state));
+  })(state)
+);
 
 export const sortById = R.sortBy(R.prop("id"));
 
@@ -16,7 +17,8 @@ export const renameKeys = R.curry((keysMap, obj) =>
     (acc, key) => R.assoc(keysMap[key] || key, obj[key], acc),
     {},
     R.keys(obj)
-  ));
+  )
+);
 
 export const defaultToZero = R.defaultTo(0);
 export const defaultToOne = R.defaultTo(1);

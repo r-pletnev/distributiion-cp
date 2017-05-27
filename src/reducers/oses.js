@@ -2,13 +2,21 @@ import { getOsVersions } from "../reducers/os_versions";
 import {
   GET_OSES_SUCCESS,
   ADD_OS_SUCCESS,
-  REMOVE_OSES_SUCCESS
+  REMOVE_OSES_SUCCESS,
+  GET_OS_PRIORITIES_SUCCESS
 } from "../constants/oses";
-import { filterById, sortById } from "../utils/ramda";
+import {
+  filterById,
+  sortById,
+  defaultToEmptyArray,
+  mapById
+} from "../utils/ramda";
 
 const initialState = {
   entities: [],
-  fetchStatus: false
+  priorities: {},
+  fetchStatus: false,
+  priorityFetchStatus: false
 };
 
 export default function osState(state = initialState, action) {
@@ -32,6 +40,14 @@ export default function osState(state = initialState, action) {
 
     case REMOVE_OSES_SUCCESS: {
       return filterById(payload, state);
+    }
+
+    case GET_OS_PRIORITIES_SUCCESS: {
+      return {
+        ...state,
+        priorities: { ...state.priorities, ...payload },
+        priorityFetchStatus: true
+      };
     }
 
     default: {
@@ -61,4 +77,12 @@ export function getOsByOsVersionId(state) {
     const isEqualOSId = elm => elm.id === cur_os_version.os_id;
     return oses.find(isEqualOSId);
   };
+}
+
+export function _getOsPriorities(state, profile) {
+  return defaultToEmptyArray(state.oses.priorities[profile]);
+}
+
+export function getOsPriorities(state, profile) {
+  return mapById(_getOsPriorities(state, profile), getOses(state));
 }
