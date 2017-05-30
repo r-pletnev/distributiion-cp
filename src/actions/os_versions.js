@@ -10,6 +10,7 @@ import {
   REMOVE_OS_VERSIONS_SUCCESS,
   GET_OS_VERSION_PRIORITIES_SUCCESS
 } from "../constants/os_versions";
+import { sortById } from "../utils/ramda";
 
 export function fetchAllOsVersions() {
   return dispatch => {
@@ -79,12 +80,14 @@ function removeOSVersionsSuccess(payload) {
   };
 }
 
-export function fetchOsVersionPriorities({
-  profile_name,
-  device_id,
-  model_id,
-  os_id
-}) {
+export function fetchOsVersionPriorities(
+  {
+    profile_name,
+    device_id,
+    model_id,
+    os_id
+  }
+) {
   const query = arguments[0];
   return dispatch => {
     return GetOsVersionPriorities(query)
@@ -108,6 +111,8 @@ function getOsVersionPrioritiesSuccess(payload, { profile_name, ...restArgs }) {
     },
     { [profile_name]: [] }
   );
+
+  priorities[profile_name] = sortById(priorities[profile_name]);
   return {
     type: GET_OS_VERSION_PRIORITIES_SUCCESS,
     payload: priorities

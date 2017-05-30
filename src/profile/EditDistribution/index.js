@@ -35,34 +35,55 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 function onDeviceRowClick(profile_name, action) {
-  return (device_id, selectAction) =>
+  return (device_id, selectAction, afterLoadAction) =>
     () => {
       selectAction(device_id);
-      action({ profile_name, device_id });
+      action({ profile_name, device_id }).then(result => {
+        afterLoadAction(device_id)();
+      });
     };
 }
 
 function onModelRowClick(profile_name, action) {
-  return (model_id, device_id, selectAction) =>
+  return (model_id, device_id, selectAction, afterLoadAction) =>
     () => {
       selectAction(model_id);
-      action({ profile_name, model_id, device_id });
+      action({ profile_name, model_id, device_id }).then(_ => {
+        afterLoadAction(model_id)();
+      });
     };
 }
 
 function onOsRowClick(profile_name, action) {
-  return (os_id, device_id, model_id, selectAction) =>
+  return (os_id, device_id, model_id, selectAction, afterLoadAction) =>
     () => {
       selectAction(os_id);
-      action({ profile_name, device_id, model_id, os_id });
+      action({ profile_name, device_id, model_id, os_id }).then(_ => {
+        afterLoadAction(os_id)();
+      });
     };
 }
 
 function onOsVersionRowClick(profile_name, action) {
-  return (os_version_id, device_id, model_id, os_id, selectAction) =>
+  return (
+    os_version_id,
+    device_id,
+    model_id,
+    os_id,
+    selectAction,
+    afterLoadAction
+  ) =>
     () => {
       selectAction(os_version_id);
-      action({ profile_name, device_id, model_id, os_id, os_version_id });
+      action({
+        profile_name,
+        device_id,
+        model_id,
+        os_id,
+        os_version_id
+      }).then(_ => {
+        afterLoadAction(os_version_id)();
+      });
     };
 }
 
@@ -73,7 +94,8 @@ function onBrowserRowClick(profile_name, action) {
     model_id,
     os_id,
     os_version_id,
-    selectAction
+    selectAction,
+    afterLoadAction
   ) =>
     () => {
       selectAction(browser_id);
@@ -84,6 +106,8 @@ function onBrowserRowClick(profile_name, action) {
         os_id,
         os_version_id,
         browser_id
+      }).then(_ => {
+        afterLoadAction(browser_id)();
       });
     };
 }

@@ -11,7 +11,7 @@ export const ADD_DEVICE_URL = "/add_device";
 export const GET_DEVICES_URL = "/get_devices";
 export const REMOVE_DEVICES_URL = "/remove_devices";
 export const GET_DEVICE_PRIORITIES_URL = "/get_device_priorities";
-export const SET_DEVICE_PRIORITIES_URL = "/set_device_priorities";
+export const SET_DEVICE_PRIORITIES_URL = "/set_device_priority";
 
 export const ADD_MODEL_URL = "/add_model";
 export const GET_MODELS_URL = "/get_models";

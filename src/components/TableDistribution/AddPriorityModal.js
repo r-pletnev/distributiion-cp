@@ -2,8 +2,9 @@ import React from "react";
 import Modal from "../Modal";
 import PropTypes from "prop-types";
 import FormField from "../FormField";
-import FormSelectField from "../FormSelectField";
-import { reduxForm } from "redux-form";
+// import FormSelectField from "../FormSelectField";
+import RFSelectField from "../RFSelectField";
+import { reduxForm, Field } from "redux-form";
 
 let AddPriorityForm = props => {
   const { handleSubmit, pristine, submitting, error } = props;
@@ -16,13 +17,16 @@ let AddPriorityForm = props => {
     return props.action(values.name, closeForm);
   };
 
+  const getSelectOptions = items =>
+    items.map(elm => ({ value: elm.id, label: elm.name }));
+
   return (
     <div className="popup-content">
       <form className="form" onSubmit={handleSubmit(submitForm)}>
-        <FormSelectField
-          label={`Выбрать ${props.name}`}
-          options={props.items}
+        <Field
           name={props.fieldName}
+          options={getSelectOptions(props.items)}
+          component={RFSelectField}
         />
         <FormField
           name="priority"

@@ -1,4 +1,7 @@
-import { GET_PROFILES_SUCCESS } from "../constants/profiles";
+import {
+  GET_PROFILES_SUCCESS,
+  ADD_PROFILE_SUCCESS
+} from "../constants/profiles";
 
 const initialState = {
   entities: [],
@@ -14,6 +17,13 @@ export default function profileState(state = initialState, action) {
         ...state,
         entities: payload,
         fetchStatus: true
+      };
+    }
+
+    case ADD_PROFILE_SUCCESS: {
+      return {
+        ...state,
+        entities: [...state.entities, payload]
       };
     }
 

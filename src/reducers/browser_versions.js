@@ -72,6 +72,5 @@ export function getBrowserVersionPriorities(state, profile) {
     state.browser_versions.priorities[profile]
   );
   const browser_versions = getBrowserVersions(state);
-  debugger;
   return mapById(priorities, browser_versions);
 }

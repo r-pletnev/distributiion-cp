@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 const ItemTable = props => {
   const {
     singleItemName,
+    secondItemName,
     rows,
     nameAddAttr,
     addBtnText,
@@ -16,6 +17,7 @@ const ItemTable = props => {
           <thead>
             <tr>
               <th>{singleItemName}</th>
+              {secondItemName || <th>{secondItemName}</th>}
               <th colSpan="2">Приоритет</th>
             </tr>
           </thead>
@@ -33,6 +35,7 @@ const ItemTable = props => {
 
 ItemTable.propTypes = {
   singleItemName: PropTypes.string.isRequired,
+  secondItemName: PropTypes.string,
   rows: PropTypes.array,
   nameAddAttr: PropTypes.string,
   addBtnText: PropTypes.string.isRequired,

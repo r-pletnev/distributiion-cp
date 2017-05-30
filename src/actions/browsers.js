@@ -10,6 +10,7 @@ import {
   REMOVE_BROWSERS_SUCCESS,
   GET_BROWSER_PRIORITIES_SUCCESS
 } from "../constants/browsers";
+import { sortById } from "../utils/ramda";
 
 export function fetchAllBrowsers() {
   return dispatch => {
@@ -114,6 +115,8 @@ function getBrowserPrioritiesSuccess(payload, { profile_name, ...restArgs }) {
     },
     { [profile_name]: [] }
   );
+
+  priorities[profile_name] = sortById(priorities[profile_name]);
   return {
     type: GET_BROWSER_PRIORITIES_SUCCESS,
     payload: priorities

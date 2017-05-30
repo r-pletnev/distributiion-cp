@@ -2,7 +2,8 @@ import {
   AddDevice,
   GetDevices,
   RemoveDevices,
-  GetDevicePriorities
+  GetDevicePriorities,
+  SetDevicePriorities
 } from "../api/devices";
 import {
   ADD_DEVICE_SUCCEES,
@@ -78,6 +79,19 @@ export function fetchDevicePriorities(profile) {
   const { profile_name } = profile;
   return dispatch => {
     return GetDevicePriorities(profile)
+      .then(response => {
+        dispatch(getDevicePrioritiesSuccess(response.data, profile_name));
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+}
+
+export function fetchSetDevicePrioritiy({ profile_name, device_id, priority }) {
+  const query = arguments[0];
+  return dispatch => {
+    return SetDevicePriorities(query)
       .then(response => {
         dispatch(getDevicePrioritiesSuccess(response.data, profile_name));
       })

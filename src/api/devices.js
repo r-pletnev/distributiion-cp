@@ -15,3 +15,7 @@ export function RemoveDevices(data) {
 export function GetDevicePriorities(data) {
   return api.client.post(api.GET_DEVICE_PRIORITIES_URL, data);
 }
+
+export function SetDevicePriorities(data) {
+  return api.client.post(api.SET_DEVICE_PRIORITIES_URL, data);
+}

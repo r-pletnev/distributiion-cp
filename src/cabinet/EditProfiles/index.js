@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import TableView from "../../components/TableView";
 import { getProfiles } from "../../reducers/profiles";
+import { fetchCreateProfile } from "../../actions/profiles";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import urls from "../../urls";
@@ -28,7 +29,9 @@ const EditProfiles = props => {
       createBtnLabel="Создать профиль"
       headRow={["#", "Имя профиля"]}
       rows={rows}
-      specialForm={null}
+      nameLabel="Имя профиля"
+      nameBtn="Отправить"
+      action={fetchCreateProfile}
     />
   );
 };
