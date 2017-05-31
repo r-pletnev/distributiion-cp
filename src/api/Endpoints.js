@@ -28,6 +28,8 @@ export const SET_OS_PRIORITIES_URL = "/set_os_priorities";
 export const ADD_ARCH_URL = "/add_arch";
 export const GET_ARCHS_URL = "/get_archs";
 export const REMOVE_ARCHS_URL = "/remove_archs";
+export const GET_ARCH_PRIORITIES_URL = "/get_arch_priorities";
+export const SET_ARCH_PRIORITIES_URL = "/set_arch_priorities";
 
 export const ADD_OS_VERSION_URL = "/add_os_version";
 export const GET_OS_VERSIONS_URL = "/get_os_versions";
@@ -38,6 +40,8 @@ export const SET_OS_VERSION_PRIORITIES_URL = "/set_os_version_priorities";
 export const ADD_OS_PANEL_URL = "/add_os_panel";
 export const GET_OS_PANELS_URL = "/get_os_panels";
 export const REMOVE_OS_PANELS_URL = "/remove_os_panels";
+export const GET_OS_PANEL_PRIORITIES_URL = "/get_os_panel_priorities";
+export const SET_OS_PANEL_PRIORITIES_URL = "/set_os_panel_priorities";
 
 export const ADD_SCREEN_URL = "/add_screen";
 export const GET_SCREENS_URL = "/get_screens";

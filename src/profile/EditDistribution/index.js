@@ -26,11 +26,19 @@ import {
   getBrowserVersionById,
   getBrowserVersionPriorities
 } from "../../reducers/browser_versions";
+import {
+  getOsPanelPriorities,
+  getOsPanelById,
+  getOsPanels
+} from "../../reducers/os_panels";
+import { getArchs, getArchById, getArchPriorities } from "../../reducers/archs";
 import { fetchModelPriorities } from "../../actions/models";
 import { fetchOsPriorities } from "../../actions/oses";
 import { fetchOsVersionPriorities } from "../../actions/os_versions";
 import { fetchBrowserPriorities } from "../../actions/browsers";
 import { fetchBrowserVersionPriorities } from "../../actions/browser_versions";
+import { fetchArchPriorities } from "../../actions/archs";
+import { fetchOsPanelPriorities } from "../../actions/os_panels";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
@@ -172,6 +180,16 @@ function mapStateToProps(state, ownProps) {
       items: getBrowserVersions(state),
       byId: getBrowserVersionById(state),
       priorities: getBrowserVersionPriorities(state, profile_name)
+    },
+    archs: {
+      items: getArchs(state),
+      byId: getArchById(state),
+      priorities: getArchPriorities(state, profile_name)
+    },
+    os_panels: {
+      items: getOsPanels(state),
+      byId: getOsPanelById(state),
+      priorities: getOsPanelPriorities(state, profile_name)
     }
   };
 }
@@ -183,7 +201,9 @@ function mapDispacthToProps(dispatch) {
     fetchOsVersionPrs: query => dispatch(fetchOsVersionPriorities(query)),
     fetchBrowserPrs: query => dispatch(fetchBrowserPriorities(query)),
     fetchBrowserVersionPrs: query =>
-      dispatch(fetchBrowserVersionPriorities(query))
+      dispatch(fetchBrowserVersionPriorities(query)),
+    fetchArchPrs: query => dispatch(fetchArchPriorities(query)),
+    fetchOsPanelPrs: query => dispatch(fetchOsPanelPriorities(query))
   };
 }
 

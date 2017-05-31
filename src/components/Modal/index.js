@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Modal from "react-modal";
 import "./style.css";
 
@@ -8,7 +9,7 @@ const myModal = props => {
       isOpen={props.show}
       onAfterOpen={props.afterOpen}
       contentLabel="Modal"
-      className="popup-box small"
+      className={props.cls}
       overlayClassName="popup popup-wrapper"
       onRequestClose={props.onClose}
     >
@@ -25,6 +26,10 @@ const myModal = props => {
       </div>
     </Modal>
   );
+};
+
+myModal.defaultProps = {
+  cls: "popup-box small"
 };
 
 export default myModal;

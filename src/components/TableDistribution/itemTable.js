@@ -17,7 +17,7 @@ const ItemTable = props => {
           <thead>
             <tr>
               <th>{singleItemName}</th>
-              {secondItemName || <th>{secondItemName}</th>}
+              {secondItemName && <th>{secondItemName}</th>}
               <th colSpan="2">Приоритет</th>
             </tr>
           </thead>

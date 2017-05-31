@@ -1,9 +1,16 @@
-import { AddArch, GetArchs, RemoveArchs } from "../api/archs";
+import {
+  AddArch,
+  GetArchs,
+  RemoveArchs,
+  GetArchPriorities
+} from "../api/archs";
 import {
   ADD_ARCH_SUCCESS,
   GET_ARHCS_SUCCESS,
-  REMOVE_ARCHS_SUCCESS
+  REMOVE_ARCHS_SUCCESS,
+  GET_ARCH_PRIORITIES_SUCCESS
 } from "../constants/archs";
+import { sortById } from "../utils/ramda";
 
 export function fetchAllArchs() {
   return dispatch => {
@@ -69,5 +76,39 @@ function removeArchsSuccess(payload) {
   return {
     type: REMOVE_ARCHS_SUCCESS,
     payload
+  };
+}
+
+export function fetchArchPriorities(
+  { profile_name, device_id, model_id, os_id, os_version_id }
+) {
+  const query = arguments[0];
+  return dispatch => {
+    return GetArchPriorities(query)
+      .then(response => {
+        dispatch(getArchPrioritiesSuccess(response.data, query));
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+}
+
+function getArchPrioritiesSuccess(payload, { profile_name, ...restArgs }) {
+  const priorities = payload.reduce(
+    (acc, elm) => {
+      acc[profile_name] = [
+        ...acc[profile_name],
+        { ...{ id: elm.arch_id, priority: elm.priority }, ...restArgs }
+      ];
+      return acc;
+    },
+    { [profile_name]: [] }
+  );
+
+  priorities[profile_name] = sortById(priorities[profile_name]);
+  return {
+    type: GET_ARCH_PRIORITIES_SUCCESS,
+    payload: priorities
   };
 }

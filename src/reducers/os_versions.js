@@ -67,7 +67,7 @@ export function getOsVersionById(state) {
   };
 }
 
-export function _getOsVersionPriorities(state, profile) {
+function _getOsVersionPriorities(state, profile) {
   return defaultToEmptyArray(state.os_versions.priorities[profile]);
 }
 

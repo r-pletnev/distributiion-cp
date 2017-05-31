@@ -1,12 +1,19 @@
 import {
   GET_ARHCS_SUCCESS,
   ADD_ARCH_SUCCESS,
-  REMOVE_ARCHS_SUCCESS
+  REMOVE_ARCHS_SUCCESS,
+  GET_ARCH_PRIORITIES_SUCCESS
 } from "../constants/archs";
-import { filterById, sortById } from "../utils/ramda";
+import {
+  filterById,
+  sortById,
+  mapById,
+  defaultToEmptyArray
+} from "../utils/ramda";
 
 const initialState = {
   entities: [],
+  priorities: {},
   fetchStatus: false
 };
 
@@ -26,6 +33,13 @@ export default function archState(state = initialState, action) {
       return {
         ...state,
         entities: sortById([...state.entities, payload])
+      };
+    }
+
+    case GET_ARCH_PRIORITIES_SUCCESS: {
+      return {
+        ...state,
+        priorities: { ...state.priorities, ...payload }
       };
     }
 
@@ -49,4 +63,11 @@ export function getArchById(state) {
     const isEqual = elm => elm.id === id;
     return archs.find(isEqual);
   };
+}
+
+export function getArchPriorities(state, profile) {
+  return mapById(
+    defaultToEmptyArray(state.archs.priorities[profile]),
+    getArchs(state)
+  );
 }

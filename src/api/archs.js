@@ -11,3 +11,11 @@ export function GetArchs() {
 export function RemoveArchs(data) {
   return api.client.post(api.REMOVE_ARCHS_URL, data);
 }
+
+export function GetArchPriorities(data) {
+  return api.client.post(api.GET_ARCH_PRIORITIES_URL, data);
+}
+
+export function SetArchPriorities(data) {
+  return api.client.post(api.GET_ARCH_PRIORITIES_URL, data);
+}

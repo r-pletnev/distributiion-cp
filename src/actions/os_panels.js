@@ -1,9 +1,16 @@
-import { AddOSPanel, GetOSPanels, RemoveOSPanels } from "../api/os_panels";
+import {
+  AddOSPanel,
+  GetOSPanels,
+  RemoveOSPanels,
+  GetOsPanelPriorities
+} from "../api/os_panels";
 import {
   ADD_OS_PANEL_SUCCESS,
   GET_OS_PANELS_SUCCESS,
-  REMOVE_OS_PANELS_SUCCESS
+  REMOVE_OS_PANELS_SUCCESS,
+  GET_OS_PANEL_PRIORITIES_SUCCESS
 } from "../constants/os_panels";
+import { sortById } from "../utils/ramda";
 
 export function fetchAllOsPanels() {
   return dispatch => {
@@ -20,7 +27,8 @@ export function fetchAllOsPanels() {
 function fetchAllOsPanelsSuccess(payload) {
   const os_panels = payload.map(elm => ({
     id: elm.os_panel_id,
-    size: elm.size
+    size: elm.size,
+    name: elm.size
   }));
   return {
     type: GET_OS_PANELS_SUCCESS,
@@ -47,7 +55,8 @@ function addOsPanelSuccess(payload) {
     type: ADD_OS_PANEL_SUCCESS,
     payload: {
       id: os_panel_id,
-      size
+      size,
+      name: size
     }
   };
 }
@@ -68,5 +77,39 @@ function removeOSPanelsSuccess(payload) {
   return {
     type: REMOVE_OS_PANELS_SUCCESS,
     payload
+  };
+}
+
+export function fetchOsPanelPriorities(
+  { profile_name, device_id, model_id, os_id, os_version_id }
+) {
+  const query = arguments[0];
+  return dispatch => {
+    return GetOsPanelPriorities(query)
+      .then(response => {
+        dispatch(getOsPanelPrioritiesSuccess(response.data, query));
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+}
+
+function getOsPanelPrioritiesSuccess(payload, { profile_name, ...restArgs }) {
+  const priorities = payload.reduce(
+    (acc, elm) => {
+      acc[profile_name] = [
+        ...acc[profile_name],
+        { ...{ id: elm.os_panel_id, priority: elm.priority }, ...restArgs }
+      ];
+      return acc;
+    },
+    { [profile_name]: [] }
+  );
+
+  priorities[profile_name] = sortById(priorities[profile_name]);
+  return {
+    type: GET_OS_PANEL_PRIORITIES_SUCCESS,
+    payload: priorities
   };
 }

@@ -1,12 +1,19 @@
 import {
   GET_OS_PANELS_SUCCESS,
   ADD_OS_PANEL_SUCCESS,
-  REMOVE_OS_PANELS_SUCCESS
+  REMOVE_OS_PANELS_SUCCESS,
+  GET_OS_PANEL_PRIORITIES_SUCCESS
 } from "../constants/os_panels";
-import { filterById, sortById } from "../utils/ramda";
+import {
+  filterById,
+  sortById,
+  mapById,
+  defaultToEmptyArray
+} from "../utils/ramda";
 
 const initialState = {
   entities: [],
+  priorities: {},
   fetchStatus: false
 };
 
@@ -26,6 +33,13 @@ export default function osPanelState(state = initialState, action) {
       return {
         ...state,
         entities: sortById([...state.entities, payload])
+      };
+    }
+
+    case GET_OS_PANEL_PRIORITIES_SUCCESS: {
+      return {
+        ...state,
+        priorities: { ...state.priorities, ...payload }
       };
     }
 
@@ -49,4 +63,11 @@ export function getOsPanelById(state) {
     const isEqual = elm => elm.id === id;
     return items.find(isEqual);
   };
+}
+
+export function getOsPanelPriorities(state, profile) {
+  return mapById(
+    defaultToEmptyArray(state.os_panels.priorities[profile]),
+    getOsPanels(state)
+  );
 }
