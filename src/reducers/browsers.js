@@ -14,7 +14,6 @@ import {
 const initialState = {
   entities: [],
   priorities: {},
-  priorityFetchStatus: false,
   fetchStatus: false
 };
 
@@ -45,7 +44,6 @@ export default function browserState(state = initialState, action) {
       return {
         ...state,
         priorities: { ...state.priorities, ...payload },
-        priorityFetchStatus: true
       };
     }
 

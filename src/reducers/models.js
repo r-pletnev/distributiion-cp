@@ -15,7 +15,6 @@ const initialState = {
   entities: [],
   priorities: {},
   fetchStatus: false,
-  priorityFetchStatus: false
 };
 
 export default function modelState(state = initialState, action) {
@@ -45,7 +44,6 @@ export default function modelState(state = initialState, action) {
       return {
         ...state,
         priorities: { ...state.priorities, ...payload },
-        priorityFetchStatus: true
       };
     }
 

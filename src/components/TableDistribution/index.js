@@ -24,7 +24,9 @@ class TableDistribution extends React.Component {
       showBrowserModal: false,
       showBrowserVersionModal: false,
       showDetailOsVersion: false,
-      showArchModal: false
+      showDetailModel: false,
+      showArchModal: false,
+      showScreenModal: false
     };
     this.getFirstThird = this.getFirstThird.bind(this);
     this.getSecondThird = this.getSecondThird.bind(this);
@@ -32,6 +34,7 @@ class TableDistribution extends React.Component {
     this.getModals = this.getModals.bind(this);
     this.hideModals = this.hideModals.bind(this);
     this.hideArchModal = this.hideArchModal.bind(this);
+    this.hideScreenModal = this.hideScreenModal.bind(this);
     this.openDeviceModal = this.openDeviceModal.bind(this);
     this.openModelModal = this.openModelModal.bind(this);
     this.openOsModal = this.openOsModal.bind(this);
@@ -39,7 +42,9 @@ class TableDistribution extends React.Component {
     this.openOsVersionModal = this.openOsVersionModal.bind(this);
     this.openBrowserVersionModal = this.openBrowserVersionModal.bind(this);
     this.openDetailOsVersion = this.openDetailOsVersion.bind(this);
+    this.openDetailModel = this.openDetailModel.bind(this);
     this.openArchModal = this.openArchModal.bind(this);
+    this.openScreenModal = this.openScreenModal.bind(this);
     this.getCurrentTypeItems = this.getCurrentTypeItems.bind(this);
     this.selectDevice = this.selectDevice.bind(this);
     this.selectModel = this.selectModel.bind(this);
@@ -62,12 +67,17 @@ class TableDistribution extends React.Component {
       showOsVersionModal: false,
       showBrowserModal: false,
       showBrowserVersionModal: false,
-      showDetailOsVersion: false
+      showDetailOsVersion: false,
+      showDetailModel: false
     });
   }
 
   hideArchModal() {
     this.setState({ showArchModal: false });
+  }
+
+  hideScreenModal(){
+    this.setState({showScreenModal: false})
   }
 
   openModelModal() {
@@ -99,11 +109,22 @@ class TableDistribution extends React.Component {
     });
   }
 
+  openDetailModel(){
+    this.setState({ showDetailModel: true})
+  }
+
   openArchModal() {
     this.setState({
       showArchModal: true,
       currentType: "archs"
     });
+  }
+
+  openScreenModal(){
+    this.setState({
+      showScreenModal: true,
+      currentType: 'screens'
+    })
   }
 
   componentWillReceiveProps(nextProps) {
@@ -124,6 +145,11 @@ class TableDistribution extends React.Component {
   }
 
   selectModel(model_id) {
+    this.props.fetchScreenPrs({
+      profile_name: this.props.match.params.profile_name,
+      device_id: this.state.device_id,
+      model_id
+    })
     this.setState({ model_id });
   }
 
@@ -162,7 +188,8 @@ class TableDistribution extends React.Component {
         onOsVersionRowClick,
         onBrowserRowClick,
         fetchArchPrs,
-        fetchOsPanelPrs
+        fetchOsPanelPrs,
+        fetchScreenPrs
       } = this.props;
 
       const { id } = this.props[type].priorities[0];
@@ -178,13 +205,17 @@ class TableDistribution extends React.Component {
           }
 
           case "models": {
-            onModelRowClick(
+            fetchScreenPrs({
+              profile_name: this.props.match.params.profile_name,
+              device_id: this.state.device_id,
+              model_id: id
+            })
+            return onModelRowClick(
               id,
               nextId,
               this.selectModel,
               this.afterFetchAction("oses")
             )();
-            break;
           }
 
           case "oses": {
@@ -277,8 +308,7 @@ class TableDistribution extends React.Component {
       {
         singleItemName: "Model",
         nameAddAttr: "add-model",
-        addBtnText: "Add Model",
-        handleOnClick: this.openModelModal,
+        addBtnText: "Add Model", handleOnClick: this.openModelModal,
         rows: models.priorities.map((elm, index) => (
           <BigTableRow
             {...elm}
@@ -291,6 +321,7 @@ class TableDistribution extends React.Component {
               this.afterFetchAction("oses")
             )}
             isActive={elm.id === this.state.model_id}
+            handleDetailClick={this.openDetailModel}
           />
         ))
       }
@@ -412,7 +443,7 @@ class TableDistribution extends React.Component {
       : [];
   }
 
-  getDetailModals() {
+  getDetailOsVersionModal() {
     const { archs, os_versions, os_panels } = this.props;
     const DetailOsVersionHeadRow = [
       <th key={0}>{`Архитектуры (${archs.priorities.length})`}</th>,
@@ -447,6 +478,29 @@ class TableDistribution extends React.Component {
         <ThirdPart headRow={DetailOsVersionHeadRow} rows={rows} />
       </DetailModal>
     );
+  }
+
+  getDetailModelModal(){
+    const {screens} = this.props
+    const headRow = [<th key={0}>{`Screens (${screens.priorities.length})`}</th>]
+    const rows = [
+      {
+        singleItemName: 'Resulution',
+        addBtnText: 'Add screen',
+        handleOnClick: this.openScreenModal,
+        rows: screens.priorities.map((elm, index) => (
+          <SmallTableRow {...elm} key={index} rowKey={index} />
+        ))
+      }
+    ]
+    return <DetailModal
+          show={this.state.showDetailModel}
+          onClose={this.hideModals}
+          title='Model properties'
+          name={this.state.model_id || ""}
+          > 
+          <ThirdPart headRow={headRow} rows={rows} />
+          </DetailModal>
   }
 
   getModals() {
@@ -508,7 +562,14 @@ class TableDistribution extends React.Component {
           action={null}
           fieldName="arch_id"
         />
-
+        <AddPriorityModal
+          show={this.state.showScreenModal}
+          onClose={this.hideScreenModal}
+          name='Screen'
+          items={this.getCurrentTypeItems()}
+          action={null}
+          fieldName='screen_id'
+        />
       </div>
     );
   }
@@ -517,7 +578,8 @@ class TableDistribution extends React.Component {
     return (
       <div>
         {this.getModals()}
-        {this.getDetailModals()}
+        {this.getDetailOsVersionModal()}
+        {this.getDetailModelModal()}
         <table className="table table-three">
           <thead className="table-three-root">
             <tr>

@@ -15,7 +15,6 @@ const initialState = {
   entities: [],
   priorities: {},
   fetchStatus: false,
-  priorityFetchStatus: false
 };
 
 export default function deviceState(state = initialState, action) {
@@ -34,7 +33,6 @@ export default function deviceState(state = initialState, action) {
       return {
         ...state,
         priorities: { ...state.priorities, ...payload },
-        priorityFetchStatus: true
       };
     }
 

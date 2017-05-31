@@ -31,6 +31,16 @@ import {
   getOsPanelById,
   getOsPanels
 } from "../../reducers/os_panels";
+import {
+  getTemplates,
+  getTemplateById,
+  getTemplatePriorities
+} from '../../reducers/templates'
+import {
+  getScreens,
+  getScreenById,
+  getScreenPriorities
+} from '../../reducers/screens'
 import { getArchs, getArchById, getArchPriorities } from "../../reducers/archs";
 import { fetchModelPriorities } from "../../actions/models";
 import { fetchOsPriorities } from "../../actions/oses";
@@ -39,6 +49,8 @@ import { fetchBrowserPriorities } from "../../actions/browsers";
 import { fetchBrowserVersionPriorities } from "../../actions/browser_versions";
 import { fetchArchPriorities } from "../../actions/archs";
 import { fetchOsPanelPriorities } from "../../actions/os_panels";
+import { fetchScreenPriorities} from '../../actions/screens'
+import {fetchTemplatePriorities} from '../../actions/templates'
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
@@ -190,6 +202,11 @@ function mapStateToProps(state, ownProps) {
       items: getOsPanels(state),
       byId: getOsPanelById(state),
       priorities: getOsPanelPriorities(state, profile_name)
+    },
+    screens: {
+      items: getScreens(state),
+      byId: getScreenById(state),
+      priorities: getScreenPriorities(state, profile_name)
     }
   };
 }
@@ -203,7 +220,9 @@ function mapDispacthToProps(dispatch) {
     fetchBrowserVersionPrs: query =>
       dispatch(fetchBrowserVersionPriorities(query)),
     fetchArchPrs: query => dispatch(fetchArchPriorities(query)),
-    fetchOsPanelPrs: query => dispatch(fetchOsPanelPriorities(query))
+    fetchOsPanelPrs: query => dispatch(fetchOsPanelPriorities(query)),
+    fetchTemplatePrs: query => dispatch(fetchTemplatePriorities(query)),
+    fetchScreenPrs: query => dispatch(fetchScreenPriorities(query))
   };
 }
 
