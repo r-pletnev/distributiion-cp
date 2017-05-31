@@ -14,7 +14,6 @@ import {
 const initialState = {
   entities: [],
   priorities: {},
-  priorityFetchStatus: false,
   fetchStatus: false
 };
 
@@ -44,8 +43,7 @@ export default function osVersionState(state = initialState, action) {
     case GET_OS_VERSION_PRIORITIES_SUCCESS: {
       return {
         ...state,
-        priorities: { ...state.priorities, ...payload },
-        priorityFetchStatus: true
+        priorities: { ...state.priorities, ...payload }
       };
     }
 

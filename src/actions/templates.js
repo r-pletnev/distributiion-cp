@@ -1,9 +1,11 @@
-import { AddTemplate, GetTemplates, RemoveTemplates } from "../api/templates";
+import { AddTemplate, GetTemplates, RemoveTemplates, GetTemplatePriorities } from "../api/templates";
 import {
   ADD_TEMPLATE_SUCCESS,
   GET_TEMPLATES_SUCCESS,
-  REMOVE_TEMPLATES_SUCCESS
+  REMOVE_TEMPLATES_SUCCESS,
+  GET_TEMPLATE_PRIORITIES_SUCCESS
 } from "../constants/templates";
+import {sortById} from '../utils/ramda'
 
 export function fetchAllTemplates() {
   return dispatch => {
@@ -73,5 +75,37 @@ function removeTemplatesSuccess(payload) {
   return {
     type: REMOVE_TEMPLATES_SUCCESS,
     payload
+  };
+}
+
+export function fetchTemplatePriorities({profile_name, device_id, model_id}){
+  const query = arguments[0]
+  return dispatch => {
+    return GetTemplatePriorities(query)
+    .then(response => {
+      dispatch(getTemplatePrioritiesSuccess(response.data, query))
+    })
+    .catch(error => {
+      console.error(error)
+    })
+  }
+}
+
+function getTemplatePrioritiesSuccess(payload, {profile_name, ...restArgs}){
+  const priorities = payload.reduce(
+    (acc, elm) => {
+      acc[profile_name] = [
+        ...acc[profile_name],
+        { ...{ id: elm.template_id, priority: elm.priority }, ...restArgs }
+      ];
+      return acc;
+    },
+    { [profile_name]: [] }
+  );
+
+  priorities[profile_name] = sortById(priorities[profile_name]);
+  return {
+    type: GET_TEMPLATE_PRIORITIES_SUCCESS,
+    payload: priorities
   };
 }

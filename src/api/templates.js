@@ -11,3 +11,11 @@ export function GetTemplates() {
 export function RemoveTemplates(data) {
   return api.client.post(api.REMOVE_TEMPLATES_URL, data);
 }
+
+export function GetTemplatePriorities(data){
+  return api.client.post(api.GET_TEMPLATE_PRIORITIES_URL, data)
+}
+
+export function SetTemplatePriorities(data){
+  return api.client.post(api.SET_TEMPLATE_PRIORITIES_URL, data)
+}

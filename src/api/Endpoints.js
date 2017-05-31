@@ -46,6 +46,8 @@ export const SET_OS_PANEL_PRIORITIES_URL = "/set_os_panel_priorities";
 export const ADD_SCREEN_URL = "/add_screen";
 export const GET_SCREENS_URL = "/get_screens";
 export const REMOVE_SCREENS_URL = "/remove_screens";
+export const GET_SCREEN_PRIORITIES_URL = '/get_screen_priorities'
+export const SET_SCREEN_PRIORITIES_URL = '/set_screen_priorities'
 
 export const ADD_BROWSER_URL = "/add_browser";
 export const GET_BROWSERS_URL = "/get_browsers";
@@ -66,5 +68,7 @@ export const REMOVE_BROWSER_PANELS_URL = "/remove_browser_panels";
 export const ADD_TEMPLATE_URL = "/add_template";
 export const GET_TEMPLATES_URL = "/get_templates";
 export const REMOVE_TEMPLATES_URL = "/remove_templates";
+export const GET_TEMPLATE_PRIORITIES_URL = '/get_template_priorities'
+export const SET_TEMPLATE_PRIORITIES_URL = '/set_template_priorities'
 
 export const GET_PROFILES_URL = "/get_profiles";

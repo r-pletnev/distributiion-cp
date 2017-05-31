@@ -11,3 +11,11 @@ export function GetScreens() {
 export function RemoveScreens(data) {
   return api.client.post(api.REMOVE_SCREENS_URL, data);
 }
+
+export function GetScreenPriorities(data){
+  return api.client.post(api.GET_SCREEN_PRIORITIES_URL, data)
+}
+
+export function SetScreenPriorities(data){
+  return api.client.post(api.SET_SCREEN_PRIORITIES_URL, data)
+}

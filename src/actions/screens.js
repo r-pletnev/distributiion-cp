@@ -1,9 +1,11 @@
-import { AddScreen, GetScreens, RemoveScreens } from "../api/screens";
+import { AddScreen, GetScreens, RemoveScreens, GetScreenPriorities } from "../api/screens";
 import {
   ADD_SCREEN_SUCCESS,
   GET_SCREENS_SUCCESS,
-  REMOVE_SCREENS_SUCCESS
+  REMOVE_SCREENS_SUCCESS,
+  GET_SCREEN_PRIORITIES_SUCCESS
 } from "../constants/screens";
+import {sortById} from '../utils/ramda'
 
 export function fetchAllScreens() {
   return dispatch => {
@@ -22,7 +24,8 @@ function fetchAllScreensSuccess(payload) {
     id: elm.screen_id,
     width: elm.width,
     height: elm.height,
-    model_id: elm.model_id
+    model_id: elm.model_id,
+    name: `${elm.height}x${elm.width}`
   }));
 
   return {
@@ -51,7 +54,8 @@ function addScreenSuccess(payload) {
     payload: {
       id: screen_id,
       width,
-      height
+      height,
+      name: `${height}x${width}`
     }
   };
 }
@@ -72,5 +76,37 @@ function removeScreensSuccess(payload) {
   return {
     type: REMOVE_SCREENS_SUCCESS,
     payload
+  };
+}
+
+export function fetchScreenPriorities({profile_name, device_id, model_id}){
+  const query = arguments[0]
+  return dispatch => {
+    return GetScreenPriorities(query)
+      .then(response => {
+        dispatch(getScreenPrioritiesSuccess(response.data, query))
+      })
+      .catch(error => {
+        console.error(error)
+      })
+  }
+}
+
+function getScreenPrioritiesSuccess(payload, {profile_name, ...restArgs}){
+  const priorities = payload.reduce(
+    (acc, elm) => {
+      acc[profile_name] = [
+        ...acc[profile_name],
+        { ...{ id: elm.screen_id, priority: elm.priority }, ...restArgs }
+      ];
+      return acc;
+    },
+    { [profile_name]: [] }
+  );
+
+  priorities[profile_name] = sortById(priorities[profile_name]);
+  return {
+    type: GET_SCREEN_PRIORITIES_SUCCESS,
+    payload: priorities
   };
 }
