@@ -16,6 +16,7 @@ export function GetScreenPriorities(data){
   return api.client.post(api.GET_SCREEN_PRIORITIES_URL, data)
 }
 
-export function SetScreenPriorities(data){
-  return api.client.post(api.SET_SCREEN_PRIORITIES_URL, data)
+export function SetScreenPriority(data){
+  return api.client.post(api.SET_SCREEN_PRIORITY_URL, data)
 }
+

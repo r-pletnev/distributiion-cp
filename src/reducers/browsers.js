@@ -2,7 +2,8 @@ import {
   GET_BROWSERS_SUCCESS,
   ADD_BROWSER_SUCCESS,
   REMOVE_BROWSERS_SUCCESS,
-  GET_BROWSER_PRIORITIES_SUCCESS
+  GET_BROWSER_PRIORITIES_SUCCESS,
+  SET_BROWSER_PRIORITY_SUCCESS
 } from "../constants/browsers";
 import {
   filterById,
@@ -45,6 +46,21 @@ export default function browserState(state = initialState, action) {
         ...state,
         priorities: { ...state.priorities, ...payload },
       };
+    }
+
+    case SET_BROWSER_PRIORITY_SUCCESS: {
+      const prs = state.priorities[payload.profile_name].filter(
+        elm => elm.id !== payload.priority.id
+      );
+
+      return {
+        ...state,
+        priorities: {
+          ...state.priorities,
+          [payload.profile_name]: sortById([...prs, payload.priority])
+        }
+      };
+      
     }
 
     default: {

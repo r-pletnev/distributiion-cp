@@ -2,7 +2,8 @@ import {
   GET_OS_VERSIONS_SUCCESS,
   ADD_OS_VERSION_SUCCESS,
   REMOVE_OS_VERSIONS_SUCCESS,
-  GET_OS_VERSION_PRIORITIES_SUCCESS
+  GET_OS_VERSION_PRIORITIES_SUCCESS,
+  SET_OS_VERSION_PRIORITY_SUCCESS
 } from "../constants/os_versions";
 import {
   filterById,
@@ -44,6 +45,20 @@ export default function osVersionState(state = initialState, action) {
       return {
         ...state,
         priorities: { ...state.priorities, ...payload }
+      };
+    }
+
+    case SET_OS_VERSION_PRIORITY_SUCCESS: {
+      const prs = state.priorities[payload.profile_name].filter(
+        elm => elm.id !== payload.priority.id
+      );
+
+      return {
+        ...state,
+        priorities: {
+          ...state.priorities,
+          [payload.profile_name]: sortById([...prs, payload.priority])
+        }
       };
     }
 

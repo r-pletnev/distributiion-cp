@@ -15,3 +15,7 @@ export function RemoveBrowsers(data) {
 export function GetBrowserPriorities(data) {
   return api.client.post(api.GET_BROWSER_PRIORITIES_URL, data);
 }
+
+export function SetBrowserPriority(data){
+  return api.client.post(api.SET_BROWSER_PRIORITY_URL, data)
+}

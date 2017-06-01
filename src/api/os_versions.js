@@ -15,3 +15,7 @@ export function RemoveOSVersions(data) {
 export function GetOsVersionPriorities(data) {
   return api.client.post(api.GET_OS_VERSION_PRIORITIES_URL, data);
 }
+
+export function SetOsVersionPriority(data){
+  return api.client.post(api.SET_OS_VERSION_PRIORITY_URL, data)
+}

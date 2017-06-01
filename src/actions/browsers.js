@@ -2,13 +2,15 @@ import {
   AddBrowser,
   GetBrowsers,
   RemoveBrowsers,
-  GetBrowserPriorities
+  GetBrowserPriorities,
+  SetBrowserPriority
 } from "../api/browsers";
 import {
   ADD_BROWSER_SUCCESS,
   GET_BROWSERS_SUCCESS,
   REMOVE_BROWSERS_SUCCESS,
-  GET_BROWSER_PRIORITIES_SUCCESS
+  GET_BROWSER_PRIORITIES_SUCCESS,
+  SET_BROWSER_PRIORITY_SUCCESS
 } from "../constants/browsers";
 import { sortById } from "../utils/ramda";
 
@@ -121,4 +123,33 @@ function getBrowserPrioritiesSuccess(payload, { profile_name, ...restArgs }) {
     type: GET_BROWSER_PRIORITIES_SUCCESS,
     payload: priorities
   };
+}
+
+export function fetchSetBrowserPriority({profile_name, device_id, model_id, os_id, os_version_id, browser_id, priority}, onSuccess){
+  const query = arguments[0]
+  return dispatch => {
+    return SetBrowserPriority(query)
+      .then(_ => {
+        dispatch(setBrowserPrioritySuccess(query))
+        onSuccess()
+      })
+      .catch(error => (console.error(error)))
+  }
+}
+
+function setBrowserPrioritySuccess({profile_name, device_id, model_id, os_version_id, os_id, browser_id, priority}){
+  const priorityProp = {
+    id: browser_id,
+    device_id,
+    model_id,
+    os_id,
+    os_version_id,
+    priority: Number(priority)
+  }
+  debugger
+
+  return {
+    type: SET_BROWSER_PRIORITY_SUCCESS,
+    payload: {profile_name, priority: priorityProp}
+  }
 }

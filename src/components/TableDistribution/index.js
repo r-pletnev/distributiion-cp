@@ -275,8 +275,7 @@ class TableDistribution extends React.Component {
           case "browsers": {
             onBrowserRowClick(
               id,
-              this.state.device_id,
-              this.state.model_id,
+              this.state.device_id, this.state.model_id,
               this.state.os_id,
               nextId,
               this.selectBrowser,
@@ -601,7 +600,7 @@ class TableDistribution extends React.Component {
           onClose={this.hideModals}
           name="Операционка"
           items={this.getCurrentTypeItems()}
-          action={null}
+          action={this.props.fetchSetOsPry(this.state.device_id, this.state.model_id)}
           fieldName="os_id"
         />
         <AddPriorityModal
@@ -609,7 +608,7 @@ class TableDistribution extends React.Component {
           onClose={this.hideModals}
           name="Версия Операционки"
           items={this.getCurrentTypeItems()}
-          action={null}
+          action={this.props.fetchSetOsVersionPry(this.state.device_id, this.state_model_id, this.state.os_id)}
           fieldName="os_version_id"
         />
         <AddPriorityModal
@@ -617,7 +616,7 @@ class TableDistribution extends React.Component {
           onClose={this.hideModals}
           name="Браузер"
           items={this.getCurrentTypeItems()}
-          action={null}
+          action={this.props.fetchSetBrowserPry(this.state.device_id, this.state.model_id, this.state.os_id, this.state.os_version_id)}
           fieldName="browser_id"
         />
         <AddPriorityModal
@@ -625,7 +624,7 @@ class TableDistribution extends React.Component {
           onClose={this.hideModals}
           name="Версия Бразуера"
           items={this.getCurrentTypeItems()}
-          actin={null}
+          action={this.props.fetchSetBrowserVersionPry(this.state.device_id, this.state.model_id, this.state.os_id, this.state.os_version_id, this.state.browser_id)}
           fieldName="browser_version_id"
         />
         <AddPriorityModal
@@ -641,7 +640,7 @@ class TableDistribution extends React.Component {
           onClose={this.hideScreenModal}
           name="Экран"
           items={this.getCurrentTypeItems()}
-          action={null}
+          action={this.props.fetchSetScreenPry(this.state.device_id, this.state.model_id)}
           fieldName="screen_id"
         />
         <AddPriorityModal

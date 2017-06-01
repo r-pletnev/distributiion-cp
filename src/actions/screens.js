@@ -1,9 +1,10 @@
-import { AddScreen, GetScreens, RemoveScreens, GetScreenPriorities } from "../api/screens";
+import { AddScreen, GetScreens, RemoveScreens, GetScreenPriorities, SetScreenPriority } from "../api/screens";
 import {
   ADD_SCREEN_SUCCESS,
   GET_SCREENS_SUCCESS,
   REMOVE_SCREENS_SUCCESS,
-  GET_SCREEN_PRIORITIES_SUCCESS
+  GET_SCREEN_PRIORITIES_SUCCESS,
+  SET_SCREEN_PRIORITY_SUCCESS
 } from "../constants/screens";
 import {sortById} from '../utils/ramda'
 
@@ -109,4 +110,29 @@ function getScreenPrioritiesSuccess(payload, {profile_name, ...restArgs}){
     type: GET_SCREEN_PRIORITIES_SUCCESS,
     payload: priorities
   };
+}
+
+export function fetchSetScreenPriority({profile_name, device_id, model_id, screen_id, priority}, onSuccess){
+  const query = arguments[0]
+  return dispatch => {
+  return SetScreenPriority(query)
+    .then(_ => {
+      dispatch(setScreenPrioritySuccess(query))
+    })
+    .catch(error => (console.error(error)))
+    }
+}
+
+function setScreenPrioritySuccess({profile_name, device_id, model_id, screen_id}, priority){
+  const priorityProp = {
+    id: screen_id,
+    device_id,
+    model_id,
+    priority: Number(priority)
+  }
+
+  return {
+    type: SET_SCREEN_PRIORITY_SUCCESS,
+    payload: {profile_name, priority: priorityProp}
+  }
 }

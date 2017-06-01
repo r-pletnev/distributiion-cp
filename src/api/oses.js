@@ -15,3 +15,7 @@ export function RemoveOSES(data) {
 export function GetOsPriorities(data) {
   return api.client.post(api.GET_OS_PRIORITIES_URL, data);
 }
+
+export function SetOsPriority(data){
+  return api.client.post(api.SET_OS_PRIORITY_URL, data)
+}

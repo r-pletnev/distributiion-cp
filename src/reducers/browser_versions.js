@@ -2,7 +2,8 @@ import {
   GET_BROWSER_VERSIONS_SUCCESS,
   ADD_BROWSER_VERSION_SUCCESS,
   REMOVE_BROWSER_VERSIONS_SUCCESS,
-  GET_BROWSER_VERSION_PRIORITIES_SUCCESS
+  GET_BROWSER_VERSION_PRIORITIES_SUCCESS,
+  SET_BROWSER_VERSION_PRIORITY_SUCCESS
 } from "../constants/browser_versions";
 import {
   filterById,
@@ -44,6 +45,20 @@ export default function browserVersionState(state = initialState, action) {
       return {
         ...state,
         priorities: { ...state.priorities, ...payload },
+      };
+    }
+
+    case SET_BROWSER_VERSION_PRIORITY_SUCCESS: {
+      const prs = state.priorities[payload.profile_name].filter(
+        elm => elm.id !== payload.priority.id
+      );
+
+      return {
+        ...state,
+        priorities: {
+          ...state.priorities,
+          [payload.profile_name]: sortById([...prs, payload.priority])
+        }
       };
     }
 

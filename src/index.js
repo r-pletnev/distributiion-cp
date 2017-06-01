@@ -30,7 +30,7 @@ const resetPriorityFetchStatus = createTransform((inboundState, key) => {
 });
 
 persistStore(store, {
-  transforms: [resetFetchStatus, erasePriorities, resetPriorityFetchStatus]
+  transforms: [resetFetchStatus, resetPriorityFetchStatus]
 });
 
 ReactDOM.render(

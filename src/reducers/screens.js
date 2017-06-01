@@ -2,7 +2,8 @@ import {
   GET_SCREENS_SUCCESS,
   ADD_SCREEN_SUCCESS,
   REMOVE_SCREENS_SUCCESS,
-  GET_SCREEN_PRIORITIES_SUCCESS
+  GET_SCREEN_PRIORITIES_SUCCESS,
+  SET_SCREEN_PRIORITY_SUCCESS
 } from "../constants/screens";
 import { filterById, sortById, mapById, defaultToEmptyArray} from "../utils/ramda";
 
@@ -40,6 +41,20 @@ export default function screenState(state = initialState, action) {
         ...state,
         priorities: {...state.priorities, ...payload}
       }
+    }
+
+    case SET_SCREEN_PRIORITY_SUCCESS: {
+      const prs = state.priorities[payload.profile_name].filter(
+        elm => elm.id !== payload.priority.id
+      );
+
+      return {
+        ...state,
+        priorities: {
+          ...state.priorities,
+          [payload.profile_name]: sortById([...prs, payload.priority])
+        }
+      };
     }
 
     default: {

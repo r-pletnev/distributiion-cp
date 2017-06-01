@@ -3,7 +3,8 @@ import {
   GET_OSES_SUCCESS,
   ADD_OS_SUCCESS,
   REMOVE_OSES_SUCCESS,
-  GET_OS_PRIORITIES_SUCCESS
+  GET_OS_PRIORITIES_SUCCESS,
+  SET_OS_PRIORITY_SUCCESS
 } from "../constants/oses";
 import {
   filterById,
@@ -45,6 +46,20 @@ export default function osState(state = initialState, action) {
       return {
         ...state,
         priorities: { ...state.priorities, ...payload },
+      };
+    }
+
+    case SET_OS_PRIORITY_SUCCESS: {
+      const prs = state.priorities[payload.profile_name].filter(
+        elm => elm.id !== payload.priority.id
+      );
+
+      return {
+        ...state,
+        priorities: {
+          ...state.priorities,
+          [payload.profile_name]: sortById([...prs, payload.priority])
+        }
       };
     }
 

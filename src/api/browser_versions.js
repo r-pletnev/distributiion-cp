@@ -15,3 +15,7 @@ export function RemoveBrowserVersions(data) {
 export function GetBrowserVersionPriorities(data) {
   return api.client.post(api.GET_BROWSER_VERSION_PRIORITIES_URL, data);
 }
+
+export function SetBrowserVersionPriority(data){
+  return api.client.post(api.SET_BROWSER_VERSION_PRIORITY_URL, data)
+}
