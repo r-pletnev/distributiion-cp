@@ -18,7 +18,7 @@ class BigTableRow extends React.Component {
         className={cx({ active: this.props.isActive })}
         onClick={this.handleOnRowClick}
       >
-        <td>{this.props.name}</td>
+        <td>{this.props.name || this.props.payload}</td>
         <td name="Приоритет">{this.props.priority}</td>
         <td className="option">
           <Link

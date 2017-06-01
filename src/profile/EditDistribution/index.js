@@ -35,22 +35,26 @@ import {
   getTemplates,
   getTemplateById,
   getTemplatePriorities
-} from '../../reducers/templates'
+} from "../../reducers/templates";
 import {
   getScreens,
   getScreenById,
   getScreenPriorities
-} from '../../reducers/screens'
+} from "../../reducers/screens";
+import { fetchSetDevicePrioritiy } from "../../actions/devices";
 import { getArchs, getArchById, getArchPriorities } from "../../reducers/archs";
-import { fetchModelPriorities } from "../../actions/models";
+import {
+  fetchModelPriorities,
+  fetchSetModelPrioirty
+} from "../../actions/models";
 import { fetchOsPriorities } from "../../actions/oses";
 import { fetchOsVersionPriorities } from "../../actions/os_versions";
 import { fetchBrowserPriorities } from "../../actions/browsers";
 import { fetchBrowserVersionPriorities } from "../../actions/browser_versions";
 import { fetchArchPriorities } from "../../actions/archs";
 import { fetchOsPanelPriorities } from "../../actions/os_panels";
-import { fetchScreenPriorities} from '../../actions/screens'
-import {fetchTemplatePriorities} from '../../actions/templates'
+import { fetchScreenPriorities } from "../../actions/screens";
+import { fetchTemplatePriorities } from "../../actions/templates";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
@@ -140,6 +144,7 @@ const EditDistribution = props => {
     fetchOsVersionPrs,
     fetchBrowserPrs,
     fetchBrowserVersionPrs,
+    fetchSetDevicePry,
     ...restProps
   } = props;
   return (
@@ -155,6 +160,18 @@ const EditDistribution = props => {
           profile_name,
           fetchBrowserVersionPrs
         )}
+        fetchSetDevicePry={(profile_name =>
+          (values, onSuccess) =>
+            fetchSetDevicePry({ ...values, ...{ profile_name } }, onSuccess))(
+          profile_name
+        )}
+        fetchSetModelPry={(profile_name =>
+          device_id =>
+            (values, onSuccess) =>
+              fetchSetModelPrioirty(
+                { ...values, ...{ profile_name, device_id } },
+                onSuccess
+              ))(profile_name)}
       />
     </div>
   );
@@ -207,6 +224,11 @@ function mapStateToProps(state, ownProps) {
       items: getScreens(state),
       byId: getScreenById(state),
       priorities: getScreenPriorities(state, profile_name)
+    },
+    templates: {
+      items: getTemplates(state),
+      byId: getTemplateById(state),
+      priorities: getTemplatePriorities(state, profile_name)
     }
   };
 }
@@ -222,7 +244,11 @@ function mapDispacthToProps(dispatch) {
     fetchArchPrs: query => dispatch(fetchArchPriorities(query)),
     fetchOsPanelPrs: query => dispatch(fetchOsPanelPriorities(query)),
     fetchTemplatePrs: query => dispatch(fetchTemplatePriorities(query)),
-    fetchScreenPrs: query => dispatch(fetchScreenPriorities(query))
+    fetchScreenPrs: query => dispatch(fetchScreenPriorities(query)),
+    fetchSetDevicePry: (query, onSuccess) =>
+      dispatch(fetchSetDevicePrioritiy(query, onSuccess)),
+    fetchSetModelPrioirty: (query, onSuccess) =>
+      dispatch(fetchSetModelPrioirty(query, onSuccess))
   };
 }
 

@@ -2,7 +2,6 @@ import React from "react";
 import Modal from "../Modal";
 import PropTypes from "prop-types";
 import FormField from "../FormField";
-// import FormSelectField from "../FormSelectField";
 import RFSelectField from "../RFSelectField";
 import { reduxForm, Field } from "redux-form";
 
@@ -14,7 +13,7 @@ let AddPriorityForm = props => {
     props.destroy();
   };
   const submitForm = values => {
-    return props.action(values.name, closeForm);
+    return props.action(values, closeForm);
   };
 
   const getSelectOptions = items =>

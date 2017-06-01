@@ -9,8 +9,10 @@ import {
   ADD_DEVICE_SUCCEES,
   GET_ALL_DEVICES_SUCCESS,
   REMOVE_DEVICES_SUCCESS,
-  GET_DEVICE_PRIORITIES_SUCCESS
+  GET_DEVICE_PRIORITIES_SUCCESS,
+  SET_DEVICE_PRIORITIES_SUCCESS
 } from "../constants/devices";
+import { sortById } from "../utils/ramda";
 
 export function fetchAllDevices() {
   return dispatch => {
@@ -88,19 +90,6 @@ export function fetchDevicePriorities(profile) {
   };
 }
 
-export function fetchSetDevicePrioritiy({ profile_name, device_id, priority }) {
-  const query = arguments[0];
-  return dispatch => {
-    return SetDevicePriorities(query)
-      .then(response => {
-        dispatch(getDevicePrioritiesSuccess(response.data, profile_name));
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  };
-}
-
 function getDevicePrioritiesSuccess(payload, profile) {
   const priorities = payload.reduce(
     (acc, elm) => {
@@ -114,6 +103,36 @@ function getDevicePrioritiesSuccess(payload, profile) {
   );
   return {
     type: GET_DEVICE_PRIORITIES_SUCCESS,
-    payload: priorities
+    payload: { [profile]: sortById(priorities[profile]) }
+  };
+}
+
+export function fetchSetDevicePrioritiy(
+  { profile_name, device_id, priority },
+  onSuccess
+) {
+  const query = arguments[0];
+  return dispatch => {
+    return SetDevicePriorities(query)
+      .then(response => {
+        dispatch(
+          setDevicePrioritiesSuccess({ device_id, priority }, profile_name)
+        );
+        onSuccess();
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+}
+
+function setDevicePrioritiesSuccess(payload, profile) {
+  const priority = {
+    id: payload.device_id,
+    priority: Number(payload.priority)
+  };
+  return {
+    type: SET_DEVICE_PRIORITIES_SUCCESS,
+    payload: { profile_name: profile, priority }
   };
 }

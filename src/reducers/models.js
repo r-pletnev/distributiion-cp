@@ -2,7 +2,8 @@ import {
   GET_ALL_MODEL_SUCCESS,
   ADD_MODEL_SUCCESS,
   REMOVE_MODELS_SUCCESS,
-  GET_MODEL_PRIORITIES_SUCCESS
+  GET_MODEL_PRIORITIES_SUCCESS,
+  SET_MODEL_PRIORITY_SUCCESS
 } from "../constants/models";
 import {
   filterById,
@@ -14,7 +15,7 @@ import {
 const initialState = {
   entities: [],
   priorities: {},
-  fetchStatus: false,
+  fetchStatus: false
 };
 
 export default function modelState(state = initialState, action) {
@@ -43,7 +44,21 @@ export default function modelState(state = initialState, action) {
     case GET_MODEL_PRIORITIES_SUCCESS: {
       return {
         ...state,
-        priorities: { ...state.priorities, ...payload },
+        priorities: { ...state.priorities, ...payload }
+      };
+    }
+
+    case SET_MODEL_PRIORITY_SUCCESS: {
+      const prs = state.priorities[payload.profile_name].filter(
+        elm => elm.id !== payload.priority.id
+      );
+
+      return {
+        ...state,
+        priorities: {
+          ...state.priorities,
+          [payload.profile_name]: sortById([...prs, payload.priority])
+        }
       };
     }
 

@@ -1,8 +1,10 @@
+import R from "ramda";
 import {
   GET_ALL_DEVICES_SUCCESS,
   ADD_DEVICE_SUCCEES,
   REMOVE_DEVICES_SUCCESS,
-  GET_DEVICE_PRIORITIES_SUCCESS
+  GET_DEVICE_PRIORITIES_SUCCESS,
+  SET_DEVICE_PRIORITIES_SUCCESS
 } from "../constants/devices";
 import {
   filterById,
@@ -14,7 +16,7 @@ import {
 const initialState = {
   entities: [],
   priorities: {},
-  fetchStatus: false,
+  fetchStatus: false
 };
 
 export default function deviceState(state = initialState, action) {
@@ -32,7 +34,21 @@ export default function deviceState(state = initialState, action) {
     case GET_DEVICE_PRIORITIES_SUCCESS: {
       return {
         ...state,
-        priorities: { ...state.priorities, ...payload },
+        priorities: { ...state.priorities, ...payload }
+      };
+    }
+
+    case SET_DEVICE_PRIORITIES_SUCCESS: {
+      const prs = state.priorities[payload.profile_name].filter(
+        elm => elm.id !== payload.priority.id
+      );
+
+      return {
+        ...state,
+        priorities: {
+          ...state.priorities,
+          [payload.profile_name]: sortById([...prs, payload.priority])
+        }
       };
     }
 

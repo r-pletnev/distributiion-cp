@@ -25,8 +25,10 @@ class TableDistribution extends React.Component {
       showBrowserVersionModal: false,
       showDetailOsVersion: false,
       showDetailModel: false,
+      showDetailBrowserVersion: false,
       showArchModal: false,
-      showScreenModal: false
+      showScreenModal: false,
+      showTemplateModal: false
     };
     this.getFirstThird = this.getFirstThird.bind(this);
     this.getSecondThird = this.getSecondThird.bind(this);
@@ -35,6 +37,7 @@ class TableDistribution extends React.Component {
     this.hideModals = this.hideModals.bind(this);
     this.hideArchModal = this.hideArchModal.bind(this);
     this.hideScreenModal = this.hideScreenModal.bind(this);
+    this.hideTemplateModal = this.hideTemplateModal.bind(this);
     this.openDeviceModal = this.openDeviceModal.bind(this);
     this.openModelModal = this.openModelModal.bind(this);
     this.openOsModal = this.openOsModal.bind(this);
@@ -43,8 +46,10 @@ class TableDistribution extends React.Component {
     this.openBrowserVersionModal = this.openBrowserVersionModal.bind(this);
     this.openDetailOsVersion = this.openDetailOsVersion.bind(this);
     this.openDetailModel = this.openDetailModel.bind(this);
+    this.openDetailBrowserVersion = this.openDetailBrowserVersion.bind(this);
     this.openArchModal = this.openArchModal.bind(this);
     this.openScreenModal = this.openScreenModal.bind(this);
+    this.openTemplateModal = this.openTemplateModal.bind(this);
     this.getCurrentTypeItems = this.getCurrentTypeItems.bind(this);
     this.selectDevice = this.selectDevice.bind(this);
     this.selectModel = this.selectModel.bind(this);
@@ -68,7 +73,8 @@ class TableDistribution extends React.Component {
       showBrowserModal: false,
       showBrowserVersionModal: false,
       showDetailOsVersion: false,
-      showDetailModel: false
+      showDetailModel: false,
+      showDetailBrowserVersion: false
     });
   }
 
@@ -76,8 +82,12 @@ class TableDistribution extends React.Component {
     this.setState({ showArchModal: false });
   }
 
-  hideScreenModal(){
-    this.setState({showScreenModal: false})
+  hideScreenModal() {
+    this.setState({ showScreenModal: false });
+  }
+
+  hideTemplateModal() {
+    this.setState({ showTemplateModal: false });
   }
 
   openModelModal() {
@@ -109,8 +119,12 @@ class TableDistribution extends React.Component {
     });
   }
 
-  openDetailModel(){
-    this.setState({ showDetailModel: true})
+  openDetailModel() {
+    this.setState({ showDetailModel: true });
+  }
+
+  openDetailBrowserVersion() {
+    this.setState({ showDetailBrowserVersion: true });
   }
 
   openArchModal() {
@@ -120,11 +134,15 @@ class TableDistribution extends React.Component {
     });
   }
 
-  openScreenModal(){
+  openScreenModal() {
     this.setState({
       showScreenModal: true,
-      currentType: 'screens'
-    })
+      currentType: "screens"
+    });
+  }
+
+  openTemplateModal() {
+    this.setState({ showTemplateModal: true, currentType: "templates" });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -149,7 +167,7 @@ class TableDistribution extends React.Component {
       profile_name: this.props.match.params.profile_name,
       device_id: this.state.device_id,
       model_id
-    })
+    });
     this.setState({ model_id });
   }
 
@@ -189,7 +207,8 @@ class TableDistribution extends React.Component {
         onBrowserRowClick,
         fetchArchPrs,
         fetchOsPanelPrs,
-        fetchScreenPrs
+        fetchScreenPrs,
+        fetchTemplatePrs
       } = this.props;
 
       const { id } = this.props[type].priorities[0];
@@ -209,7 +228,7 @@ class TableDistribution extends React.Component {
               profile_name: this.props.match.params.profile_name,
               device_id: this.state.device_id,
               model_id: id
-            })
+            });
             return onModelRowClick(
               id,
               nextId,
@@ -266,8 +285,15 @@ class TableDistribution extends React.Component {
             break;
           }
           case "browser_versions": {
-            this.selectBrowserVersion(id)();
-            break;
+            fetchTemplatePrs({
+              profile_name: this.props.match.params.profile_name,
+              device_id: this.state.device_id,
+              model_id: this.state.model_id,
+              os_id: this.state.os_id,
+              os_version_id: this.state.os_version_id,
+              browser_id: id
+            });
+            return this.selectBrowserVersion(id)();
           }
         }
       };
@@ -275,7 +301,17 @@ class TableDistribution extends React.Component {
   }
 
   selectBrowserVersion(browser_version_id) {
-    return () => this.setState({ browser_version_id });
+    return () => {
+      this.props.fetchTemplatePrs({
+        profile_name: this.props.match.params.profile_name,
+        device_id: this.state.device_id,
+        model_id: this.state.model_id,
+        os_id: this.state.os_id,
+        os_version_id: this.state.os_version_id,
+        browser_id: browser_version_id
+      });
+      this.setState({ browser_version_id });
+    };
   }
 
   getFirstThird() {
@@ -308,7 +344,8 @@ class TableDistribution extends React.Component {
       {
         singleItemName: "Model",
         nameAddAttr: "add-model",
-        addBtnText: "Add Model", handleOnClick: this.openModelModal,
+        addBtnText: "Add Model",
+        handleOnClick: this.openModelModal,
         rows: models.priorities.map((elm, index) => (
           <BigTableRow
             {...elm}
@@ -430,6 +467,7 @@ class TableDistribution extends React.Component {
             rowKey={index}
             action={this.selectBrowserVersion(elm.id)}
             isActive={elm.id === this.state.browser_version_id}
+            handleDetailClick={this.openDetailBrowserVersion}
           />
         ))
       }
@@ -480,27 +518,63 @@ class TableDistribution extends React.Component {
     );
   }
 
-  getDetailModelModal(){
-    const {screens} = this.props
-    const headRow = [<th key={0}>{`Screens (${screens.priorities.length})`}</th>]
+  getDetailBrowserVersion() {
+    const { templates } = this.props;
+    const headRow = [
+      <th key={0}>{`Шаблоны UA (${templates.priorities.length})`}</th>
+    ];
     const rows = [
       {
-        singleItemName: 'Resulution',
-        addBtnText: 'Add screen',
+        singleItemName: "Шаблон",
+        addBtnText: "Добавить шаблон",
+        handleOnClick: this.openTemplateModal,
+        rows: templates.priorities.map((elm, index) => (
+          <SmallTableRow
+            {...{ payload: null, name: elm.payload, priority: elm.priority }}
+            key={index}
+            rowKey={index}
+          />
+        ))
+      }
+    ];
+
+    return (
+      <DetailModal
+        show={this.state.showDetailBrowserVersion}
+        onClose={this.hideModals}
+        title="Свойства версии браузеров"
+        name={this.state.browser_version_id || ""}
+      >
+        <ThirdPart headRow={headRow} rows={rows} />
+      </DetailModal>
+    );
+  }
+
+  getDetailModelModal() {
+    const { screens } = this.props;
+    const headRow = [
+      <th key={0}>{`Screens (${screens.priorities.length})`}</th>
+    ];
+    const rows = [
+      {
+        singleItemName: "Resulution",
+        addBtnText: "Add screen",
         handleOnClick: this.openScreenModal,
         rows: screens.priorities.map((elm, index) => (
           <SmallTableRow {...elm} key={index} rowKey={index} />
         ))
       }
-    ]
-    return <DetailModal
-          show={this.state.showDetailModel}
-          onClose={this.hideModals}
-          title='Model properties'
-          name={this.state.model_id || ""}
-          > 
-          <ThirdPart headRow={headRow} rows={rows} />
-          </DetailModal>
+    ];
+    return (
+      <DetailModal
+        show={this.state.showDetailModel}
+        onClose={this.hideModals}
+        title="Model properties"
+        name={this.state.model_id || ""}
+      >
+        <ThirdPart headRow={headRow} rows={rows} />
+      </DetailModal>
+    );
   }
 
   getModals() {
@@ -511,7 +585,7 @@ class TableDistribution extends React.Component {
           onClose={this.hideModals}
           name="Устройство"
           items={this.getCurrentTypeItems()}
-          action={null}
+          action={this.props.fetchSetDevicePry}
           fieldName="device_id"
         />
         <AddPriorityModal
@@ -519,7 +593,7 @@ class TableDistribution extends React.Component {
           onClose={this.hideModals}
           name="Модель"
           items={this.getCurrentTypeItems()}
-          action={null}
+          action={this.props.fetchSetModelPry(this.state.device_id)}
           fieldName="model_id"
         />
         <AddPriorityModal
@@ -565,10 +639,18 @@ class TableDistribution extends React.Component {
         <AddPriorityModal
           show={this.state.showScreenModal}
           onClose={this.hideScreenModal}
-          name='Screen'
+          name="Экран"
           items={this.getCurrentTypeItems()}
           action={null}
-          fieldName='screen_id'
+          fieldName="screen_id"
+        />
+        <AddPriorityModal
+          show={this.state.showTemplateModal}
+          onClose={this.hideTemplateModal}
+          name="Шаблон"
+          items={this.getCurrentTypeItems()}
+          action={null}
+          fieldName="template_id"
         />
       </div>
     );
@@ -580,6 +662,7 @@ class TableDistribution extends React.Component {
         {this.getModals()}
         {this.getDetailOsVersionModal()}
         {this.getDetailModelModal()}
+        {this.getDetailBrowserVersion()}
         <table className="table table-three">
           <thead className="table-three-root">
             <tr>

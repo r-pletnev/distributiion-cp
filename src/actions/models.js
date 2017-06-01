@@ -2,13 +2,15 @@ import {
   AddModel,
   GetModels,
   RemoveModels,
-  GetModelPriorities
+  GetModelPriorities,
+  SetModelPriorities
 } from "../api/models";
 import {
   ADD_MODEL_SUCCESS,
   GET_ALL_MODEL_SUCCESS,
   REMOVE_MODELS_SUCCESS,
-  GET_MODEL_PRIORITIES_SUCCESS
+  GET_MODEL_PRIORITIES_SUCCESS,
+  SET_MODEL_PRIORITY_SUCCESS
 } from "../constants/models";
 
 export function fetchAllModels() {
@@ -112,5 +114,39 @@ function getModelPrioritiesSuccess(payload, { profile_name, device_id }) {
   return {
     type: GET_MODEL_PRIORITIES_SUCCESS,
     payload: priorities
+  };
+}
+
+export function fetchSetModelPrioirty(
+  { profile_name, device_id, model_id, priority },
+  onSuccess
+) {
+  const query = arguments[0];
+  return dispatch => {
+    return SetModelPriorities(query)
+      .then(response => {
+        dispatch(
+          setModelPrioritySuccess(
+            { device_id, model_id, priority },
+            profile_name
+          )
+        );
+        onSuccess();
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+}
+
+function setModelPrioritySuccess(payload, profile_name) {
+  const priority = {
+    id: payload.model_id,
+    device_id: payload.device_id,
+    priority: Number(payload.priority)
+  };
+  return {
+    type: SET_MODEL_PRIORITY_SUCCESS,
+    payload: { profile_name, priority }
   };
 }

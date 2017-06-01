@@ -15,3 +15,7 @@ export function RemoveModels(data) {
 export function GetModelPriorities(data) {
   return api.client.post(api.GET_MODEL_PRIORITIES_URL, data);
 }
+
+export function SetModelPriorities(data) {
+  return api.client.post(api.SET_MODEL_PRIORITIES_URL, data);
+}
