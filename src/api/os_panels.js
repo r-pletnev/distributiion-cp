@@ -16,6 +16,6 @@ export function GetOsPanelPriorities(data) {
   return api.client.post(api.GET_OS_PANEL_PRIORITIES_URL, data);
 }
 
-export function SetOsPanelPriorities(data) {
-  return api.client.post(api.SET_OS_PANEL_PRIORITIES_URL, data);
+export function SetOsPanelPriority(data) {
+  return api.client.post(api.SET_OS_PANEL_PRIORITY_URL, data);
 }

@@ -27,6 +27,7 @@ class TableDistribution extends React.Component {
       showDetailModel: false,
       showDetailBrowserVersion: false,
       showArchModal: false,
+      showOsPanelModal: false,
       showScreenModal: false,
       showTemplateModal: false
     };
@@ -36,6 +37,7 @@ class TableDistribution extends React.Component {
     this.getModals = this.getModals.bind(this);
     this.hideModals = this.hideModals.bind(this);
     this.hideArchModal = this.hideArchModal.bind(this);
+    this.hideOsPanelModal = this.hideOsPanelModal.bind(this);
     this.hideScreenModal = this.hideScreenModal.bind(this);
     this.hideTemplateModal = this.hideTemplateModal.bind(this);
     this.openDeviceModal = this.openDeviceModal.bind(this);
@@ -48,6 +50,7 @@ class TableDistribution extends React.Component {
     this.openDetailModel = this.openDetailModel.bind(this);
     this.openDetailBrowserVersion = this.openDetailBrowserVersion.bind(this);
     this.openArchModal = this.openArchModal.bind(this);
+    this.openOsPanelModal = this.openOsPanelModal.bind(this);
     this.openScreenModal = this.openScreenModal.bind(this);
     this.openTemplateModal = this.openTemplateModal.bind(this);
     this.getCurrentTypeItems = this.getCurrentTypeItems.bind(this);
@@ -80,6 +83,10 @@ class TableDistribution extends React.Component {
 
   hideArchModal() {
     this.setState({ showArchModal: false });
+  }
+
+  hideOsPanelModal() {
+    this.setState({ showOsPanelModal: false });
   }
 
   hideScreenModal() {
@@ -131,6 +138,13 @@ class TableDistribution extends React.Component {
     this.setState({
       showArchModal: true,
       currentType: "archs"
+    });
+  }
+
+  openOsPanelModal() {
+    this.setState({
+      showOsPanelModal: true,
+      currentType: "os_panels"
     });
   }
 
@@ -197,6 +211,18 @@ class TableDistribution extends React.Component {
     this.setState({ browser_id });
   }
 
+  getItemName(item_id, type) {
+    if (R.isNil(item_id) || R.isNil(type)) return "";
+    const byId = this.props[type].byId;
+    const curItem = byId(item_id);
+    return curItem ? curItem.name : item_id;
+  }
+
+  getFirstId(type) {
+    if (R.isEmpty(this.props[type].priorities)) return null;
+    return this.props[type].priorities[0].id;
+  }
+
   afterFetchAction(type) {
     return nextId => {
       const {
@@ -211,7 +237,8 @@ class TableDistribution extends React.Component {
         fetchTemplatePrs
       } = this.props;
 
-      const { id } = this.props[type].priorities[0];
+      const id = this.getFirstId(type);
+
       return () => {
         switch (type) {
           case "devices": {
@@ -275,7 +302,8 @@ class TableDistribution extends React.Component {
           case "browsers": {
             onBrowserRowClick(
               id,
-              this.state.device_id, this.state.model_id,
+              this.state.device_id,
+              this.state.model_id,
               this.state.os_id,
               nextId,
               this.selectBrowser,
@@ -499,7 +527,7 @@ class TableDistribution extends React.Component {
       {
         singleItemName: "Высота",
         addBtnText: "Добавить панель",
-        handleOnClick: null,
+        handleOnClick: this.openOsPanelModal,
         rows: os_panels.priorities.map((elm, index) => (
           <SmallTableRow {...elm} key={index} rowKey={index} />
         ))
@@ -510,7 +538,7 @@ class TableDistribution extends React.Component {
         show={this.state.showDetailOsVersion}
         onClose={this.hideModals}
         title="Свойства версии ОС"
-        name={this.state.os_version_id || ""}
+        name={this.getItemName(this.state.os_version_id, "os_versions")}
       >
         <ThirdPart headRow={DetailOsVersionHeadRow} rows={rows} />
       </DetailModal>
@@ -542,7 +570,10 @@ class TableDistribution extends React.Component {
         show={this.state.showDetailBrowserVersion}
         onClose={this.hideModals}
         title="Свойства версии браузеров"
-        name={this.state.browser_version_id || ""}
+        name={this.getItemName(
+          this.state.browser_version_id,
+          "browser_versions"
+        )}
       >
         <ThirdPart headRow={headRow} rows={rows} />
       </DetailModal>
@@ -569,7 +600,7 @@ class TableDistribution extends React.Component {
         show={this.state.showDetailModel}
         onClose={this.hideModals}
         title="Model properties"
-        name={this.state.model_id || ""}
+        name={this.getItemName(this.state.model_id, "models")}
       >
         <ThirdPart headRow={headRow} rows={rows} />
       </DetailModal>
@@ -600,7 +631,10 @@ class TableDistribution extends React.Component {
           onClose={this.hideModals}
           name="Операционка"
           items={this.getCurrentTypeItems()}
-          action={this.props.fetchSetOsPry(this.state.device_id, this.state.model_id)}
+          action={this.props.fetchSetOsPry(
+            this.state.device_id,
+            this.state.model_id
+          )}
           fieldName="os_id"
         />
         <AddPriorityModal
@@ -608,7 +642,11 @@ class TableDistribution extends React.Component {
           onClose={this.hideModals}
           name="Версия Операционки"
           items={this.getCurrentTypeItems()}
-          action={this.props.fetchSetOsVersionPry(this.state.device_id, this.state_model_id, this.state.os_id)}
+          action={this.props.fetchSetOsVersionPry(
+            this.state.device_id,
+            this.state_model_id,
+            this.state.os_id
+          )}
           fieldName="os_version_id"
         />
         <AddPriorityModal
@@ -616,7 +654,12 @@ class TableDistribution extends React.Component {
           onClose={this.hideModals}
           name="Браузер"
           items={this.getCurrentTypeItems()}
-          action={this.props.fetchSetBrowserPry(this.state.device_id, this.state.model_id, this.state.os_id, this.state.os_version_id)}
+          action={this.props.fetchSetBrowserPry(
+            this.state.device_id,
+            this.state.model_id,
+            this.state.os_id,
+            this.state.os_version_id
+          )}
           fieldName="browser_id"
         />
         <AddPriorityModal
@@ -624,7 +667,13 @@ class TableDistribution extends React.Component {
           onClose={this.hideModals}
           name="Версия Бразуера"
           items={this.getCurrentTypeItems()}
-          action={this.props.fetchSetBrowserVersionPry(this.state.device_id, this.state.model_id, this.state.os_id, this.state.os_version_id, this.state.browser_id)}
+          action={this.props.fetchSetBrowserVersionPry(
+            this.state.device_id,
+            this.state.model_id,
+            this.state.os_id,
+            this.state.os_version_id,
+            this.state.browser_id
+          )}
           fieldName="browser_version_id"
         />
         <AddPriorityModal
@@ -632,15 +681,35 @@ class TableDistribution extends React.Component {
           onClose={this.hideArchModal}
           name="Архитектура"
           items={this.getCurrentTypeItems()}
-          action={null}
+          action={this.props.fetchSetArchPry(
+            this.state.device_id,
+            this.state.model_id,
+            this.state.os_id
+          )}
           fieldName="arch_id"
+        />
+        <AddPriorityModal
+          show={this.state.showOsPanelModal}
+          onClose={this.hideOsPanelModal}
+          name="Панель ОС"
+          items={this.getCurrentTypeItems()}
+          action={this.props.fetchSetOsPanelPry(
+            this.state.device_id,
+            this.state.model_id,
+            this.state.os_id,
+            this.state.os_version_id
+          )}
+          fieldName="os_panel_id"
         />
         <AddPriorityModal
           show={this.state.showScreenModal}
           onClose={this.hideScreenModal}
           name="Экран"
           items={this.getCurrentTypeItems()}
-          action={this.props.fetchSetScreenPry(this.state.device_id, this.state.model_id)}
+          action={this.props.fetchSetScreenPry(
+            this.state.device_id,
+            this.state.model_id
+          )}
           fieldName="screen_id"
         />
         <AddPriorityModal
@@ -648,7 +717,13 @@ class TableDistribution extends React.Component {
           onClose={this.hideTemplateModal}
           name="Шаблон"
           items={this.getCurrentTypeItems()}
-          action={null}
+          action={this.props.fetchSetTemplatePry(
+            this.state.device_id,
+            this.state.model_id,
+            this.state.os_id,
+            this.state.os_version_id,
+            this.state.browser_id
+          )}
           fieldName="template_id"
         />
       </div>
@@ -658,10 +733,10 @@ class TableDistribution extends React.Component {
   render() {
     return (
       <div>
-        {this.getModals()}
         {this.getDetailOsVersionModal()}
         {this.getDetailModelModal()}
         {this.getDetailBrowserVersion()}
+        {this.getModals()}
         <table className="table table-three">
           <thead className="table-three-root">
             <tr>

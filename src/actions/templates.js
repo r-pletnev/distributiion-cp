@@ -1,11 +1,18 @@
-import { AddTemplate, GetTemplates, RemoveTemplates, GetTemplatePriorities } from "../api/templates";
+import {
+  AddTemplate,
+  GetTemplates,
+  RemoveTemplates,
+  GetTemplatePriorities,
+  SetTemplatePriority
+} from "../api/templates";
 import {
   ADD_TEMPLATE_SUCCESS,
   GET_TEMPLATES_SUCCESS,
   REMOVE_TEMPLATES_SUCCESS,
-  GET_TEMPLATE_PRIORITIES_SUCCESS
+  GET_TEMPLATE_PRIORITIES_SUCCESS,
+  SET_TEMPLATE_PRIORITY_SUCCESS
 } from "../constants/templates";
-import {sortById} from '../utils/ramda'
+import { sortById } from "../utils/ramda";
 
 export function fetchAllTemplates() {
   return dispatch => {
@@ -78,20 +85,20 @@ function removeTemplatesSuccess(payload) {
   };
 }
 
-export function fetchTemplatePriorities({profile_name, device_id, model_id}){
-  const query = arguments[0]
+export function fetchTemplatePriorities({ profile_name, device_id, model_id }) {
+  const query = arguments[0];
   return dispatch => {
     return GetTemplatePriorities(query)
-    .then(response => {
-      dispatch(getTemplatePrioritiesSuccess(response.data, query))
-    })
-    .catch(error => {
-      console.error(error)
-    })
-  }
+      .then(response => {
+        dispatch(getTemplatePrioritiesSuccess(response.data, query));
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
 }
 
-function getTemplatePrioritiesSuccess(payload, {profile_name, ...restArgs}){
+function getTemplatePrioritiesSuccess(payload, { profile_name, ...restArgs }) {
   const priorities = payload.reduce(
     (acc, elm) => {
       acc[profile_name] = [
@@ -107,5 +114,57 @@ function getTemplatePrioritiesSuccess(payload, {profile_name, ...restArgs}){
   return {
     type: GET_TEMPLATE_PRIORITIES_SUCCESS,
     payload: priorities
+  };
+}
+
+export function fetchSetTemplatePriority(
+  {
+    profile_name,
+    device_id,
+    model_id,
+    os_id,
+    os_version_id,
+    browser_id,
+    template_id,
+    priority
+  },
+  onSuccess
+) {
+  const query = arguments[0];
+  return dispatch => {
+    return SetTemplatePriority(query)
+      .then(_ => {
+        dispatch(setTemplatePrioritySuccess(query));
+        onSuccess();
+      })
+      .catch(error => console.error(error));
+  };
+}
+
+function setTemplatePrioritySuccess(
+  {
+    profile_name,
+    device_id,
+    model_id,
+    os_id,
+    os_version_id,
+    browser_id,
+    template_id,
+    priority
+  }
+) {
+  const priorityProp = {
+    id: template_id,
+    device_id,
+    model_id,
+    os_id,
+    os_version_id,
+    browser_id,
+    priority: Number(priority)
+  };
+
+  return {
+    type: SET_TEMPLATE_PRIORITY_SUCCESS,
+    payload: { profile_name, priority: priorityProp }
   };
 }

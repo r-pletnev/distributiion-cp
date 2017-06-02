@@ -2,7 +2,8 @@ import {
   GET_OS_PANELS_SUCCESS,
   ADD_OS_PANEL_SUCCESS,
   REMOVE_OS_PANELS_SUCCESS,
-  GET_OS_PANEL_PRIORITIES_SUCCESS
+  GET_OS_PANEL_PRIORITIES_SUCCESS,
+  SET_OS_PANEL_PRIORITY_SUCCESS
 } from "../constants/os_panels";
 import {
   filterById,
@@ -40,6 +41,20 @@ export default function osPanelState(state = initialState, action) {
       return {
         ...state,
         priorities: { ...state.priorities, ...payload }
+      };
+    }
+
+    case SET_OS_PANEL_PRIORITY_SUCCESS: {
+      const prs = state.priorities[payload.profile_name].filter(
+        elm => elm.id !== payload.priority.id
+      );
+
+      return {
+        ...state,
+        priorities: {
+          ...state.priorities,
+          [payload.profile_name]: sortById([...prs, payload.priority])
+        }
       };
     }
 

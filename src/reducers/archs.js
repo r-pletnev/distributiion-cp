@@ -2,7 +2,8 @@ import {
   GET_ARHCS_SUCCESS,
   ADD_ARCH_SUCCESS,
   REMOVE_ARCHS_SUCCESS,
-  GET_ARCH_PRIORITIES_SUCCESS
+  GET_ARCH_PRIORITIES_SUCCESS,
+  SET_ARCH_PRIORITY_SUCCESS
 } from "../constants/archs";
 import {
   filterById,
@@ -40,6 +41,20 @@ export default function archState(state = initialState, action) {
       return {
         ...state,
         priorities: { ...state.priorities, ...payload }
+      };
+    }
+
+    case SET_ARCH_PRIORITY_SUCCESS: {
+      const prs = state.priorities[payload.profile_name].filter(
+        elm => elm.id !== payload.priority.id
+      );
+
+      return {
+        ...state,
+        priorities: {
+          ...state.priorities,
+          [payload.profile_name]: sortById([...prs, payload.priority])
+        }
       };
     }
 

@@ -2,13 +2,15 @@ import {
   AddArch,
   GetArchs,
   RemoveArchs,
-  GetArchPriorities
+  GetArchPriorities,
+  SetArchPriority
 } from "../api/archs";
 import {
   ADD_ARCH_SUCCESS,
   GET_ARHCS_SUCCESS,
   REMOVE_ARCHS_SUCCESS,
-  GET_ARCH_PRIORITIES_SUCCESS
+  GET_ARCH_PRIORITIES_SUCCESS,
+  SET_ARCH_PRIORITY_SUCCESS
 } from "../constants/archs";
 import { sortById } from "../utils/ramda";
 
@@ -110,5 +112,37 @@ function getArchPrioritiesSuccess(payload, { profile_name, ...restArgs }) {
   return {
     type: GET_ARCH_PRIORITIES_SUCCESS,
     payload: priorities
+  };
+}
+
+export function fetchSetArchPriority(
+  { profile_name, device_id, model_id, os_id, arch_id, priority },
+  onSuccess
+) {
+  const query = arguments[0];
+  return dispatch => {
+    return SetArchPriority(query)
+      .then(_ => {
+        dispatch(setArchPrioritySuccess(query));
+        onSuccess();
+      })
+      .catch(error => console.error(error));
+  };
+}
+
+function setArchPrioritySuccess(
+  { profile_name, device_id, model_id, os_id, arch_id, priority }
+) {
+  const priorityProp = {
+    id: arch_id,
+    device_id,
+    model_id,
+    os_id,
+    priority: Number(priority)
+  };
+
+  return {
+    type: SET_ARCH_PRIORITY_SUCCESS,
+    payload: { profile_name, priority: priorityProp }
   };
 }

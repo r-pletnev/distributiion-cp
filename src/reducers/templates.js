@@ -2,9 +2,15 @@ import {
   GET_TEMPLATES_SUCCESS,
   ADD_TEMPLATE_SUCCESS,
   REMOVE_TEMPLATES_SUCCESS,
-  GET_TEMPLATE_PRIORITIES_SUCCESS
+  GET_TEMPLATE_PRIORITIES_SUCCESS,
+  SET_TEMPLATE_PRIORITY_SUCCESS
 } from "../constants/templates";
-import { filterById, sortById, mapById, defaultToEmptyArray } from "../utils/ramda";
+import {
+  filterById,
+  sortById,
+  mapById,
+  defaultToEmptyArray
+} from "../utils/ramda";
 
 const initialState = {
   entities: [],
@@ -33,11 +39,25 @@ export default function templateState(state = initialState, action) {
     case GET_TEMPLATE_PRIORITIES_SUCCESS: {
       return {
         ...state,
-        priorities: {...state.priorities, ...payload}
-      }
+        priorities: { ...state.priorities, ...payload }
+      };
     }
     case REMOVE_TEMPLATES_SUCCESS: {
       return filterById(payload, state);
+    }
+
+    case SET_TEMPLATE_PRIORITY_SUCCESS: {
+      const prs = state.priorities[payload.profile_name].filter(
+        elm => elm.id !== payload.priority.id
+      );
+
+      return {
+        ...state,
+        priorities: {
+          ...state.priorities,
+          [payload.profile_name]: sortById([...prs, payload.priority])
+        }
+      };
     }
 
     default: {
@@ -58,6 +78,9 @@ export function getTemplateById(state) {
   };
 }
 
-export function getTemplatePriorities(state, profile){
-  return mapById(defaultToEmptyArray(state.templates.priorities[profile]), getTemplates(state))
+export function getTemplatePriorities(state, profile) {
+  return mapById(
+    defaultToEmptyArray(state.templates.priorities[profile]),
+    getTemplates(state)
+  );
 }

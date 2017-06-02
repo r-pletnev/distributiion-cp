@@ -2,13 +2,15 @@ import {
   AddOSPanel,
   GetOSPanels,
   RemoveOSPanels,
-  GetOsPanelPriorities
+  GetOsPanelPriorities,
+  SetOsPanelPriority
 } from "../api/os_panels";
 import {
   ADD_OS_PANEL_SUCCESS,
   GET_OS_PANELS_SUCCESS,
   REMOVE_OS_PANELS_SUCCESS,
-  GET_OS_PANEL_PRIORITIES_SUCCESS
+  GET_OS_PANEL_PRIORITIES_SUCCESS,
+  SET_OS_PANEL_PRIORITY_SUCCESS
 } from "../constants/os_panels";
 import { sortById } from "../utils/ramda";
 
@@ -111,5 +113,54 @@ function getOsPanelPrioritiesSuccess(payload, { profile_name, ...restArgs }) {
   return {
     type: GET_OS_PANEL_PRIORITIES_SUCCESS,
     payload: priorities
+  };
+}
+
+export function fetchSetOsPanelPriority(
+  {
+    profile_name,
+    device_id,
+    model_id,
+    os_id,
+    os_version_id,
+    os_panel_id,
+    priority
+  },
+  onSuccess
+) {
+  const query = arguments[0];
+  return dispatch => {
+    return SetOsPanelPriority(query)
+      .then(_ => {
+        dispatch(setOsPanelPrioritySuccess(query));
+        onSuccess();
+      })
+      .catch(error => console.error(error));
+  };
+}
+
+function setOsPanelPrioritySuccess(
+  {
+    profile_name,
+    device_id,
+    model_id,
+    os_id,
+    os_version_id,
+    os_panel_id,
+    priority
+  }
+) {
+  const priorityProp = {
+    id: os_panel_id,
+    device_id,
+    model_id,
+    os_id,
+    os_version_id,
+    priority: Number(priority)
+  };
+
+  return {
+    type: SET_OS_PANEL_PRIORITY_SUCCESS,
+    payload: { profile_name, priority: priorityProp }
   };
 }

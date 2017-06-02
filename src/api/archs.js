@@ -16,6 +16,6 @@ export function GetArchPriorities(data) {
   return api.client.post(api.GET_ARCH_PRIORITIES_URL, data);
 }
 
-export function SetArchPriorities(data) {
-  return api.client.post(api.GET_ARCH_PRIORITIES_URL, data);
+export function SetArchPriority(data) {
+  return api.client.post(api.SET_ARCH_PRIORITY_URL, data);
 }

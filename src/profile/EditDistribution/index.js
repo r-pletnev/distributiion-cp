@@ -48,13 +48,31 @@ import {
   fetchSetModelPrioirty
 } from "../../actions/models";
 import { fetchOsPriorities, fetchSetOsPriority } from "../../actions/oses";
-import { fetchOsVersionPriorities, fetchSetOsVersionPriority } from "../../actions/os_versions";
-import { fetchBrowserPriorities, fetchSetBrowserPriority } from "../../actions/browsers";
-import { fetchBrowserVersionPriorities, fetchSetBrowserVersionPriority } from "../../actions/browser_versions";
-import { fetchArchPriorities } from "../../actions/archs";
-import { fetchOsPanelPriorities } from "../../actions/os_panels";
-import { fetchScreenPriorities, fetchSetScreenPriority } from "../../actions/screens";
-import { fetchTemplatePriorities } from "../../actions/templates";
+import {
+  fetchOsVersionPriorities,
+  fetchSetOsVersionPriority
+} from "../../actions/os_versions";
+import {
+  fetchBrowserPriorities,
+  fetchSetBrowserPriority
+} from "../../actions/browsers";
+import {
+  fetchBrowserVersionPriorities,
+  fetchSetBrowserVersionPriority
+} from "../../actions/browser_versions";
+import { fetchArchPriorities, fetchSetArchPriority } from "../../actions/archs";
+import {
+  fetchOsPanelPriorities,
+  fetchSetOsPanelPriority
+} from "../../actions/os_panels";
+import {
+  fetchScreenPriorities,
+  fetchSetScreenPriority
+} from "../../actions/screens";
+import {
+  fetchTemplatePriorities,
+  fetchSetTemplatePriority
+} from "../../actions/templates";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
@@ -151,6 +169,9 @@ const EditDistribution = props => {
     fetchSetBrowserPry,
     fetchSetBrowserVersionPry,
     fetchSetScreenPry,
+    fetchSetArchPry,
+    fetchSetOsPanelPry,
+    fetchSetTemplatePry,
     ...restProps
   } = props;
   return (
@@ -178,41 +199,88 @@ const EditDistribution = props => {
                 { ...values, ...{ profile_name, device_id } },
                 onSuccess
               ))(profile_name)}
-        fetchSetOsPry={(profile_name => 
-          (device_id, model_id) => 
-            (values, onSuccess) => 
+        fetchSetOsPry={(profile_name =>
+          (device_id, model_id) =>
+            (values, onSuccess) =>
               fetchSetOsPry(
-                {...values, ...{profile_name, device_id, model_id}},
+                { ...values, ...{ profile_name, device_id, model_id } },
                 onSuccess
               ))(profile_name)}
-        fetchSetOsVersionPry={(profile_name => 
-              (device_id, model_id, os_id) => 
-                (values, onSuccess) => 
-                  fetchSetOsVersionPry(
-                    {...values, ...{profile_name, device_id, model_id, os_id}},
-                    onSuccess
-                ))(profile_name)}
-        fetchSetBrowserPry={(profile_name => 
-        (device_id, model_id, os_id, os_version_id) => 
-          (values, onSuccess) => 
-            fetchSetBrowserPry(
-              {...values, ...{profile_name, device_id, model_id, os_id, os_version_id}},
-              onSuccess
-            ))(profile_name)}
-        fetchSetBrowserVersionPry={(profile_name => 
-          (device_id, model_id, os_id, os_version_id, browser_id) => 
-            (values, onSuccess) => 
+        fetchSetOsVersionPry={(profile_name =>
+          (device_id, model_id, os_id) =>
+            (values, onSuccess) =>
+              fetchSetOsVersionPry(
+                { ...values, ...{ profile_name, device_id, model_id, os_id } },
+                onSuccess
+              ))(profile_name)}
+        fetchSetBrowserPry={(profile_name =>
+          (device_id, model_id, os_id, os_version_id) =>
+            (values, onSuccess) =>
+              fetchSetBrowserPry(
+                {
+                  ...values,
+                  ...{ profile_name, device_id, model_id, os_id, os_version_id }
+                },
+                onSuccess
+              ))(profile_name)}
+        fetchSetBrowserVersionPry={(profile_name =>
+          (device_id, model_id, os_id, os_version_id, browser_id) =>
+            (values, onSuccess) =>
               fetchSetBrowserVersionPry(
-                {...values, ...{profile_name, device_id, model_id, os_id, os_version_id, browser_id}},
+                {
+                  ...values,
+                  ...{
+                    profile_name,
+                    device_id,
+                    model_id,
+                    os_id,
+                    os_version_id,
+                    browser_id
+                  }
+                },
                 onSuccess
               ))(profile_name)}
-        fetchSetScreenPry={(profile_name => 
-        (device_id, model_id) => 
-          (values, onSuccess) => 
-            fetchSetScreenPry(
-              {...values, ...{profile_name, device_id, model_id}},
-              onSuccess,
-            ))(profile_name)}
+        fetchSetScreenPry={(profile_name =>
+          (device_id, model_id) =>
+            (values, onSuccess) =>
+              fetchSetScreenPry(
+                { ...values, ...{ profile_name, device_id, model_id } },
+                onSuccess
+              ))(profile_name)}
+        fetchSetArchPry={(profile_name =>
+          (device_id, model_id, os_id) =>
+            (values, onSuccess) =>
+              fetchSetArchPry(
+                { ...values, ...{ profile_name, device_id, model_id, os_id } },
+                onSuccess
+              ))(profile_name)}
+        fetchSetOsPanelPry={(profile_name =>
+          (device_id, model_id, os_id, os_version_id) =>
+            (values, onSuccess) =>
+              fetchSetOsPanelPry(
+                {
+                  ...values,
+                  ...{ profile_name, device_id, model_id, os_id, os_version_id }
+                },
+                onSuccess
+              ))(profile_name)}
+        fetchSetTemplatePry={(profile_name =>
+          (device_id, model_id, os_id, os_version_id, browser_id) =>
+            (values, onSuccess) =>
+              fetchSetTemplatePry(
+                {
+                  ...values,
+                  ...{
+                    profile_name,
+                    device_id,
+                    model_id,
+                    os_id,
+                    os_version_id,
+                    browser_id
+                  }
+                },
+                onSuccess
+              ))(profile_name)}
       />
     </div>
   );
@@ -290,16 +358,22 @@ function mapDispacthToProps(dispatch) {
       dispatch(fetchSetDevicePrioritiy(query, onSuccess)),
     fetchSetModelPry: (query, onSuccess) =>
       dispatch(fetchSetModelPrioirty(query, onSuccess)),
-    fetchSetOsPry: (query, onSuccess) => 
+    fetchSetOsPry: (query, onSuccess) =>
       dispatch(fetchSetOsPriority(query, onSuccess)),
-    fetchSetOsVersionPry: (query, onSuccess) => 
+    fetchSetOsVersionPry: (query, onSuccess) =>
       dispatch(fetchSetOsVersionPriority(query, onSuccess)),
-    fetchSetBrowserPry: (query, onSuccess) => 
+    fetchSetBrowserPry: (query, onSuccess) =>
       dispatch(fetchSetBrowserPriority(query, onSuccess)),
-    fetchSetBrowserVersionPry: (query, onSuccess) => 
+    fetchSetBrowserVersionPry: (query, onSuccess) =>
       dispatch(fetchSetBrowserVersionPriority(query, onSuccess)),
-    fetchSetScreenPry: (query, onSuccess) => 
-      dispatch(fetchSetScreenPriority(query, onSuccess))
+    fetchSetScreenPry: (query, onSuccess) =>
+      dispatch(fetchSetScreenPriority(query, onSuccess)),
+    fetchSetArchPry: (query, onSuccess) =>
+      dispatch(fetchSetArchPriority(query, onSuccess)),
+    fetchSetOsPanelPry: (query, onSuccess) =>
+      dispatch(fetchSetOsPanelPriority(query, onSuccess)),
+    fetchSetTemplatePry: (query, onSuccess) =>
+      dispatch(fetchSetTemplatePriority(query, onSuccess))
   };
 }
 

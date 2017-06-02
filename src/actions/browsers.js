@@ -125,19 +125,40 @@ function getBrowserPrioritiesSuccess(payload, { profile_name, ...restArgs }) {
   };
 }
 
-export function fetchSetBrowserPriority({profile_name, device_id, model_id, os_id, os_version_id, browser_id, priority}, onSuccess){
-  const query = arguments[0]
+export function fetchSetBrowserPriority(
+  {
+    profile_name,
+    device_id,
+    model_id,
+    os_id,
+    os_version_id,
+    browser_id,
+    priority
+  },
+  onSuccess
+) {
+  const query = arguments[0];
   return dispatch => {
     return SetBrowserPriority(query)
       .then(_ => {
-        dispatch(setBrowserPrioritySuccess(query))
-        onSuccess()
+        dispatch(setBrowserPrioritySuccess(query));
+        onSuccess();
       })
-      .catch(error => (console.error(error)))
-  }
+      .catch(error => console.error(error));
+  };
 }
 
-function setBrowserPrioritySuccess({profile_name, device_id, model_id, os_version_id, os_id, browser_id, priority}){
+function setBrowserPrioritySuccess(
+  {
+    profile_name,
+    device_id,
+    model_id,
+    os_version_id,
+    os_id,
+    browser_id,
+    priority
+  }
+) {
   const priorityProp = {
     id: browser_id,
     device_id,
@@ -145,11 +166,11 @@ function setBrowserPrioritySuccess({profile_name, device_id, model_id, os_versio
     os_id,
     os_version_id,
     priority: Number(priority)
-  }
-  debugger
+  };
+  debugger;
 
   return {
     type: SET_BROWSER_PRIORITY_SUCCESS,
-    payload: {profile_name, priority: priorityProp}
-  }
+    payload: { profile_name, priority: priorityProp }
+  };
 }
