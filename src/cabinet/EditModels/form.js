@@ -23,21 +23,29 @@ let AddModelForm = props => {
       <form className="form" onSubmit={handleSubmit(submitForm)}>
         <FormSelectField
           name="device_id"
-          label="Device type"
+          label="Выбор устройства"
           options={props.devices}
         />
         <FormField
           name="name"
           type="text"
-          label="Enter Model name"
+          label="Имя модели"
           autoComplete="off"
         />
         <FormField
           name="payload"
           type="text"
-          label="UA string"
+          label="Содержимое (payload)"
           autoComplete="off"
         />
+        <FormField
+          name="pixel_ratio"
+          type="number"
+          label="Плотность пикселей"
+          autoComplete="off"
+        />
+        <FormField name="width" type="number" label="Ширина" />
+        <FormField name="height" type="number" label="Высота" />
         <div className="popup-bottom">
           <button
             className="btn btn-success"

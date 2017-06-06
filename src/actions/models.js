@@ -55,15 +55,19 @@ export function fetchAddModel(model, onSuccess) {
   };
 }
 
-function addModelSuccess(payload) {
-  const { model_id, name, device_id, ...rest } = payload;
+function addModelSuccess(
+  { model_id: id, name, device_id, payload, pixel_ratio, width, height }
+) {
   return {
     type: ADD_MODEL_SUCCESS,
     payload: {
-      id: model_id,
+      id,
       name,
-      payload: rest.payload,
-      device_id
+      device_id,
+      payload,
+      pixel_ratio,
+      width,
+      height
     }
   };
 }
