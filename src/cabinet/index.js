@@ -4,68 +4,68 @@ import urls from "../urls";
 
 const items = [
   {
-    title: "Devices",
-    text: "Управление девайсами",
+    title: "Устройства",
+    text: "Список устройств",
     to: urls.devices,
     image: "al-device"
   },
   {
-    title: "Models",
-    text: "Управление моделями девайсов",
+    title: "Модели",
+    text: "Список моделями для устройств",
     to: urls.models,
     image: "al-model"
   },
   {
-    title: "Screens",
-    text: "Управление разрешениями экрана",
+    title: "Экраны",
+    text: "Список разрешений экранов",
     to: urls.screens,
     image: "al-screen"
   },
   {
-    title: "OS",
-    text: "Управление операционными системами",
+    title: "ОС",
+    text: "Список операционных систем",
     to: urls.os,
     image: "al-os"
   },
   {
-    title: "OS versions",
-    text: "Управление версиями ОС",
+    title: "Версии ОС",
+    text: "Список версий ОС",
     to: urls.os_versions,
     image: "al-os-version"
   },
   {
-    title: "OS architectures",
-    text: "Управление архитектурой ОС",
+    title: "Архитектуры ОС",
+    text: "Список архитектур ОС",
     to: urls.os_arch,
     image: "al-os-control"
   },
   {
-    title: "OS panels",
+    title: "Панели ОС",
     text: "Управление панелями ОС",
     to: urls.os_panels,
     image: "al-os-panel"
   },
   {
-    title: "Browsers",
-    text: "Управление браузерами",
+    title: "Браузеры",
+    text: "Список браузеров",
     to: urls.browsers,
     image: "al-browser"
   },
   {
-    title: "Browser versions",
-    text: "Управление версиями браузеров",
+    title: "Версии браузеров",
+    text: "Список версий браузеров",
     to: urls.browser_versions,
     image: "al-browser-version"
   },
   {
-    title: "Browser panels",
-    text: "Управление панелями браузеров",
+    title: "Панели браузеров",
+    text: "Список панелей браузеров",
     to: urls.browser_panel_versions,
     image: "al-browser-panel"
   },
   {
-    title: "UA templates",
-    text: "Управление шаблонами UA",
+    title: "Шаблоны UA",
+    text: "Список шаблонов UA",
     to: urls.templates,
     image: "al-ua-template"
   }

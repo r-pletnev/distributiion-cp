@@ -15,6 +15,8 @@ const TableRow = props => {
       <td>{device ? device.name : "there isn't such device!"}</td>
       <td>{elm.name}</td>
       <td>{elm.payload}</td>
+      <td>{elm.pixel_ratio}</td>
+      <td>{`${elm.width}x${elm.height}`}</td>
       <ButtonBlock onRemoveClick={onRemove([elm.id])} />
     </tr>
   );
@@ -33,7 +35,14 @@ const EditDevices = props => {
     <TableView
       title="Edit Models"
       createBtnLabel="Create model"
-      headRow={["ID", "Device Type", "Model Name", "UA string"]}
+      headRow={[
+        "#",
+        "Устройство",
+        "Модель",
+        "Содержимое",
+        "Плотность пикселей",
+        "Разрешение"
+      ]}
       rows={rows}
       specialForm={AddModelForm}
     />

@@ -31,7 +31,10 @@ export function fetchAllModelSuccess(payload) {
     id: elm.model_id,
     name: elm.name,
     payload: elm.payload,
-    device_id: elm.device_id
+    device_id: elm.device_id,
+    pixel_ratio: elm.pixel_ratio,
+    width: elm.width,
+    height: elm.height
   }));
   return {
     type: GET_ALL_MODEL_SUCCESS,
