@@ -46,8 +46,8 @@ export const SET_OS_PANEL_PRIORITY_URL = "/set_os_panel_priority";
 export const ADD_SCREEN_URL = "/add_screen";
 export const GET_SCREENS_URL = "/get_screens";
 export const REMOVE_SCREENS_URL = "/remove_screens";
-export const GET_SCREEN_PRIORITIES_URL = '/get_screen_priorities'
-export const SET_SCREEN_PRIORITY_URL = '/set_screen_priority'
+export const GET_SCREEN_PRIORITIES_URL = "/get_screen_priorities";
+export const SET_SCREEN_PRIORITY_URL = "/set_screen_priority";
 
 export const ADD_BROWSER_URL = "/add_browser";
 export const GET_BROWSERS_URL = "/get_browsers";
@@ -58,7 +58,8 @@ export const SET_BROWSER_PRIORITY_URL = "/set_browser_priority";
 export const ADD_BROWSER_VERSION_URL = "/add_browser_version";
 export const GET_BROWSER_VERSIONS_URL = "/get_browser_versions";
 export const REMOVE_BROWSER_VERSIONS_URL = "/remove_browser_versions";
-export const GET_BROWSER_VERSION_PRIORITIES_URL = "/get_browser_version_priorities";
+export const GET_BROWSER_VERSION_PRIORITIES_URL =
+  "/get_browser_version_priorities";
 export const SET_BROWSER_VERSION_PRIORITY_URL = "/set_browser_version_priority";
 
 export const ADD_BROWSER_PANEL_URL = "/add_browser_panel";
@@ -68,7 +69,17 @@ export const REMOVE_BROWSER_PANELS_URL = "/remove_browser_panels";
 export const ADD_TEMPLATE_URL = "/add_template";
 export const GET_TEMPLATES_URL = "/get_templates";
 export const REMOVE_TEMPLATES_URL = "/remove_templates";
-export const GET_TEMPLATE_PRIORITIES_URL = '/get_template_priorities'
-export const SET_TEMPLATE_PRIORITY_URL = '/set_template_priority'
+export const GET_TEMPLATE_PRIORITIES_URL = "/get_template_priorities";
+export const SET_TEMPLATE_PRIORITY_URL = "/set_template_priority";
 
 export const GET_PROFILES_URL = "/get_profiles";
+
+export const ADD_FAVORITE_URL = "/add_favorite";
+export const GET_FAVORITES_URL = "/get_favorites";
+export const REMOVE_FAVORITES_URL = "remove_favorites";
+export const GET_FAVORITE_PRIORITIES_URL = "/get_favorite_priorities";
+export const SET_FAVORITE_PRIORITY_URL = "/set_favorite_priority";
+
+export const ADD_DOMAINS_URL = "/add_favorite_domains";
+export const GET_DOMAINS_URL = "/get_favorites_domains";
+export const REMOVE_DOMAINS_URL = "/remove_favorites_domains";

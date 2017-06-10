@@ -1,7 +1,7 @@
 import R from "ramda";
 import {
   GET_ALL_DEVICES_SUCCESS,
-  ADD_DEVICE_SUCCEES,
+  ADD_DEVICE_SUCCESS,
   REMOVE_DEVICES_SUCCESS,
   GET_DEVICE_PRIORITIES_SUCCESS,
   SET_DEVICE_PRIORITIES_SUCCESS
@@ -52,7 +52,7 @@ export default function deviceState(state = initialState, action) {
       };
     }
 
-    case ADD_DEVICE_SUCCEES: {
+    case ADD_DEVICE_SUCCESS: {
       return {
         ...state,
         entities: sortById([...state.entities, payload])

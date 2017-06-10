@@ -23,10 +23,17 @@ let AddBrowserPanelForm = props => {
         <FormField
           name="size"
           type="number"
-          label="Size"
+          label="Высота панели"
           autoComplete="on"
           minValue={1}
           maxValue={300}
+        />
+        <FormField
+          name="priority"
+          type="number"
+          label="Приоритет"
+          autoComplete="off"
+          minValue={1}
         />
         <div className="popup-bottom">
           <button
@@ -34,7 +41,7 @@ let AddBrowserPanelForm = props => {
             disabled={pristine || submitting}
             type="submit"
           >
-            Send
+            Отправить
           </button>
         </div>
       </form>

@@ -566,7 +566,7 @@ fieldset[disabled] a.btn {
   display: flex;
   flex-wrap: wrap;
   margin: 0 -0.5em;
-  justify-content: space-around;
+  justify-content: center;
 }
 .card {
   position: relative;
@@ -575,7 +575,7 @@ fieldset[disabled] a.btn {
   flex: 2 2 15em;
   flex-direction: column;
   min-height: 10em;
-  max-width: 230px;
+  max-width: 240px;
   background-color: #ffffff;
   border: 1px solid #ccc;
   -webkit-border-radius: 5px;
@@ -603,6 +603,7 @@ fieldset[disabled] a.btn {
   justify-content: center;
   width: 100%;
   height: 10em;
+  min-width: 10em;
   background: #ccc;
   padding: 1em;
   margin: -1em -1em 1em;
@@ -614,9 +615,9 @@ fieldset[disabled] a.btn {
   align-self: center;
   align-items: center;
   justify-content: center;
-  height: 10em;
-  width: 10em;
-  line-height: 10em;
+  height: 8em;
+  width: 8em;
+  line-height: 8em;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%;
@@ -974,7 +975,7 @@ table {
   border-top: 1px solid #ccc;
 }
 .table thead th {
-  vertical-align: bottom;
+  vertical-align: middle;
   border-bottom: 2px solid #ccc;
 }
 .table tbody + tbody {
@@ -1598,7 +1599,7 @@ p {
   width: 90%;
 }
 .main-content.start {
-  max-width: 1024px;
+  max-width: 1260px;
 }
 ::-webkit-scrollbar {
   width: 10px;

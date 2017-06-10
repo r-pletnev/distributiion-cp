@@ -31,7 +31,8 @@ function fetchAllOsVersionsSuccess(payload) {
     id: elm.os_version_id,
     name: elm.name,
     payload: elm.payload,
-    os_id: elm.os_id
+    os_id: elm.os_id,
+    build: elm.build
   }));
   return {
     type: GET_OS_VERSIONS_SUCCESS,
@@ -82,14 +83,12 @@ function removeOSVersionsSuccess(payload) {
   };
 }
 
-export function fetchOsVersionPriorities(
-  {
-    profile_name,
-    device_id,
-    model_id,
-    os_id
-  }
-) {
+export function fetchOsVersionPriorities({
+  profile_name,
+  device_id,
+  model_id,
+  os_id
+}) {
   const query = arguments[0];
   return dispatch => {
     return GetOsVersionPriorities(query)
@@ -121,29 +120,39 @@ function getOsVersionPrioritiesSuccess(payload, { profile_name, ...restArgs }) {
   };
 }
 
-export function fetchSetOsVersionPriority({profile_name, device_id, model_id, os_id, os_version_id, priority}, onSuccess){
-  const query = arguments[0]
+export function fetchSetOsVersionPriority(
+  { profile_name, device_id, model_id, os_id, os_version_id, priority },
+  onSuccess
+) {
+  const query = arguments[0];
   return dispatch => {
     return SetOsVersionPriority(query)
       .then(_ => {
-        dispatch(setOsVersionPrioritySuccess(query))
-        onSuccess()
+        dispatch(setOsVersionPrioritySuccess(query));
+        onSuccess();
       })
-      .catch(error => (console.error(error)))
-  }
+      .catch(error => console.error(error));
+  };
 }
 
-function setOsVersionPrioritySuccess({profile_name, model_id, device_id, os_id, os_version_id, priority}){
+function setOsVersionPrioritySuccess({
+  profile_name,
+  model_id,
+  device_id,
+  os_id,
+  os_version_id,
+  priority
+}) {
   const priorityProp = {
     id: os_version_id,
     model_id,
-    device_id, 
+    device_id,
     os_id,
     priority: Number(priority)
-  }
+  };
 
   return {
     type: SET_OS_VERSION_PRIORITY_SUCCESS,
-    payload: {profile_name, priority: priorityProp}
-  }
+    payload: { profile_name, priority: priorityProp }
+  };
 }

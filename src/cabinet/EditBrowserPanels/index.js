@@ -25,7 +25,7 @@ const EditBrowserPanels = props => {
     <TableRow
       elm={elm}
       onRemove={ids => () => props.dispatch(fetchRemoveBrowserPanels(ids))}
-      browser={props.getBrowserById(elm.browser_id)}
+      browser={props.browserById(elm.browser_id)}
     />
   ));
 

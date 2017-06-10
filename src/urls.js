@@ -12,7 +12,8 @@ const urls = {
   templates: "/templates",
   profiles: "/profiles",
   profile: "/profiles/:profile_name/",
-  distribution: "/profiles/:profile_name/distribution"
+  distribution: "/profiles/:profile_name/distribution",
+  favorites: "/favorites"
 };
 
 export default urls;

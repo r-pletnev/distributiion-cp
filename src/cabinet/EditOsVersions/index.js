@@ -15,6 +15,7 @@ const TableRow = props => {
       <td>{os.name} </td>
       <td>{elm.name}</td>
       <td>{elm.payload}</td>
+      <td>{elm.build}</td>
       <ButtonBlock onRemoveClick={onRemove([elm.id])} />
     </tr>
   );
@@ -31,9 +32,9 @@ const EditOsVersions = props => {
 
   return (
     <TableView
-      title="Edit OS Versions"
-      createBtnLabel="Create Os version"
-      headRow={["ID", "OS", "Version name", "Payload"]}
+      title="Управление версиями ОС"
+      createBtnLabel="Создать версию ОС"
+      headRow={["#", "ОС", "Версия", "Содержание", "Билд"]}
       rows={rows}
       specialForm={AddOsVerisionForm}
     />

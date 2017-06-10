@@ -26,21 +26,20 @@ import { fetchAllOsPanels } from "./actions/os_panels";
 import EditArchs from "./cabinet/EditArchs";
 import { fetchAllArchs } from "./actions/archs";
 import EditDistribution from "./profile/EditDistribution";
+import { fetchAllFavorites } from "./actions/favorites";
+import EditFavorites from "./cabinet/EditFavorites";
 
-const render = (Component, rest) =>
-  fns =>
-    store =>
-      props => {
-        const { params } = props.match;
-        const { dispatch, getState } = store;
-        const state = getState();
-        fns.forEach(elm => {
-          const { action, always, path } = elm;
-          const loaded = always ? false : getProp(path, state);
-          if (!loaded) dispatch(action(params));
-        });
-        return <Component />;
-      };
+const render = (Component, rest) => fns => store => props => {
+  const { params } = props.match;
+  const { dispatch, getState } = store;
+  const state = getState();
+  fns.forEach(elm => {
+    const { action, always, path } = elm;
+    const loaded = always ? false : getProp(path, state);
+    if (!loaded) dispatch(action(params));
+  });
+  return <Component />;
+};
 
 export const loadTemplates = render(EditTemplates)([
   { action: fetchAllBrowsers, path: ["browsers.fetchStatus"] },
@@ -52,6 +51,7 @@ export const loadProfiles = render(EditProfiles)([
 ]);
 
 export const loadBrowserPanels = render(EditBrowserPanels)([
+  { action: fetchAllBrowsers, path: ["browsers.fetchStatus"] },
   {
     action: fetchAllBrowserPanels,
     path: ["browser_panels.fetchStatus"]
@@ -117,4 +117,8 @@ export const loadDistribution = render(EditDistribution)([
     path: ["browser_panels.fetchStatus"]
   },
   { action: fetchDevicePriorities, path: ["devices.priorityFetchStatus"] }
+]);
+
+export const loadFavorites = render(EditFavorites)([
+  { action: fetchAllFavorites, path: ["favorites.fetchStatus"] }
 ]);

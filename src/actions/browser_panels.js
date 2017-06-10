@@ -24,7 +24,9 @@ export function fetchAllBrowserPanels() {
 function fetchAllBrowserPanelsSuccess(payload) {
   const browser_panels = payload.map(elm => ({
     id: elm.browser_panel_id,
-    size: elm.size
+    size: elm.size,
+    priority: elm.priority,
+    browser_id: elm.browser_id
   }));
 
   return {
@@ -47,10 +49,7 @@ export function fetchAddBrowserPanel(browserPanel, onSuccess) {
 }
 
 function addBrowserPanelSuccess(payload) {
-  const {
-    browser_panel_id,
-    ...rest
-  } = payload;
+  const { browser_panel_id, ...rest } = payload;
   return {
     type: ADD_BROWSER_PANEL_SUCCESS,
     payload: {

@@ -26,14 +26,15 @@ let AddOsVerisionForm = props => {
   return (
     <div className="popup-content">
       <form className="form" onSubmit={handleSubmit(submitForm)}>
-        <FormSelectField name="os_id" label="Select OS" options={props.oses} />
+        <FormSelectField name="os_id" label="Выбрать ОС" options={props.oses} />
         <FormField
           name="name"
           type="text"
-          label="OS version name"
+          label="Имя версии ОС"
           autoComplete="off"
         />
-        <FormField name="payload" type="text" label="Payload" />
+        <FormField name="payload" type="text" label="Содержимое(payload)" />
+        <FormField name="build" type="text" label="Билд" />
         <div className="popup-bottom">
           <button
             className="btn btn-success"

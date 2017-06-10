@@ -6,7 +6,7 @@ import {
   SetDevicePriorities
 } from "../api/devices";
 import {
-  ADD_DEVICE_SUCCEES,
+  ADD_DEVICE_SUCCESS,
   GET_ALL_DEVICES_SUCCESS,
   REMOVE_DEVICES_SUCCESS,
   GET_DEVICE_PRIORITIES_SUCCESS,
@@ -50,7 +50,7 @@ export function fetchAddDevice(name, onSuccess) {
 function addDeviceSuccess(payload) {
   const { device_id, name } = payload;
   return {
-    type: ADD_DEVICE_SUCCEES,
+    type: ADD_DEVICE_SUCCESS,
     payload: {
       id: device_id,
       name

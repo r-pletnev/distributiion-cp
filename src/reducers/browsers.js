@@ -44,7 +44,7 @@ export default function browserState(state = initialState, action) {
     case GET_BROWSER_PRIORITIES_SUCCESS: {
       return {
         ...state,
-        priorities: { ...state.priorities, ...payload },
+        priorities: { ...state.priorities, ...payload }
       };
     }
 
@@ -60,7 +60,6 @@ export default function browserState(state = initialState, action) {
           [payload.profile_name]: sortById([...prs, payload.priority])
         }
       };
-      
     }
 
     default: {

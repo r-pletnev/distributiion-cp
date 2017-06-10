@@ -96,9 +96,13 @@ function removeBrowserVersionsSuccess(payload) {
   };
 }
 
-export function fetchBrowserVersionPriorities(
-  { profile_name, device_id, model_id, os_id, browser_id }
-) {
+export function fetchBrowserVersionPriorities({
+  profile_name,
+  device_id,
+  model_id,
+  os_id,
+  browser_id
+}) {
   const query = arguments[0];
   return dispatch => {
     return GetBrowserVersionPriorities(query)
@@ -135,20 +139,40 @@ function getBrowserVersionPrioritiesSuccess(
   };
 }
 
-
-export function fetchSetBrowserVersionPriority({profile_name, device_id, model_id, os_id, os_version_id, browser_id, browser_version_id, priority}, onSuccess){
-  const query = arguments[0]
+export function fetchSetBrowserVersionPriority(
+  {
+    profile_name,
+    device_id,
+    model_id,
+    os_id,
+    os_version_id,
+    browser_id,
+    browser_version_id,
+    priority
+  },
+  onSuccess
+) {
+  const query = arguments[0];
   return dispatch => {
     return SetBrowserVersionPriority(query)
-    .then (_ => {
-      dispatch(setBrowserVersionPrioritySuccess(query))
-      onSuccess()
-    })
-    .catch(error => (console.error(error)))
-  }
+      .then(_ => {
+        dispatch(setBrowserVersionPrioritySuccess(query));
+        onSuccess();
+      })
+      .catch(error => console.error(error));
+  };
 }
 
-function setBrowserVersionPrioritySuccess({profile_name, device_id, model_id, os_id, os_version_id, browser_id, browser_version_id, priority}){
+function setBrowserVersionPrioritySuccess({
+  profile_name,
+  device_id,
+  model_id,
+  os_id,
+  os_version_id,
+  browser_id,
+  browser_version_id,
+  priority
+}) {
   const priorityProp = {
     id: browser_version_id,
     device_id,
@@ -157,10 +181,10 @@ function setBrowserVersionPrioritySuccess({profile_name, device_id, model_id, os
     os_version_id,
     browser_id,
     priority: Number(priority)
-  }
+  };
 
   return {
     type: SET_BROWSER_VERSION_PRIORITY_SUCCESS,
-    payload: {profile_name, priority: priorityProp}
-  }
+    payload: { profile_name, priority: priorityProp }
+  };
 }

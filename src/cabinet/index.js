@@ -4,6 +4,18 @@ import urls from "../urls";
 
 const items = [
   {
+    title: "Профили",
+    text: "Список профилей и их настройки",
+    to: urls.profiles,
+    image: "al-profiles"
+  },
+  {
+    title: "Круги интересов",
+    text: "Список кругов интересов",
+    to: urls.favorites,
+    image: "al-stars"
+  },
+  {
     title: "Устройства",
     text: "Список устройств",
     to: urls.devices,
@@ -84,24 +96,8 @@ class MainPage extends React.Component {
     ));
     return (
       <div className="main-content start">
-        <div className="split">
-          <div className="box">
-            <h2>Distributions</h2>
-            <div className="cards">
-              <Card
-                title="Edit Distributions"
-                to={urls.profiles}
-                text="Управление распределениями для выбранного профиля"
-                image="al-profiles"
-              />
-            </div>
-          </div>
-          <div className="box box-3x">
-            <h2>Items of Distributions</h2>
-            <div className="cards">
-              {cards}
-            </div>
-          </div>
+        <div className="cards">
+          {cards}
         </div>
       </div>
     );

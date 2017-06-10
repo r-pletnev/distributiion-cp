@@ -47,6 +47,7 @@ const App = props => {
             path={urls.distribution}
             render={hooks.loadDistribution(store)}
           />
+          <Route path={urls.favorites} render={hooks.loadFavorites(store)} />
           <Route component={NoMatch} />
         </Switch>
       </PageLayout>

@@ -34,15 +34,15 @@ const EditBrowserVersions = props => {
 
   return (
     <TableView
-      title="Edit browser versions"
-      createBtnLabel="Create Browser version"
+      title="Управление версиями браузеров"
+      createBtnLabel="Создать версию браузера"
       headRow={[
-        "ID",
-        "Browser",
-        "Version name",
-        "Engine version",
-        "Browser version",
-        "Subversion"
+        "#",
+        "Браузер",
+        "Имя версии",
+        "Имя движка",
+        "Версия браузера",
+        "Подверсия"
       ]}
       rows={rows}
       specialForm={AddBrowserVersionForm}
