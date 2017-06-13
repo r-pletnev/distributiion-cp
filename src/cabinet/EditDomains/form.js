@@ -1,36 +1,38 @@
-import R from "ramda";
 import React from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import { reduxForm } from "redux-form";
 import FormField from "../../components/FormField";
 import FormSelectField from "../../components/FormSelectField";
-import { fetchAddOsPanel } from "../../actions/os_panels";
-import { getOses } from "../../reducers/oses";
-import { getOsVersions } from "../../reducers/os_versions";
+import FormCheckboxField from "../../components/FormCheckboxField";
+import { fetchAddDomains } from "../../actions/domains";
+import { withRouter } from "react-router";
 
-let AddOsPanelForm = props => {
+let AddDomainForm = props => {
   const { handleSubmit, pristine, submitting, error } = props;
-
+  const { favorite_id } = props.match.params;
   const closeForm = () => {
     props.closeForm();
     props.destroy();
   };
+
   const submitForm = values => {
-    return props.dispatch(fetchAddOsPanel(values, closeForm));
+    return props.dispatch(
+      fetchAddDomains({ favorite_id, domains: [values] }, closeForm)
+    );
   };
 
   return (
     <div className="popup-content">
       <form className="form" onSubmit={handleSubmit(submitForm)}>
+        <FormField name="domain" label="Домен" />
         <FormField
-          name="size"
+          name="priority"
+          label="Приоритет"
           type="number"
-          label="Высота панели ОС"
-          autoComplete="on"
           minValue={1}
-          maxValue={300}
         />
+        <FormSelectField name="age_id" label="Возрастная группа" options={[]} />
+        <FormCheckboxField name="male" label="Мужчина" />
         <div className="popup-bottom">
           <button
             className="btn btn-success"
@@ -45,8 +47,8 @@ let AddOsPanelForm = props => {
   );
 };
 
-AddOsPanelForm = reduxForm({
-  form: "AddOsPanelForm"
-})(AddOsPanelForm);
+AddDomainForm = reduxForm({
+  form: "AddDomainForm"
+})(AddDomainForm);
 
-export default connect()(AddOsPanelForm);
+export default connect()(withRouter(AddDomainForm));

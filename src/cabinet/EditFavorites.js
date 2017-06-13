@@ -4,22 +4,29 @@ import TableView from "../components/TableView";
 import { fetchAddFavorite, fetchRemoveFavorites } from "../actions/favorites";
 import { getFavorites } from "../reducers/favorites";
 import ButtonBlock from "../components/ButtonOptions";
+import { Link } from "react-router-dom";
+import { withRouter } from "react-router";
 
-const TableRow = ({ elm, onRemove }) => {
+let TableRow = ({ elm, onRemove, match }) => {
   return (
     <tr key={elm.id}>
       <td className="id">{elm.id}</td>
-      <td>{elm.name}</td>
+      <td>
+        <Link to={`${match.url}/${elm.id}/domains`}>{elm.name}</Link>
+      </td>
       <ButtonBlock onRemoveClick={onRemove([elm.id])} />
     </tr>
   );
 };
+
+TableRow = withRouter(TableRow);
 
 const EditFavorites = props => {
   const rows = props.favorites.map(elm => (
     <TableRow
       elm={elm}
       onRemove={ids => () => props.fetchRemoveFavorites(ids)}
+      key={elm.id}
     />
   ));
 

@@ -28,6 +28,8 @@ import { fetchAllArchs } from "./actions/archs";
 import EditDistribution from "./profile/EditDistribution";
 import { fetchAllFavorites } from "./actions/favorites";
 import EditFavorites from "./cabinet/EditFavorites";
+import { fetchAllDomains } from "./actions/domains";
+import EditDomains from "./cabinet/EditDomains";
 
 const render = (Component, rest) => fns => store => props => {
   const { params } = props.match;
@@ -121,4 +123,12 @@ export const loadDistribution = render(EditDistribution)([
 
 export const loadFavorites = render(EditFavorites)([
   { action: fetchAllFavorites, path: ["favorites.fetchStatus"] }
+]);
+
+export const loadDomains = render(EditDomains)([
+  {
+    action: fetchAllDomains,
+    always: true,
+    path: ["favorites.fetchDomainStatus"]
+  }
 ]);

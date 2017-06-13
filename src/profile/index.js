@@ -1,6 +1,5 @@
 import React from "react";
 import Card from "../components/Card";
-import urls from "../urls";
 import { withRouter } from "react-router";
 
 const items = [

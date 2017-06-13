@@ -81,5 +81,5 @@ export const GET_FAVORITE_PRIORITIES_URL = "/get_favorite_priorities";
 export const SET_FAVORITE_PRIORITY_URL = "/set_favorite_priority";
 
 export const ADD_DOMAINS_URL = "/add_favorite_domains";
-export const GET_DOMAINS_URL = "/get_favorites_domains";
-export const REMOVE_DOMAINS_URL = "/remove_favorites_domains";
+export const GET_DOMAINS_URL = "/get_favorite_domains";
+export const REMOVE_DOMAINS_URL = "/remove_favorite_domains";

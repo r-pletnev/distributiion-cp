@@ -13,7 +13,8 @@ const urls = {
   profiles: "/profiles",
   profile: "/profiles/:profile_name/",
   distribution: "/profiles/:profile_name/distribution",
-  favorites: "/favorites"
+  favorites: "/favorites",
+  domains: "/favorites/:favorite_id/domains"
 };
 
 export default urls;

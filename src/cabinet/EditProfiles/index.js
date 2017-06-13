@@ -5,7 +5,6 @@ import { getProfiles } from "../../reducers/profiles";
 import { fetchCreateProfile } from "../../actions/profiles";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
-import urls from "../../urls";
 
 let TableRow = props => {
   const { elm, index, match } = props;

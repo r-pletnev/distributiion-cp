@@ -1,14 +1,19 @@
 import {
   ADD_FAVORITE_SUCCESS,
   GET_ALL_FAVORITES_SUCCESS,
-  REMOVE_FAVORITES_SUCCESS
+  REMOVE_FAVORITES_SUCCESS,
+  ADD_DOMAINS_SUCCESS,
+  REMOVE_DOMAINS_SUCCESS,
+  GET_ALL_DOMAINS_SUCCESS
 } from "../constants/favorites";
-import { filterById, sortById } from "../utils/ramda";
+import { filterById, sortById, defaultToEmptyArray } from "../utils/ramda";
 
 const initialState = {
   entities: [],
   priorities: {},
-  fetchStatus: false
+  domains: {},
+  fetchStatus: false,
+  fetchDomainStatus: false
 };
 
 export default function favoriteState(state = initialState, action) {
@@ -33,6 +38,14 @@ export default function favoriteState(state = initialState, action) {
       return filterById(payload, state);
     }
 
+    case GET_ALL_DOMAINS_SUCCESS: {
+      return {
+        ...state,
+        domains: { ...state.domains, ...payload },
+        fetchDomainStatus: true
+      };
+    }
+
     default: {
       return state;
     }
@@ -41,4 +54,8 @@ export default function favoriteState(state = initialState, action) {
 
 export function getFavorites(state) {
   return state.favorites.entities;
+}
+
+export function getDomains(state, favorite_id) {
+  return defaultToEmptyArray(state.favorites.domains[favorite_id]);
 }
