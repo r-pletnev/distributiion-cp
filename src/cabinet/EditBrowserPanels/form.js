@@ -5,6 +5,7 @@ import { reduxForm } from "redux-form";
 import FormField from "../../components/FormField";
 import FormSelectField from "../../components/FormSelectField";
 import { fetchAddBrowserPanel } from "../../actions/browser_panels";
+import { getBrowsers } from "../../reducers/browsers";
 
 let AddBrowserPanelForm = props => {
   const { handleSubmit, pristine, submitting, error } = props;
@@ -20,6 +21,11 @@ let AddBrowserPanelForm = props => {
   return (
     <div className="popup-content">
       <form className="form" onSubmit={handleSubmit(submitForm)}>
+        <FormSelectField
+          name="browser_id"
+          label="Выбрать браузер"
+          options={props.browsers}
+        />
         <FormField
           name="size"
           type="number"
@@ -53,4 +59,10 @@ AddBrowserPanelForm = reduxForm({
   form: "AddBrowserPanelForm"
 })(AddBrowserPanelForm);
 
-export default connect()(AddBrowserPanelForm);
+function mapStateToProps(state) {
+  return {
+    browsers: getBrowsers(state)
+  };
+}
+
+export default connect(mapStateToProps)(AddBrowserPanelForm);
