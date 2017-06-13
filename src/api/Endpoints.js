@@ -58,8 +58,7 @@ export const SET_BROWSER_PRIORITY_URL = "/set_browser_priority";
 export const ADD_BROWSER_VERSION_URL = "/add_browser_version";
 export const GET_BROWSER_VERSIONS_URL = "/get_browser_versions";
 export const REMOVE_BROWSER_VERSIONS_URL = "/remove_browser_versions";
-export const GET_BROWSER_VERSION_PRIORITIES_URL =
-  "/get_browser_version_priorities";
+export const GET_BROWSER_VERSION_PRIORITIES_URL = "/get_browser_version_priorities";
 export const SET_BROWSER_VERSION_PRIORITY_URL = "/set_browser_version_priority";
 
 export const ADD_BROWSER_PANEL_URL = "/add_browser_panel";
@@ -83,3 +82,6 @@ export const SET_FAVORITE_PRIORITY_URL = "/set_favorite_priority";
 export const ADD_DOMAINS_URL = "/add_favorite_domains";
 export const GET_DOMAINS_URL = "/get_favorite_domains";
 export const REMOVE_DOMAINS_URL = "/remove_favorite_domains";
+
+export const ADD_AGE_URL = "/add_age";
+export const GET_AGES_URL = "/get_ages";

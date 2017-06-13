@@ -53,6 +53,7 @@ const App = props => {
             render={hooks.loadFavorites(store)}
           />
           <Route path={urls.domains} render={hooks.loadDomains(store)} />
+          <Route path={urls.ages} render={hooks.loadAges(store)} />
           <Route component={NoMatch} />
         </Switch>
       </PageLayout>

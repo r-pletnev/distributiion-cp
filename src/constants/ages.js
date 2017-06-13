@@ -1,0 +1,2 @@
+export const ADD_AGE_SUCCESS = "ADD_AGE_SUCCESS";
+export const GET_AGES_SUCCESS = "GET_AGES_SUCCESS";

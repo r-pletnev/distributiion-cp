@@ -13,9 +13,12 @@ import browser_panels from "./browser_panels";
 import templates from "./templates";
 import profiles from "./profiles";
 import favorites from "./favorites";
+import ages from "./ages";
 
 export const rootReducer = combineReducers({
   form: FormReducer,
+  ages,
+  favorites,
   devices,
   models,
   oses,
@@ -27,6 +30,5 @@ export const rootReducer = combineReducers({
   browser_versions,
   browser_panels,
   templates,
-  profiles,
-  favorites
+  profiles
 });

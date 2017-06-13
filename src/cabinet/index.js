@@ -10,6 +10,12 @@ const items = [
     image: "al-profiles"
   },
   {
+    title: "Возрастные категории",
+    text: "Возрастные категории киборгов",
+    to: urls.ages,
+    image: "al-ages"
+  },
+  {
     title: "Круги интересов",
     text: "Список кругов интересов",
     to: urls.favorites,
@@ -95,10 +101,8 @@ class MainPage extends React.Component {
       />
     ));
     return (
-      <div className="main-content start">
-        <div className="cards">
-          {cards}
-        </div>
+      <div className="cards">
+        {cards}
       </div>
     );
   }

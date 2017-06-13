@@ -30,18 +30,23 @@ import { fetchAllFavorites } from "./actions/favorites";
 import EditFavorites from "./cabinet/EditFavorites";
 import { fetchAllDomains } from "./actions/domains";
 import EditDomains from "./cabinet/EditDomains";
+import { fetchAllAges } from "./actions/ages";
+import EditAges from "./cabinet/EditAges";
 
-const render = (Component, rest) => fns => store => props => {
-  const { params } = props.match;
-  const { dispatch, getState } = store;
-  const state = getState();
-  fns.forEach(elm => {
-    const { action, always, path } = elm;
-    const loaded = always ? false : getProp(path, state);
-    if (!loaded) dispatch(action(params));
-  });
-  return <Component />;
-};
+const render = (Component, rest) =>
+  fns =>
+    store =>
+      props => {
+        const { params } = props.match;
+        const { dispatch, getState } = store;
+        const state = getState();
+        fns.forEach(elm => {
+          const { action, always, path } = elm;
+          const loaded = always ? false : getProp(path, state);
+          if (!loaded) dispatch(action(params));
+        });
+        return <Component />;
+      };
 
 export const loadTemplates = render(EditTemplates)([
   { action: fetchAllBrowsers, path: ["browsers.fetchStatus"] },
@@ -131,4 +136,8 @@ export const loadDomains = render(EditDomains)([
     always: true,
     path: ["favorites.fetchDomainStatus"]
   }
+]);
+
+export const loadAges = render(EditAges)([
+  { action: fetchAllAges, path: ["ages.fetchStatus"] }
 ]);

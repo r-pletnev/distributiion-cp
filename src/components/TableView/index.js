@@ -31,7 +31,7 @@ class TableView extends React.Component {
   render() {
     const { title, createBtnLabel, headRow, rows, specialForm } = this.props;
     return (
-      <div className="main-content">
+      <div>
         <AddModal
           show={this.state.showCreateModal}
           onClose={this.closeModals}
