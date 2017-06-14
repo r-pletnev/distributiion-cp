@@ -28,7 +28,7 @@ let AddOsPanelForm = props => {
           type="number"
           label="Высота панели ОС"
           autoComplete="on"
-          minValue={1}
+          minValue={0}
           maxValue={300}
         />
         <div className="popup-bottom">

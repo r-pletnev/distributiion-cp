@@ -27,9 +27,9 @@ const EditOsPanels = props => {
 
   return (
     <TableView
-      title="Edit OS Panels"
-      createBtnLabel="Create Os panel"
-      headRow={["ID", "Height"]}
+      title="Управление панелями ОС"
+      createBtnLabel="Создать панель ОС"
+      headRow={["#", "Высота"]}
       rows={rows}
       specialForm={AddOsPanelForm}
     />
