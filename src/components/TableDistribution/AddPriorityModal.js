@@ -33,7 +33,6 @@ let AddPriorityForm = props => {
           label="Приоритет"
           autoComplete="off"
           minValue={0}
-          maxValue={1000}
         />
         <div className="popup-bottom">
           <button
