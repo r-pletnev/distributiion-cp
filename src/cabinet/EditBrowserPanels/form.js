@@ -32,7 +32,7 @@ let AddBrowserPanelForm = props => {
           label="Высота панели"
           autoComplete="on"
           minValue={1}
-          maxValue={300}
+          maxValue={900}
         />
         <FormField
           name="priority"

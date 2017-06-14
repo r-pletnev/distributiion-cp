@@ -3,7 +3,7 @@ const urls = {
   screens: "/screens",
   models: "/models",
   os: "/os",
-  os_versions: "/os-versions/",
+  os_versions: "/os-versions",
   os_panels: "/os-panels",
   os_arch: "/os-arch",
   browsers: "/browsers",
