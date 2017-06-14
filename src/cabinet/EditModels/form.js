@@ -43,6 +43,7 @@ let AddModelForm = props => {
           type="number"
           label="Плотность пикселей"
           autoComplete="off"
+          step="0.01"
         />
         <FormField name="width" type="number" label="Ширина" />
         <FormField name="height" type="number" label="Высота" />

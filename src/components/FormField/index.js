@@ -38,6 +38,7 @@ export const renderField = (
             autoFocus={restProps.autoFocus}
             autoComplete={restProps.autoComplete}
             maxLength={restProps.maxLength}
+            {...type === 'number' && {step: restProps.step}}
           />}
       {meta.touched &&
         meta.error &&
@@ -92,7 +93,8 @@ FormField.defaultProps = {
   minValue: 0,
   maxLength: 250,
   autoComplete: "on",
-  type: "text"
+  type: "text",
+  step: '1'
 };
 
 export default FormField;
