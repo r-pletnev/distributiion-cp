@@ -131,6 +131,7 @@ export const loadFavorites = render(EditFavorites)([
 ]);
 
 export const loadDomains = render(EditDomains)([
+  { action: fetchAllAges, path: ["ages.fetchStatus"] },
   {
     action: fetchAllDomains,
     always: true,

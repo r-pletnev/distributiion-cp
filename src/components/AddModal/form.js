@@ -45,7 +45,6 @@ AddForm = reduxForm({
 })(AddForm);
 
 AddForm.propTypes = {
-  items: PropTypes.array,
   doubleName: PropTypes.string,
   action: PropTypes.func,
   nameLabel: PropTypes.string,

@@ -34,3 +34,11 @@ export default function ageState(state = initialState, action) {
 export function getAges(state) {
   return state.ages.entities;
 }
+
+export function getAgeById(state) {
+  const items = getAges(state);
+  return id => {
+    const isEqual = elm => elm.id === id;
+    return items.find(isEqual);
+  };
+}

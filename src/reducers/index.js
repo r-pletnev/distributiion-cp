@@ -14,9 +14,12 @@ import templates from "./templates";
 import profiles from "./profiles";
 import favorites from "./favorites";
 import ages from "./ages";
+import ux from "./ux";
+import adblocks from "./adblocks";
 
 export const rootReducer = combineReducers({
   form: FormReducer,
+  adblocks,
   ages,
   favorites,
   devices,
@@ -30,5 +33,6 @@ export const rootReducer = combineReducers({
   browser_versions,
   browser_panels,
   templates,
-  profiles
+  profiles,
+  ux
 });

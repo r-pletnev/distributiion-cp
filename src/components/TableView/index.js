@@ -1,4 +1,5 @@
 import React from "react";
+
 import PropTypes from "prop-types";
 import Table from "../Table";
 import AddModal from "../AddModal";
@@ -9,13 +10,6 @@ class TableView extends React.Component {
     this.state = { showCreateModal: false };
     this.openCreateModal = this.openCreateModal.bind(this);
     this.closeModals = this.closeModals.bind(this);
-  }
-
-  componentDidMount() {
-    const { onMountAction } = this.props;
-    if (onMountAction) {
-      onMountAction();
-    }
   }
 
   openCreateModal() {
@@ -29,16 +23,30 @@ class TableView extends React.Component {
   }
 
   render() {
-    const { title, createBtnLabel, headRow, rows, specialForm } = this.props;
+    const {
+      title,
+      createBtnLabel,
+      headRow,
+      rows,
+      specialForm,
+      editForm,
+      defferedRows
+    } = this.props;
     return (
       <div>
         <AddModal
           show={this.state.showCreateModal}
           onClose={this.closeModals}
-          items={rows}
           SpecialForm={specialForm}
           {...this.props}
         />
+        {editForm &&
+          <AddModal
+            show={this.props.statusEditForm}
+            onClose={this.props.closeEditForm}
+            SpecialForm={editForm}
+            title={this.props.editFormTitle}
+          />}
         <h2 className="card-title">{title}</h2>
         <div className="table-item-btn">
           <button
@@ -61,7 +69,6 @@ TableView.propTypes = {
   createBtnLabel: PropTypes.string,
   headRow: PropTypes.array,
   rows: PropTypes.array,
-  onMountAction: PropTypes.func,
 
   // form by itself
   specialForm: PropTypes.func,
@@ -71,7 +78,14 @@ TableView.propTypes = {
   action: PropTypes.func,
   nameLabel: PropTypes.string,
   helpLabel: PropTypes.string,
-  nameBtn: PropTypes.string
+  nameBtn: PropTypes.string,
+
+  // form for EditModal
+  editForm: PropTypes.func,
+  statusEditForm: PropTypes.bool,
+  closeEditForm: PropTypes.func,
+  editFormTitle: PropTypes.string
+  // if not null it prefered simple rows
 };
 
 export default TableView;

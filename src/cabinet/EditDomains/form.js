@@ -6,6 +6,7 @@ import FormSelectField from "../../components/FormSelectField";
 import FormCheckboxField from "../../components/FormCheckboxField";
 import { fetchAddDomains } from "../../actions/domains";
 import { withRouter } from "react-router";
+import { getAges } from "../../reducers/ages";
 
 let AddDomainForm = props => {
   const { handleSubmit, pristine, submitting, error } = props;
@@ -31,7 +32,11 @@ let AddDomainForm = props => {
           type="number"
           minValue={1}
         />
-        <FormSelectField name="age_id" label="Возрастная группа" options={[]} />
+        <FormSelectField
+          name="age_id"
+          label="Возрастная группа"
+          options={props.ages}
+        />
         <FormCheckboxField name="male" label="Мужчина" />
         <div className="popup-bottom">
           <button
@@ -51,4 +56,10 @@ AddDomainForm = reduxForm({
   form: "AddDomainForm"
 })(AddDomainForm);
 
-export default connect()(withRouter(AddDomainForm));
+function mapStateToProps(state) {
+  return {
+    ages: getAges(state)
+  };
+}
+
+export default connect(mapStateToProps)(withRouter(AddDomainForm));

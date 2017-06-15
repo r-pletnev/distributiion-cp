@@ -12,7 +12,7 @@ let TableRow = ({ elm, onRemove, match }) => {
     <tr key={elm.id}>
       <td className="id">{elm.id}</td>
       <td>
-        <Link to={`${match.url}/${elm.id}/domains`}>{elm.name}</Link>
+        <Link to={`${match.url}/${elm.id}`}>{elm.name}</Link>
       </td>
       <ButtonBlock onRemoveClick={onRemove([elm.id])} />
     </tr>

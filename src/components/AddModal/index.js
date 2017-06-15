@@ -20,7 +20,6 @@ AddModal.propTypes = {
   title: PropTypes.string,
   SpecialForm: PropTypes.func,
   // form's props
-  items: PropTypes.array,
   doubleName: PropTypes.string,
   action: PropTypes.func,
   nameLabel: PropTypes.string,

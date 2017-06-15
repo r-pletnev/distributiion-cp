@@ -7,6 +7,7 @@ const checkboxField = ({ input, type, id, innerText, ...restProps }) => (
     {restProps.title && <label>{restProps.title}</label>}
     <label className="checkbox-label">
       <input {...input} id={id} type={type} tabIndex={0} />
+      {" "}
       {restProps.label}
     </label>
     {restProps.helpText &&

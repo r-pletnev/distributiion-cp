@@ -14,7 +14,7 @@ const urls = {
   profile: "/profiles/:profile_name/",
   distribution: "/profiles/:profile_name/distribution",
   favorites: "/favorites",
-  domains: "/favorites/:favorite_id/domains",
+  domains: "/favorites/:favorite_id",
   ages: "/ages"
 };
 

@@ -17,7 +17,8 @@ function fetchAllAgesSuccess(items) {
   const ages = items.map(elm => ({
     id: elm.age_id,
     max_age: elm.max_age,
-    min_age: elm.min_age
+    min_age: elm.min_age,
+    name: `${elm.min_age} - ${elm.max_age}`
   }));
   return {
     type: GET_AGES_SUCCESS,
@@ -38,8 +39,8 @@ export function fetchAddAge({ min_age, max_age }) {
   };
 }
 
-function addAgeSuccess({ age_id, ...rest }) {
-  const age = { id: age_id, ...rest };
+function addAgeSuccess({ age_id, min_age, max_age }) {
+  const age = { id: age_id, min_age, max_age, name: `${min_age} - ${max_age}` };
   return {
     type: ADD_AGE_SUCCESS,
     payload: age

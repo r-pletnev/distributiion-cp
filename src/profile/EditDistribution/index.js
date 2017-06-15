@@ -342,7 +342,7 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-function mapDispacthToProps(dispatch) {
+function mapDispatchToProps(dispatch) {
   return {
     fetchModelPrs: query => dispatch(fetchModelPriorities(query)),
     fetchOsPrs: query => dispatch(fetchOsPriorities(query)),
@@ -378,5 +378,5 @@ function mapDispacthToProps(dispatch) {
 }
 
 export default withRouter(
-  connect(mapStateToProps, mapDispacthToProps)(EditDistribution)
+  connect(mapStateToProps, mapDispatchToProps)(EditDistribution)
 );
