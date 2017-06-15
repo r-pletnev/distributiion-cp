@@ -23,24 +23,20 @@ function fetchAdblocksSuccess(adblocks, profile_name) {
   };
 }
 
-export function fetchSetAdblocks(
-  { profile_name, is_blocked, priority },
-  onSuccess
-) {
-  const query = arguments[0];
+export function fetchSetAdblocks(prs, profile_name, onSuccess) {
   return dispatch => {
-    return SetAdblocks(query)
+    return SetAdblocks(prs)
       .then(_ => {
-        dispatch(setAdblocksSuccess(query));
-        onSuccess();
+        dispatch(setAdblocksSuccess(prs, profile_name));
+        onSuccess()
       })
       .catch(console.error);
   };
 }
 
-function setAdblocksSuccess({ profile_name, is_blocked, priority }) {
+function setAdblocksSuccess(prs, profile_name) {
   return {
     type: SET_ADBLOCKS_SUCCESS,
-    payload: { [profile_name]: { is_blocked, priority } }
+    payload: { [profile_name]:  prs}
   };
 }

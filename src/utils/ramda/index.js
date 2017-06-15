@@ -21,6 +21,7 @@ export const renameKeys = R.curry((keysMap, obj) =>
 );
 
 export const defaultToZero = R.defaultTo(0);
+export const defaultToNull = R.defaultTo(null)
 export const defaultToOne = R.defaultTo(1);
 export const defaultToFalse = R.defaultTo(false);
 export const defaultToEmptyString = R.defaultTo("");

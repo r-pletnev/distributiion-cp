@@ -87,4 +87,4 @@ export const ADD_AGE_URL = "/add_age";
 export const GET_AGES_URL = "/get_ages";
 
 export const GET_ADBLOCKS_URL = "/get_adblock_priorities";
-export const SET_ADBLOCKS_URL = "/set_adblock_priorities";
+export const SET_ADBLOCKS_URL = "/set_adblock_priority";
