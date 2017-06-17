@@ -94,7 +94,7 @@ function removeModelsSuccess(payload) {
   };
 }
 
-// query shape: profile_name, device_id
+// query shape: profile_name, device_id, os_id, os_version_id
 export function fetchModelPriorities(query) {
   return dispatch => {
     return GetModelPriorities(query)
@@ -107,12 +107,21 @@ export function fetchModelPriorities(query) {
   };
 }
 
-function getModelPrioritiesSuccess(payload, { profile_name, device_id }) {
+function getModelPrioritiesSuccess(
+  payload,
+  { profile_name, device_id, os_id, os_version_id }
+) {
   const priorities = payload.reduce(
     (acc, elm) => {
       acc[profile_name] = [
         ...acc[profile_name],
-        { id: elm.model_id, priority: elm.priority, device_id }
+        {
+          id: elm.model_id,
+          priority: elm.priority,
+          device_id,
+          os_id,
+          os_version_id
+        }
       ];
       return acc;
     },

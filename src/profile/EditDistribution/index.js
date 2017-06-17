@@ -86,45 +86,50 @@ function onDeviceRowClick(profile_name, action) {
     };
 }
 
-function onModelRowClick(profile_name, action) {
-  return (model_id, device_id, selectAction, afterLoadAction) =>
-    () => {
-      selectAction(model_id);
-      action({ profile_name, model_id, device_id }).then(_ => {
-        afterLoadAction(model_id)();
-      });
-    };
-}
-
 function onOsRowClick(profile_name, action) {
-  return (os_id, device_id, model_id, selectAction, afterLoadAction) =>
+  return (os_id, device_id, selectAction, afterLoadAction) =>
     () => {
       selectAction(os_id);
-      action({ profile_name, device_id, model_id, os_id }).then(_ => {
+      action({ profile_name, device_id, os_id }).then(_ => {
         afterLoadAction(os_id)();
       });
     };
 }
 
 function onOsVersionRowClick(profile_name, action) {
-  return (
-    os_version_id,
-    device_id,
-    model_id,
-    os_id,
-    selectAction,
-    afterLoadAction
-  ) =>
+  return (os_version_id, device_id, os_id, selectAction, afterLoadAction) =>
     () => {
       selectAction(os_version_id);
       action({
         profile_name,
         device_id,
-        model_id,
         os_id,
         os_version_id
       }).then(_ => {
         afterLoadAction(os_version_id)();
+      });
+    };
+}
+
+function onModelRowClick(profile_name, action) {
+  return (
+    model_id,
+    device_id,
+    os_id,
+    os_version_id,
+    selectAction,
+    afterLoadAction
+  ) =>
+    () => {
+      selectAction(model_id);
+      action({
+        profile_name,
+        model_id,
+        device_id,
+        os_id,
+        os_version_id
+      }).then(_ => {
+        afterLoadAction(model_id)();
       });
     };
 }
@@ -179,10 +184,10 @@ const EditDistribution = props => {
       <h2>Распределение параметров окружения</h2>
       <TableDistribution
         {...restProps}
-        onDeviceRowClick={onDeviceRowClick(profile_name, fetchModelPrs)}
-        onModelRowClick={onModelRowClick(profile_name, fetchOsPrs)}
+        onDeviceRowClick={onDeviceRowClick(profile_name, fetchOsPrs)}
         onOsRowClick={onOsRowClick(profile_name, fetchOsVersionPrs)}
-        onOsVersionRowClick={onOsVersionRowClick(profile_name, fetchBrowserPrs)}
+        onOsVersionRowClick={onOsVersionRowClick(profile_name, fetchModelPrs)}
+        onModelRowClick={onModelRowClick(profile_name, fetchBrowserPrs)}
         onBrowserRowClick={onBrowserRowClick(
           profile_name,
           fetchBrowserVersionPrs

@@ -167,7 +167,7 @@ class TableDistribution extends React.Component {
       this.props.onDeviceRowClick(
         id,
         this.selectDevice,
-        this.afterFetchAction("models")
+        this.afterFetchAction("oses")
       )();
     }
   }
@@ -177,11 +177,11 @@ class TableDistribution extends React.Component {
   }
 
   selectModel(model_id) {
-    this.props.fetchScreenPrs({
-      profile_name: this.props.match.params.profile_name,
-      device_id: this.state.device_id,
-      model_id
-    });
+    // this.props.fetchScreenPrs({
+    //   profile_name: this.props.match.params.profile_name,
+    //   device_id: this.state.device_id,
+    //   model_id
+    // });
     this.setState({ model_id });
   }
 
@@ -245,29 +245,14 @@ class TableDistribution extends React.Component {
             onDeviceRowClick(
               id,
               this.selectDevice,
-              this.afterFetchAction("models")
-            )();
-            break;
-          }
-
-          case "models": {
-            fetchScreenPrs({
-              profile_name: this.props.match.params.profile_name,
-              device_id: this.state.device_id,
-              model_id: id
-            });
-            return onModelRowClick(
-              id,
-              nextId,
-              this.selectModel,
               this.afterFetchAction("oses")
             )();
+            break;
           }
 
           case "oses": {
             return onOsRowClick(
               id,
-              this.state.device_id,
               nextId,
               this.selectOs,
               this.afterFetchAction("os_versions")
@@ -275,27 +260,23 @@ class TableDistribution extends React.Component {
           }
 
           case "os_versions": {
-            fetchArchPrs({
-              profile_name: this.props.match.params.profile_name,
-              device_id: this.state.device_id,
-              model_id: this.state.model_id,
-              os_id: this.state.os_id,
-              os_version_id: id
-            });
-            fetchOsPanelPrs({
-              profile_name: this.props.match.params.profile_name,
-              device_id: this.state.device_id,
-              model_id: this.state.model_id,
-              os_id: this.state.os_id,
-              os_version_id: id
-            });
             return onOsVersionRowClick(
               id,
               this.state.device_id,
-              this.state.model_id,
               nextId,
               this.selectOsVersion,
-              this.afterFetchAction("browsers", id)
+              this.afterFetchAction("models")
+            )();
+          }
+
+          case "models": {
+            return onModelRowClick(
+              id,
+              this.state.device_id,
+              this.state.os_id,
+              nextId,
+              this.selectModel,
+              this.afterFetchAction("browsers")
             )();
           }
 
@@ -312,14 +293,6 @@ class TableDistribution extends React.Component {
             break;
           }
           case "browser_versions": {
-            fetchTemplatePrs({
-              profile_name: this.props.match.params.profile_name,
-              device_id: this.state.device_id,
-              model_id: this.state.model_id,
-              os_id: this.state.os_id,
-              os_version_id: this.state.os_version_id,
-              browser_id: id
-            });
             return this.selectBrowserVersion(id)();
           }
         }
@@ -342,11 +315,11 @@ class TableDistribution extends React.Component {
   }
 
   getFirstThird() {
-    const { devices, models } = this.props;
-    const { onDeviceRowClick, onModelRowClick } = this.props;
+    const { devices, oses } = this.props;
+    const { onDeviceRowClick, onOsRowClick } = this.props;
     const head = [
-      <th key={0}>{`Devices(${devices.priorities.length})`}</th>,
-      <th key={1}>{`Models(${models.priorities.length})`}</th>
+      <th key={0}>{`Устройства(${devices.priorities.length})`}</th>,
+      <th key={1}>{`ОС(${oses.priorities.length})`}</th>
     ];
     const rows = [
       {
@@ -362,45 +335,13 @@ class TableDistribution extends React.Component {
             action={onDeviceRowClick(
               elm.id,
               this.selectDevice,
-              this.afterFetchAction("models")
+              this.afterFetchAction("oses")
             )}
             isActive={elm.id === this.state.device_id}
           />
         ))
       },
-      {
-        singleItemName: "Model",
-        nameAddAttr: "add-model",
-        addBtnText: "Add Model",
-        handleOnClick: this.openModelModal,
-        rows: models.priorities.map((elm, index) => (
-          <BigTableRow
-            {...elm}
-            rowKey={index}
-            key={index}
-            action={onModelRowClick(
-              elm.id,
-              this.state.device_id,
-              this.selectModel,
-              this.afterFetchAction("oses")
-            )}
-            isActive={elm.id === this.state.model_id}
-            handleDetailClick={this.openDetailModel}
-          />
-        ))
-      }
-    ];
-    return <ThirdPart headRow={head} rows={rows} />;
-  }
 
-  getSecondThird() {
-    const { oses, os_versions, onOsRowClick, onOsVersionRowClick } = this.props;
-
-    const head = [
-      <th key={0}>{`Oses(${oses.priorities.length})`}</th>,
-      <th key={1}>{`OS Versions(${os_versions.priorities.length})`}</th>
-    ];
-    const rows = [
       {
         singleItemName: "OS",
         nameAddAttr: "add-os",
@@ -414,14 +355,30 @@ class TableDistribution extends React.Component {
             action={onOsRowClick(
               elm.id,
               this.state.device_id,
-              this.state.model_id,
               this.selectOs,
               this.afterFetchAction("os_versions")
             )}
             isActive={elm.id === this.state.os_id}
           />
         ))
-      },
+      }
+    ];
+    return <ThirdPart headRow={head} rows={rows} />;
+  }
+
+  getSecondThird() {
+    const {
+      models,
+      os_versions,
+      onModelRowClick,
+      onOsVersionRowClick
+    } = this.props;
+
+    const head = [
+      <th key={0}>{`Версии ОС(${os_versions.priorities.length})`}</th>,
+      <th key={1}>{`Модели(${models.priorities.length})`}</th>
+    ];
+    const rows = [
       {
         singleItemName: "OS Version",
         nameAddAttr: "add-os-version",
@@ -435,13 +392,33 @@ class TableDistribution extends React.Component {
             action={onOsVersionRowClick(
               elm.id,
               this.state.device_id,
-              this.state.model_id,
               this.state.os_id,
               this.selectOsVersion,
-              this.afterFetchAction("browsers", elm.id)
+              this.afterFetchAction("models", elm.id)
             )}
             isActive={elm.id === this.state.os_version_id}
             handleDetailClick={this.openDetailOsVersion}
+          />
+        ))
+      },
+      {
+        singleItemName: "Model",
+        nameAddAttr: "add-model",
+        addBtnText: "Add Model",
+        handleOnClick: this.openModelModal,
+        rows: models.priorities.map((elm, index) => (
+          <SmallTableRow
+            {...elm}
+            rowKey={index}
+            key={index}
+            action={onModelRowClick(
+              elm.id,
+              this.state.device_id,
+              this.selectModel,
+              this.afterFetchAction("browsers")
+            )}
+            isActive={elm.id === this.state.model_id}
+            handleDetailClick={this.openDetailModel}
           />
         ))
       }
@@ -580,32 +557,32 @@ class TableDistribution extends React.Component {
     );
   }
 
-  getDetailModelModal() {
-    const { screens } = this.props;
-    const headRow = [
-      <th key={0}>{`Screens (${screens.priorities.length})`}</th>
-    ];
-    const rows = [
-      {
-        singleItemName: "Resulution",
-        addBtnText: "Add screen",
-        handleOnClick: this.openScreenModal,
-        rows: screens.priorities.map((elm, index) => (
-          <SmallTableRow {...elm} key={index} rowKey={index} />
-        ))
-      }
-    ];
-    return (
-      <DetailModal
-        show={this.state.showDetailModel}
-        onClose={this.hideModals}
-        title="Model properties"
-        name={this.getItemName(this.state.model_id, "models")}
-      >
-        <ThirdPart headRow={headRow} rows={rows} />
-      </DetailModal>
-    );
-  }
+  // getDetailModelModal() {
+  //   const { screens } = this.props;
+  //   const headRow = [
+  //     <th key={0}>{`Screens (${screens.priorities.length})`}</th>
+  //   ];
+  //   const rows = [
+  //     {
+  //       singleItemName: "Resulution",
+  //       addBtnText: "Add screen",
+  //       handleOnClick: this.openScreenModal,
+  //       rows: screens.priorities.map((elm, index) => (
+  //         <SmallTableRow {...elm} key={index} rowKey={index} />
+  //       ))
+  //     }
+  //   ];
+  //   return (
+  //     <DetailModal
+  //       show={this.state.showDetailModel}
+  //       onClose={this.hideModals}
+  //       title="Model properties"
+  //       name={this.getItemName(this.state.model_id, "models")}
+  //     >
+  //       <ThirdPart headRow={headRow} rows={rows} />
+  //     </DetailModal>
+  //   );
+  // }
 
   getModals() {
     return (
@@ -618,14 +595,14 @@ class TableDistribution extends React.Component {
           action={this.props.fetchSetDevicePry}
           fieldName="device_id"
         />
-        <AddPriorityModal
-          show={this.state.showModelModal}
-          onClose={this.hideModals}
-          name="Модель"
-          items={this.getCurrentTypeItems()}
-          action={this.props.fetchSetModelPry(this.state.device_id)}
-          fieldName="model_id"
-        />
+        {/* <AddPriorityModal */}
+        {/*   show={this.state.showModelModal} */}
+        {/*   onClose={this.hideModals} */}
+        {/*   name="Модель" */}
+        {/*   items={this.getCurrentTypeItems()} */}
+        {/*   action={this.props.fetchSetModelPry(this.state.device_id)} */}
+        {/*   fieldName="model_id" */}
+        {/* /> */}
         <AddPriorityModal
           show={this.state.showOsModal}
           onClose={this.hideModals}
@@ -734,17 +711,17 @@ class TableDistribution extends React.Component {
     return (
       <div>
         {this.getDetailOsVersionModal()}
-        {this.getDetailModelModal()}
+        {/* {this.getDetailModelModal()} */}
         {this.getDetailBrowserVersion()}
         {this.getModals()}
         <table className="table table-three">
-          <thead className="table-three-root">
-            <tr>
-              <th>Устройства</th>
-              <th>Операционные системы</th>
-              <th>Браузеры</th>
-            </tr>
-          </thead>
+          {/* <thead className="table-three-root"> */}
+          {/*   <tr> */}
+          {/*     <th>Устройства</th> */}
+          {/*     <th>Операционные системы</th> */}
+          {/*     <th>Браузеры</th> */}
+          {/*   </tr> */}
+          {/* </thead> */}
           <tbody>
             <tr>
               {this.getFirstThird()}

@@ -1,4 +1,10 @@
-import { AddOS, GetOSES, RemoveOSES, GetOsPriorities, SetOsPriority } from "../api/oses";
+import {
+  AddOS,
+  GetOSES,
+  RemoveOSES,
+  GetOsPriorities,
+  SetOsPriority
+} from "../api/oses";
 import {
   ADD_OS_SUCCESS,
   GET_OSES_SUCCESS,
@@ -100,28 +106,30 @@ function getOsPrioritiesSuccess(payload, { profile_name, ...restArgs }) {
   };
 }
 
-export function fetchSetOsPriority({profile_name, device_id, model_id, os_id, priority}, onSuccess){
-  const query = arguments[0]
+export function fetchSetOsPriority(
+  { profile_name, device_id, os_id, priority },
+  onSuccess
+) {
+  const query = arguments[0];
   return dispatch => {
     return SetOsPriority(query)
       .then(_ => {
-        dispatch(setOsPrioritySuccess(query))
-        onSuccess()
+        dispatch(setOsPrioritySuccess(query));
+        onSuccess();
       })
-      .catch(error => (console.error(error)))
-  }
+      .catch(console.error);
+  };
 }
 
-function setOsPrioritySuccess({profile_name, model_id, device_id, os_id, priority}){
+function setOsPrioritySuccess({ profile_name, device_id, os_id, priority }) {
   const priorityProp = {
     id: os_id,
     device_id,
-    model_id,
     priority: Number(priority)
-  }
+  };
 
   return {
     type: SET_OS_PRIORITY_SUCCESS,
-    payload: {profile_name, priority: priorityProp}
-  }
+    payload: { profile_name, priority: priorityProp }
+  };
 }
