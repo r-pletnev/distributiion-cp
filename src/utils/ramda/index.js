@@ -7,6 +7,9 @@ export const filterById = R.curry((ids, state) =>
 );
 
 export const sortById = R.sortBy(R.prop("id"));
+export const sortByName = R.sortBy(R.prop("name"));
+export const sortDescByName = R.sort(R.compose(R.descend, R.prop("name")));
+export const sortDescById = R.sortBy(R.compose(R.descend, R.prop("id")));
 
 // dotted path for take deep nested fields from objects
 const dotPath = R.useWith(R.path, [R.split(".")]);
@@ -21,7 +24,7 @@ export const renameKeys = R.curry((keysMap, obj) =>
 );
 
 export const defaultToZero = R.defaultTo(0);
-export const defaultToNull = R.defaultTo(null)
+export const defaultToNull = R.defaultTo(null);
 export const defaultToOne = R.defaultTo(1);
 export const defaultToFalse = R.defaultTo(false);
 export const defaultToEmptyString = R.defaultTo("");

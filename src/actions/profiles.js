@@ -27,7 +27,7 @@ function GetProfilesSuccess(payload) {
 
 export function fetchCreateProfile(profile_name, onSuccess) {
   return dispatch => {
-    return SetDevicePriorities({ profile_name, device_id: 1, priority: 1 })
+    return SetDevicePriorities([{ profile_name, device_id: 1, priority: 1 }])
       .then(response => {
         dispatch(createProfileSuccess(profile_name));
         onSuccess();

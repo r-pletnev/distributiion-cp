@@ -154,7 +154,7 @@ export function fetchSetBrowserVersionPriority(
 ) {
   const query = arguments[0];
   return dispatch => {
-    return SetBrowserVersionPriority(query)
+    return SetBrowserVersionPriority([query])
       .then(_ => {
         dispatch(setBrowserVersionPrioritySuccess(query));
         onSuccess();

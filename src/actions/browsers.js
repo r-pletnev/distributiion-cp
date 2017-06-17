@@ -27,10 +27,13 @@ export function fetchAllBrowsers() {
 }
 
 function fetchAllBrowsersSuccess(payload) {
-  const browsers = payload.map(elm => ({
-    id: elm.browser_id,
-    name: elm.name
-  }));
+  const browsers = payload.map(elm => {
+    const { browser_id: id, ...rest } = elm;
+    return {
+      id: elm.browser_id,
+      name: elm.name
+    };
+  });
 
   return {
     type: GET_BROWSERS_SUCCESS,
@@ -84,9 +87,12 @@ function removeBrowsersSuccess(payload) {
   };
 }
 
-export function fetchBrowserPriorities(
-  { profile_name, device_id, model_id, os_id }
-) {
+export function fetchBrowserPriorities({
+  profile_name,
+  device_id,
+  model_id,
+  os_id
+}) {
   const query = arguments[0];
   return dispatch => {
     return GetBrowserPriorities(query)
@@ -139,7 +145,7 @@ export function fetchSetBrowserPriority(
 ) {
   const query = arguments[0];
   return dispatch => {
-    return SetBrowserPriority(query)
+    return SetBrowserPriority([query])
       .then(_ => {
         dispatch(setBrowserPrioritySuccess(query));
         onSuccess();
@@ -148,17 +154,15 @@ export function fetchSetBrowserPriority(
   };
 }
 
-function setBrowserPrioritySuccess(
-  {
-    profile_name,
-    device_id,
-    model_id,
-    os_version_id,
-    os_id,
-    browser_id,
-    priority
-  }
-) {
+function setBrowserPrioritySuccess({
+  profile_name,
+  device_id,
+  model_id,
+  os_version_id,
+  os_id,
+  browser_id,
+  priority
+}) {
   const priorityProp = {
     id: browser_id,
     device_id,

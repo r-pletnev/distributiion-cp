@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { reduxForm } from "redux-form";
 import FormField from "../../components/FormField";
-import FormSelectField from "../../components/FormSelectField";
+import FormSelect2Field from "../../components/FormSelect2Field";
 import { fetchAddScreen } from "../../actions/screens";
 import { getModels } from "../../reducers/models";
 
@@ -27,24 +27,29 @@ let AddScreenForm = props => {
   return (
     <div className="popup-content">
       <form className="form" onSubmit={handleSubmit(submitForm)}>
+        <FormSelect2Field
+          name="model_id"
+          label="Выберите модель"
+          options={props.models}
+        />
         <div className="split">
           <div className="box">
             <FormField
               name="width"
               type="number"
-              label="Width"
+              label="Ширина"
               minValue={1}
-              maxValue={3000}
+              maxValue={5000}
             />
           </div>
           <div className="box">
             <FormField
               name="height"
               type="number"
-              label="height"
+              label="Высота"
               autoComplete="on"
               minValue={1}
-              maxValue={3000}
+              maxValue={5000}
             />
           </div>
         </div>
@@ -54,7 +59,7 @@ let AddScreenForm = props => {
             disabled={pristine || submitting}
             type="submit"
           >
-            Send
+            Отправить
           </button>
         </div>
       </form>

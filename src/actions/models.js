@@ -58,9 +58,15 @@ export function fetchAddModel(model, onSuccess) {
   };
 }
 
-function addModelSuccess(
-  { model_id: id, name, device_id, payload, pixel_ratio, width, height }
-) {
+function addModelSuccess({
+  model_id: id,
+  name,
+  device_id,
+  payload,
+  pixel_ratio,
+  width,
+  height
+}) {
   return {
     type: ADD_MODEL_SUCCESS,
     payload: {
@@ -139,7 +145,7 @@ export function fetchSetModelPrioirty(
 ) {
   const query = arguments[0];
   return dispatch => {
-    return SetModelPriorities(query)
+    return SetModelPriorities([query])
       .then(response => {
         dispatch(
           setModelPrioritySuccess(

@@ -8,6 +8,7 @@ import {
 import {
   filterById,
   sortById,
+  sortDescById,
   defaultToEmptyArray,
   mapById
 } from "../utils/ramda";
@@ -44,7 +45,7 @@ export default function browserVersionState(state = initialState, action) {
     case GET_BROWSER_VERSION_PRIORITIES_SUCCESS: {
       return {
         ...state,
-        priorities: { ...state.priorities, ...payload },
+        priorities: { ...state.priorities, ...payload }
       };
     }
 
@@ -77,6 +78,13 @@ export function getBrowserVersionById(state) {
   return id => {
     const isEqual = elm => elm.id === id;
     return items.find(isEqual);
+  };
+}
+
+export function getBrowserVersionByBrowserId(state) {
+  const items = getBrowserVersions(state);
+  return id => {
+    return sortById(items.filter(elm => elm.browser_id === id));
   };
 }
 

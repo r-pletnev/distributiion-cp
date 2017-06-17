@@ -112,7 +112,7 @@ export function fetchSetOsPriority(
 ) {
   const query = arguments[0];
   return dispatch => {
-    return SetOsPriority(query)
+    return SetOsPriority([query])
       .then(_ => {
         dispatch(setOsPrioritySuccess(query));
         onSuccess();

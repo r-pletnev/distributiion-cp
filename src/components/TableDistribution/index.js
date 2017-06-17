@@ -24,7 +24,6 @@ class TableDistribution extends React.Component {
       showBrowserModal: false,
       showBrowserVersionModal: false,
       showDetailOsVersion: false,
-      showDetailModel: false,
       showDetailBrowserVersion: false,
       showArchModal: false,
       showOsPanelModal: false,
@@ -41,13 +40,12 @@ class TableDistribution extends React.Component {
     this.hideScreenModal = this.hideScreenModal.bind(this);
     this.hideTemplateModal = this.hideTemplateModal.bind(this);
     this.openDeviceModal = this.openDeviceModal.bind(this);
-    this.openModelModal = this.openModelModal.bind(this);
     this.openOsModal = this.openOsModal.bind(this);
+    this.openModelModal = this.openModelModal.bind(this);
     this.openBrowserModal = this.openBrowserModal.bind(this);
     this.openOsVersionModal = this.openOsVersionModal.bind(this);
     this.openBrowserVersionModal = this.openBrowserVersionModal.bind(this);
     this.openDetailOsVersion = this.openDetailOsVersion.bind(this);
-    this.openDetailModel = this.openDetailModel.bind(this);
     this.openDetailBrowserVersion = this.openDetailBrowserVersion.bind(this);
     this.openArchModal = this.openArchModal.bind(this);
     this.openOsPanelModal = this.openOsPanelModal.bind(this);
@@ -70,14 +68,14 @@ class TableDistribution extends React.Component {
   hideModals() {
     this.setState({
       showDeviceModal: false,
-      showModelModal: false,
       showOsModal: false,
       showOsVersionModal: false,
       showBrowserModal: false,
       showBrowserVersionModal: false,
       showDetailOsVersion: false,
       showDetailModel: false,
-      showDetailBrowserVersion: false
+      showDetailBrowserVersion: false,
+      showModelModal: false
     });
   }
 
@@ -124,10 +122,6 @@ class TableDistribution extends React.Component {
     this.setState({
       showDetailOsVersion: true
     });
-  }
-
-  openDetailModel() {
-    this.setState({ showDetailModel: true });
   }
 
   openDetailBrowserVersion() {
@@ -177,11 +171,6 @@ class TableDistribution extends React.Component {
   }
 
   selectModel(model_id) {
-    // this.props.fetchScreenPrs({
-    //   profile_name: this.props.match.params.profile_name,
-    //   device_id: this.state.device_id,
-    //   model_id
-    // });
     this.setState({ model_id });
   }
 
@@ -242,12 +231,11 @@ class TableDistribution extends React.Component {
       return () => {
         switch (type) {
           case "devices": {
-            onDeviceRowClick(
+            return onDeviceRowClick(
               id,
               this.selectDevice,
               this.afterFetchAction("oses")
             )();
-            break;
           }
 
           case "oses": {
@@ -281,7 +269,7 @@ class TableDistribution extends React.Component {
           }
 
           case "browsers": {
-            onBrowserRowClick(
+            return onBrowserRowClick(
               id,
               this.state.device_id,
               this.state.model_id,
@@ -290,7 +278,6 @@ class TableDistribution extends React.Component {
               this.selectBrowser,
               this.afterFetchAction("browser_versions")
             )();
-            break;
           }
           case "browser_versions": {
             return this.selectBrowserVersion(id)();
@@ -323,9 +310,9 @@ class TableDistribution extends React.Component {
     ];
     const rows = [
       {
-        singleItemName: "Device",
+        singleItemName: "Устройство",
         nameAddAttr: "add-device",
-        addBtnText: "Add Device",
+        addBtnText: "Добавить устройство",
         handleOnClick: this.openDeviceModal,
         rows: devices.priorities.map((elm, index) => (
           <SmallTableRow
@@ -343,9 +330,9 @@ class TableDistribution extends React.Component {
       },
 
       {
-        singleItemName: "OS",
+        singleItemName: "ОС",
         nameAddAttr: "add-os",
-        addBtnText: "Add OS",
+        addBtnText: "Добавить ОС",
         handleOnClick: this.openOsModal,
         rows: oses.priorities.map((elm, index) => (
           <SmallTableRow
@@ -380,9 +367,9 @@ class TableDistribution extends React.Component {
     ];
     const rows = [
       {
-        singleItemName: "OS Version",
+        singleItemName: "Версия ОС",
         nameAddAttr: "add-os-version",
-        addBtnText: "Add OS Version",
+        addBtnText: "Добавить версию ОС",
         handleOnClick: this.openOsVersionModal,
         rows: os_versions.priorities.map((elm, index) => (
           <BigTableRow
@@ -402,18 +389,21 @@ class TableDistribution extends React.Component {
         ))
       },
       {
-        singleItemName: "Model",
+        singleItemName: "Модель",
         nameAddAttr: "add-model",
-        addBtnText: "Add Model",
+        addBtnText: "Добавить модель",
         handleOnClick: this.openModelModal,
         rows: models.priorities.map((elm, index) => (
           <SmallTableRow
-            {...elm}
+            name={elm.name}
+            priority={elm.priority}
             rowKey={index}
             key={index}
             action={onModelRowClick(
               elm.id,
               this.state.device_id,
+              this.state.os_id,
+              this.state.os_version_id,
               this.selectModel,
               this.afterFetchAction("browsers")
             )}
@@ -430,16 +420,16 @@ class TableDistribution extends React.Component {
   getLastThird() {
     const { browsers, browser_versions, onBrowserRowClick } = this.props;
     const head = [
-      <th key={0}>{`Browsers(${browsers.priorities.length})`}</th>,
+      <th key={0}>{`Браузеры(${browsers.priorities.length})`}</th>,
       <th key={1}>
-        {`Browser Versions(${browser_versions.priorities.length})`}
+        {`Версии Браузеров(${browser_versions.priorities.length})`}
       </th>
     ];
     const rows = [
       {
-        singleItemName: "Browser",
+        singleItemName: "Браузер",
         nameAddAttr: "add-browser",
-        addBtnText: "Add Browser",
+        addBtnText: "Добавить Браузер",
         handleOnClick: this.openBrowserModal,
         rows: browsers.priorities.map((elm, index) => (
           <SmallTableRow
@@ -460,9 +450,9 @@ class TableDistribution extends React.Component {
         ))
       },
       {
-        singleItemName: "Browser Version",
+        singleItemName: "Версия Браузера",
         nameAddAttr: "add-browser-version",
-        addBtnText: "Add Browser Version",
+        addBtnText: "Добавить версию браузера",
         handleOnClick: this.openBrowserVersionModal,
         rows: browser_versions.priorities.map((elm, index) => (
           <BigTableRow
@@ -480,9 +470,22 @@ class TableDistribution extends React.Component {
   }
 
   getCurrentTypeItems() {
-    return this.state.currentType
-      ? this.props[this.state.currentType].items
-      : [];
+    const { currentType } = this.state;
+    if (!currentType) return [];
+
+    switch (currentType) {
+      case "browser_versions": {
+        return this.props.browser_versions.byBrowserId(this.state.browser_id);
+      }
+
+      case "os_versions": {
+        return this.props.os_versions.byOsId(this.state.os_id);
+      }
+
+      default: {
+        return this.props[currentType].items;
+      }
+    }
   }
 
   getDetailOsVersionModal() {
@@ -557,36 +560,21 @@ class TableDistribution extends React.Component {
     );
   }
 
-  // getDetailModelModal() {
-  //   const { screens } = this.props;
-  //   const headRow = [
-  //     <th key={0}>{`Screens (${screens.priorities.length})`}</th>
-  //   ];
-  //   const rows = [
-  //     {
-  //       singleItemName: "Resulution",
-  //       addBtnText: "Add screen",
-  //       handleOnClick: this.openScreenModal,
-  //       rows: screens.priorities.map((elm, index) => (
-  //         <SmallTableRow {...elm} key={index} rowKey={index} />
-  //       ))
-  //     }
-  //   ];
-  //   return (
-  //     <DetailModal
-  //       show={this.state.showDetailModel}
-  //       onClose={this.hideModals}
-  //       title="Model properties"
-  //       name={this.getItemName(this.state.model_id, "models")}
-  //     >
-  //       <ThirdPart headRow={headRow} rows={rows} />
-  //     </DetailModal>
-  //   );
-  // }
-
   getModals() {
     return (
       <div>
+        <AddPriorityModal
+          show={this.state.showModelModal}
+          onClose={this.hideModals}
+          name="Модель"
+          items={this.getCurrentTypeItems()}
+          action={this.props.fetchSetModelPry(
+            this.state.device_id,
+            this.state.os_id,
+            this.state.os_version_id
+          )}
+          fieldName="model_id"
+        />
         <AddPriorityModal
           show={this.state.showDeviceModal}
           onClose={this.hideModals}
@@ -595,23 +583,12 @@ class TableDistribution extends React.Component {
           action={this.props.fetchSetDevicePry}
           fieldName="device_id"
         />
-        {/* <AddPriorityModal */}
-        {/*   show={this.state.showModelModal} */}
-        {/*   onClose={this.hideModals} */}
-        {/*   name="Модель" */}
-        {/*   items={this.getCurrentTypeItems()} */}
-        {/*   action={this.props.fetchSetModelPry(this.state.device_id)} */}
-        {/*   fieldName="model_id" */}
-        {/* /> */}
         <AddPriorityModal
           show={this.state.showOsModal}
           onClose={this.hideModals}
           name="Операционка"
           items={this.getCurrentTypeItems()}
-          action={this.props.fetchSetOsPry(
-            this.state.device_id,
-            this.state.model_id
-          )}
+          action={this.props.fetchSetOsPry(this.state.device_id)}
           fieldName="os_id"
         />
         <AddPriorityModal
@@ -621,7 +598,6 @@ class TableDistribution extends React.Component {
           items={this.getCurrentTypeItems()}
           action={this.props.fetchSetOsVersionPry(
             this.state.device_id,
-            this.state_model_id,
             this.state.os_id
           )}
           fieldName="os_version_id"
@@ -642,7 +618,7 @@ class TableDistribution extends React.Component {
         <AddPriorityModal
           show={this.state.showBrowserVersionModal}
           onClose={this.hideModals}
-          name="Версия Бразуера"
+          name="Версия Браузера"
           items={this.getCurrentTypeItems()}
           action={this.props.fetchSetBrowserVersionPry(
             this.state.device_id,
@@ -711,17 +687,9 @@ class TableDistribution extends React.Component {
     return (
       <div>
         {this.getDetailOsVersionModal()}
-        {/* {this.getDetailModelModal()} */}
         {this.getDetailBrowserVersion()}
         {this.getModals()}
         <table className="table table-three">
-          {/* <thead className="table-three-root"> */}
-          {/*   <tr> */}
-          {/*     <th>Устройства</th> */}
-          {/*     <th>Операционные системы</th> */}
-          {/*     <th>Браузеры</th> */}
-          {/*   </tr> */}
-          {/* </thead> */}
           <tbody>
             <tr>
               {this.getFirstThird()}

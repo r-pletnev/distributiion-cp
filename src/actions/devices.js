@@ -113,7 +113,7 @@ export function fetchSetDevicePrioritiy(
 ) {
   const query = arguments[0];
   return dispatch => {
-    return SetDevicePriorities(query)
+    return SetDevicePriorities([query])
       .then(response => {
         dispatch(
           setDevicePrioritiesSuccess({ device_id, priority }, profile_name)

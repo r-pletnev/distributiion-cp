@@ -87,3 +87,8 @@ function _getOsVersionPriorities(state, profile) {
 export function getOsVersionPriorities(state, profile) {
   return mapById(_getOsVersionPriorities(state, profile), getOsVersions(state));
 }
+
+export function getOsVesionByOsId(state) {
+  const items = getOsVersions(state);
+  return id => sortById(items.filter(elm => elm.os_id === id));
+}

@@ -3,13 +3,19 @@ import { Field } from "redux-form";
 import PropTypes from "prop-types";
 import cx from "classnames";
 
-export const renderField = (
-  { input, label, type, meta, SubLink, ...restProps }
-) => (
+export const renderField = ({
+  input,
+  label,
+  type,
+  meta,
+  SubLink,
+  ...restProps
+}) => (
   <div
     className={cx("form-group", { "has-error": meta.touched && meta.error })}
   >
-    <label htmlFor={restProps.id}>{label} {SubLink && <SubLink />}</label>
+    <label htmlFor={restProps.id}>{label}: {SubLink && <SubLink />}</label>
+    {" "}
     <div className="group">
       {type === "textarea"
         ? <textarea
@@ -38,7 +44,7 @@ export const renderField = (
             autoFocus={restProps.autoFocus}
             autoComplete={restProps.autoComplete}
             maxLength={restProps.maxLength}
-            {...type === 'number' && {step: restProps.step}}
+            {...type === "number" && { step: restProps.step }}
           />}
       {meta.touched &&
         meta.error &&
@@ -94,7 +100,7 @@ FormField.defaultProps = {
   maxLength: 250,
   autoComplete: "on",
   type: "text",
-  step: '1'
+  step: "1"
 };
 
 export default FormField;

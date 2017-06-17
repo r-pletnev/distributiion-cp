@@ -53,10 +53,7 @@ export function fetchAddTemplate(template, onSuccess) {
 }
 
 function addTemplateSuccess(payload) {
-  const {
-    template_id,
-    ...rest
-  } = payload;
+  const { template_id, ...rest } = payload;
   return {
     type: ADD_TEMPLATE_SUCCESS,
     payload: {
@@ -132,7 +129,7 @@ export function fetchSetTemplatePriority(
 ) {
   const query = arguments[0];
   return dispatch => {
-    return SetTemplatePriority(query)
+    return SetTemplatePriority([query])
       .then(_ => {
         dispatch(setTemplatePrioritySuccess(query));
         onSuccess();
@@ -141,18 +138,16 @@ export function fetchSetTemplatePriority(
   };
 }
 
-function setTemplatePrioritySuccess(
-  {
-    profile_name,
-    device_id,
-    model_id,
-    os_id,
-    os_version_id,
-    browser_id,
-    template_id,
-    priority
-  }
-) {
+function setTemplatePrioritySuccess({
+  profile_name,
+  device_id,
+  model_id,
+  os_id,
+  os_version_id,
+  browser_id,
+  template_id,
+  priority
+}) {
   const priorityProp = {
     id: template_id,
     device_id,

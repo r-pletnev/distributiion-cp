@@ -2,12 +2,11 @@ import React from "react";
 import Modal from "../Modal";
 import PropTypes from "prop-types";
 import FormField from "../FormField";
-import RFSelectField from "../RFSelectField";
+import FormSelect2Field from "../FormSelect2Field";
 import { reduxForm, Field } from "redux-form";
 
 let AddPriorityForm = props => {
-  const { handleSubmit, pristine, submitting, error } = props;
-
+  const { handleSubmit, pristine, submitting, error, name } = props;
   const closeForm = () => {
     props.closeForm();
     props.destroy();
@@ -16,16 +15,13 @@ let AddPriorityForm = props => {
     return props.action(values, closeForm);
   };
 
-  const getSelectOptions = items =>
-    items.map(elm => ({ value: elm.id, label: elm.name }));
-
   return (
     <div className="popup-content">
       <form className="form" onSubmit={handleSubmit(submitForm)}>
-        <Field
+        <FormSelect2Field
           name={props.fieldName}
-          options={getSelectOptions(props.items)}
-          component={RFSelectField}
+          options={props.items}
+          label={props.label ? props.label : name}
         />
         <FormField
           name="priority"
@@ -68,7 +64,8 @@ AddPriorityModal.propTypes = {
   // form's props
   items: PropTypes.array,
   action: PropTypes.func,
-  fieldName: PropTypes.string // this name will send to api
+  fieldName: PropTypes.string, // this name will send to api
+  label: PropTypes.string
 };
 
 export default AddPriorityModal;

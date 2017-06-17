@@ -1,7 +1,5 @@
 import axios from "axios";
 
-export const ROOT_URL = "https://develop.antlace.com:10124";
-
 export const client = axios.create({
   baseURL: "https://develop.antlace.com:10124/cyborgs",
   responseType: "json"
@@ -58,7 +56,8 @@ export const SET_BROWSER_PRIORITY_URL = "/set_browser_priority";
 export const ADD_BROWSER_VERSION_URL = "/add_browser_version";
 export const GET_BROWSER_VERSIONS_URL = "/get_browser_versions";
 export const REMOVE_BROWSER_VERSIONS_URL = "/remove_browser_versions";
-export const GET_BROWSER_VERSION_PRIORITIES_URL = "/get_browser_version_priorities";
+export const GET_BROWSER_VERSION_PRIORITIES_URL =
+  "/get_browser_version_priorities";
 export const SET_BROWSER_VERSION_PRIORITY_URL = "/set_browser_version_priority";
 
 export const ADD_BROWSER_PANEL_URL = "/add_browser_panel";

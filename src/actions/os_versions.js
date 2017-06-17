@@ -83,14 +83,12 @@ function removeOSVersionsSuccess(payload) {
   };
 }
 
-export function fetchOsVersionPriorities(
-  {
-    profile_name,
-    device_id,
-    model_id,
-    os_id
-  }
-) {
+export function fetchOsVersionPriorities({
+  profile_name,
+  device_id,
+  model_id,
+  os_id
+}) {
   const query = arguments[0];
   return dispatch => {
     return GetOsVersionPriorities(query)
@@ -128,7 +126,7 @@ export function fetchSetOsVersionPriority(
 ) {
   const query = arguments[0];
   return dispatch => {
-    return SetOsVersionPriority(query)
+    return SetOsVersionPriority([query])
       .then(_ => {
         dispatch(setOsVersionPrioritySuccess(query));
         onSuccess();
@@ -137,15 +135,13 @@ export function fetchSetOsVersionPriority(
   };
 }
 
-function setOsVersionPrioritySuccess(
-  {
-    profile_name,
-    device_id,
-    os_id,
-    os_version_id,
-    priority
-  }
-) {
+function setOsVersionPrioritySuccess({
+  profile_name,
+  device_id,
+  os_id,
+  os_version_id,
+  priority
+}) {
   const priorityProp = {
     id: os_version_id,
     device_id,

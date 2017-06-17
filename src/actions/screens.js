@@ -124,7 +124,7 @@ export function fetchSetScreenPriority(
 ) {
   const query = arguments[0];
   return dispatch => {
-    return SetScreenPriority(query)
+    return SetScreenPriority([query])
       .then(_ => {
         dispatch(setScreenPrioritySuccess(query));
         onSuccess();
@@ -133,9 +133,13 @@ export function fetchSetScreenPriority(
   };
 }
 
-function setScreenPrioritySuccess(
-  { profile_name, device_id, model_id, screen_id, priority }
-) {
+function setScreenPrioritySuccess({
+  profile_name,
+  device_id,
+  model_id,
+  screen_id,
+  priority
+}) {
   const priorityProp = {
     id: screen_id,
     device_id,

@@ -18,28 +18,38 @@ RFReactSelect.propTypes = {
   }).isRequired,
   options: PropTypes.array.isRequired,
   multi: PropTypes.bool,
-  className: PropTypes.string
+  className: PropTypes.string,
+  label: PropTypes.string
 };
 
 // source: https://gist.github.com/leocristofani/98312e61807db8f32e720c9f97a186e5
 
-export default function RFReactSelect({ input, options, multi, className }) {
+export default function RFReactSelect({
+  input,
+  options,
+  multi,
+  className,
+  label
+}) {
   const { name, value, onBlur, onChange, onFocus } = input;
   const transformedValue = transformValue(value, options, multi);
   return (
-    <Select
-      valueKey="value"
-      name={name}
-      value={transformedValue}
-      multi={multi}
-      options={options}
-      onChange={
-        multi ? multiChangeHandler(onChange) : singleChangeHandler(onChange)
-      }
-      onBlur={() => onBlur(value)}
-      onFocus={onFocus}
-      className={className}
-    />
+    <div>
+      {label && <label>{label}:</label>}
+      <Select
+        valueKey="value"
+        name={name}
+        value={transformedValue}
+        multi={multi}
+        options={options}
+        onChange={
+          multi ? multiChangeHandler(onChange) : singleChangeHandler(onChange)
+        }
+        onBlur={() => onBlur(value)}
+        onFocus={onFocus}
+        className={className}
+      />
+    </div>
   );
 }
 

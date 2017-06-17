@@ -8,10 +8,11 @@ import AddOsVerisionForm from "./form";
 import ButtonBlock from "../../components/ButtonOptions";
 
 const TableRow = props => {
-  const { elm, onRemove } = props;
+  const { elm, onRemove, model } = props;
   return (
-    <tr key={elm.id}>
+    <tr>
       <td className="id">{elm.id}</td>
+      <td>{model && model.name}</td>
       <td>{elm.width}</td>
       <td>{elm.height}</td>
       <ButtonBlock onRemoveClick={onRemove([elm.id])} />
@@ -22,16 +23,18 @@ const TableRow = props => {
 const EditScreens = props => {
   const rows = props.items.map(elm => (
     <TableRow
+      key={elm.id}
       elm={elm}
       onRemove={ids => () => props.dispatch(fetchRemoveScreens(ids))}
+      model={props.modelById(elm.model_id)}
     />
   ));
 
   return (
     <TableView
-      title="Edit Screens"
-      createBtnLabel="Create screen"
-      headRow={["ID", "Width", "Height"]}
+      title="Управление разрешение экранов"
+      createBtnLabel="Создать разрешение"
+      headRow={["#", "Модель", "Ширина", "Высота"]}
       rows={rows}
       specialForm={AddOsVerisionForm}
     />
