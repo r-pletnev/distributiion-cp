@@ -80,6 +80,13 @@ export function getModelById(state) {
   };
 }
 
+export function getModelByDeviceId(state) {
+  const items = getModels(state);
+  return id => {
+    return sortById(items.filter(elm => elm.device_id === id));
+  };
+}
+
 export function _getModelPriorities(state, profile) {
   return defaultToEmptyArray(state.models.priorities[profile]);
 }

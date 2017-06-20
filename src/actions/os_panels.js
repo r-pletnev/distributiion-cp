@@ -130,7 +130,7 @@ export function fetchSetOsPanelPriority(
 ) {
   const query = arguments[0];
   return dispatch => {
-    return SetOsPanelPriority(query)
+    return SetOsPanelPriority([query])
       .then(_ => {
         dispatch(setOsPanelPrioritySuccess(query));
         onSuccess();

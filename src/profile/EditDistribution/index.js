@@ -8,7 +8,8 @@ import {
 import {
   getModels,
   getModelById,
-  getModelPriorities
+  getModelPriorities,
+  getModelByDeviceId
 } from "../../reducers/models";
 import { getOses, getOsById, getOsPriorities } from "../../reducers/oses";
 import {
@@ -79,41 +80,38 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 function onDeviceRowClick(profile_name, action) {
-  return (device_id, selectAction, afterLoadAction) => () => {
-    selectAction(device_id);
-    action({ profile_name, device_id }).then(result => {
-      afterLoadAction(device_id)();
-    });
-  };
+  return (device_id, selectAction, afterLoadAction) =>
+    () => {
+      selectAction(device_id);
+      action({ profile_name, device_id }).then(result => {
+        afterLoadAction(device_id)();
+      });
+    };
 }
 
 function onOsRowClick(profile_name, action) {
-  return (os_id, device_id, selectAction, afterLoadAction) => () => {
-    selectAction(os_id);
-    action({ profile_name, device_id, os_id }).then(_ => {
-      afterLoadAction(os_id)();
-    });
-  };
+  return (os_id, device_id, selectAction, afterLoadAction) =>
+    () => {
+      selectAction(os_id);
+      action({ profile_name, device_id, os_id }).then(_ => {
+        afterLoadAction(os_id)();
+      });
+    };
 }
 
 function onOsVersionRowClick(profile_name, action) {
-  return (
-    os_version_id,
-    device_id,
-    os_id,
-    selectAction,
-    afterLoadAction
-  ) => () => {
-    selectAction(os_version_id);
-    action({
-      profile_name,
-      device_id,
-      os_id,
-      os_version_id
-    }).then(_ => {
-      afterLoadAction(os_version_id)();
-    });
-  };
+  return (os_version_id, device_id, os_id, selectAction, afterLoadAction) =>
+    () => {
+      selectAction(os_version_id);
+      action({
+        profile_name,
+        device_id,
+        os_id,
+        os_version_id
+      }).then(_ => {
+        afterLoadAction(os_version_id)();
+      });
+    };
 }
 
 function onModelRowClick(profile_name, action) {
@@ -124,18 +122,19 @@ function onModelRowClick(profile_name, action) {
     os_version_id,
     selectAction,
     afterLoadAction
-  ) => () => {
-    selectAction(model_id);
-    action({
-      profile_name,
-      model_id,
-      device_id,
-      os_id,
-      os_version_id
-    }).then(_ => {
-      afterLoadAction(model_id)();
-    });
-  };
+  ) =>
+    () => {
+      selectAction(model_id);
+      action({
+        profile_name,
+        model_id,
+        device_id,
+        os_id,
+        os_version_id
+      }).then(_ => {
+        afterLoadAction(model_id)();
+      });
+    };
 }
 
 function onBrowserRowClick(profile_name, action) {
@@ -147,19 +146,20 @@ function onBrowserRowClick(profile_name, action) {
     os_version_id,
     selectAction,
     afterLoadAction
-  ) => () => {
-    selectAction(browser_id);
-    action({
-      profile_name,
-      device_id,
-      model_id,
-      os_id,
-      os_version_id,
-      browser_id
-    }).then(_ => {
-      afterLoadAction(browser_id)();
-    });
-  };
+  ) =>
+    () => {
+      selectAction(browser_id);
+      action({
+        profile_name,
+        device_id,
+        model_id,
+        os_id,
+        os_version_id,
+        browser_id
+      }).then(_ => {
+        afterLoadAction(browser_id)();
+      });
+    };
 }
 
 const EditDistribution = props => {
@@ -195,116 +195,103 @@ const EditDistribution = props => {
           profile_name,
           fetchBrowserVersionPrs
         )}
-        fetchSetDevicePry={(profile_name => (values, onSuccess) =>
-          fetchSetDevicePry({ ...values, ...{ profile_name } }, onSuccess))(
+        fetchSetDevicePry={(profile_name =>
+          (values, onSuccess) =>
+            fetchSetDevicePry({ ...values, ...{ profile_name } }, onSuccess))(
           profile_name
         )}
-        fetchSetModelPry={(profile_name => (
-          device_id,
-          os_id,
-          os_version_id
-        ) => (values, onSuccess) =>
-          fetchSetModelPry(
-            { ...values, ...{ profile_name, device_id, os_id, os_version_id } },
-            onSuccess
-          ))(profile_name)}
-        fetchSetOsPry={(profile_name => device_id => (values, onSuccess) =>
-          fetchSetOsPry(
-            { ...values, ...{ profile_name, device_id } },
-            onSuccess
-          ))(profile_name)}
-        fetchSetOsVersionPry={(profile_name => (device_id, os_id) => (
-          values,
-          onSuccess
-        ) =>
-          fetchSetOsVersionPry(
-            { ...values, ...{ profile_name, device_id, os_id } },
-            onSuccess
-          ))(profile_name)}
-        fetchSetBrowserPry={(profile_name => (
-          device_id,
-          model_id,
-          os_id,
-          os_version_id
-        ) => (values, onSuccess) =>
-          fetchSetBrowserPry(
-            {
-              ...values,
-              ...{ profile_name, device_id, model_id, os_id, os_version_id }
-            },
-            onSuccess
-          ))(profile_name)}
-        fetchSetBrowserVersionPry={(profile_name => (
-          device_id,
-          model_id,
-          os_id,
-          os_version_id,
-          browser_id
-        ) => (values, onSuccess) =>
-          fetchSetBrowserVersionPry(
-            {
-              ...values,
-              ...{
-                profile_name,
-                device_id,
-                model_id,
-                os_id,
-                os_version_id,
-                browser_id
-              }
-            },
-            onSuccess
-          ))(profile_name)}
-        fetchSetScreenPry={(profile_name => (device_id, model_id) => (
-          values,
-          onSuccess
-        ) =>
-          fetchSetScreenPry(
-            { ...values, ...{ profile_name, device_id, model_id } },
-            onSuccess
-          ))(profile_name)}
-        fetchSetArchPry={(profile_name => (device_id, model_id, os_id) => (
-          values,
-          onSuccess
-        ) =>
-          fetchSetArchPry(
-            { ...values, ...{ profile_name, device_id, model_id, os_id } },
-            onSuccess
-          ))(profile_name)}
-        fetchSetOsPanelPry={(profile_name => (
-          device_id,
-          model_id,
-          os_id,
-          os_version_id
-        ) => (values, onSuccess) =>
-          fetchSetOsPanelPry(
-            {
-              ...values,
-              ...{ profile_name, device_id, model_id, os_id, os_version_id }
-            },
-            onSuccess
-          ))(profile_name)}
-        fetchSetTemplatePry={(profile_name => (
-          device_id,
-          model_id,
-          os_id,
-          os_version_id,
-          browser_id
-        ) => (values, onSuccess) =>
-          fetchSetTemplatePry(
-            {
-              ...values,
-              ...{
-                profile_name,
-                device_id,
-                model_id,
-                os_id,
-                os_version_id,
-                browser_id
-              }
-            },
-            onSuccess
-          ))(profile_name)}
+        fetchSetModelPry={(profile_name =>
+          (device_id, os_id, os_version_id) =>
+            (values, onSuccess) =>
+              fetchSetModelPry(
+                {
+                  ...values,
+                  ...{ profile_name, device_id, os_id, os_version_id }
+                },
+                onSuccess
+              ))(profile_name)}
+        fetchSetOsPry={(profile_name =>
+          device_id =>
+            (values, onSuccess) =>
+              fetchSetOsPry(
+                { ...values, ...{ profile_name, device_id } },
+                onSuccess
+              ))(profile_name)}
+        fetchSetOsVersionPry={(profile_name =>
+          (device_id, os_id) =>
+            (values, onSuccess) =>
+              fetchSetOsVersionPry(
+                { ...values, ...{ profile_name, device_id, os_id } },
+                onSuccess
+              ))(profile_name)}
+        fetchSetBrowserPry={(profile_name =>
+          (device_id, model_id, os_id, os_version_id) =>
+            (values, onSuccess) =>
+              fetchSetBrowserPry(
+                {
+                  ...values,
+                  ...{ profile_name, device_id, model_id, os_id, os_version_id }
+                },
+                onSuccess
+              ))(profile_name)}
+        fetchSetBrowserVersionPry={(profile_name =>
+          (device_id, model_id, os_id, os_version_id, browser_id) =>
+            (values, onSuccess) =>
+              fetchSetBrowserVersionPry(
+                {
+                  ...values,
+                  ...{
+                    profile_name,
+                    device_id,
+                    model_id,
+                    os_id,
+                    os_version_id,
+                    browser_id
+                  }
+                },
+                onSuccess
+              ))(profile_name)}
+        fetchSetScreenPry={(profile_name =>
+          (device_id, model_id) =>
+            (values, onSuccess) =>
+              fetchSetScreenPry(
+                { ...values, ...{ profile_name, device_id, model_id } },
+                onSuccess
+              ))(profile_name)}
+        fetchSetArchPry={(profile_name =>
+          (device_id, os_id) =>
+            (values, onSuccess) =>
+              fetchSetArchPry(
+                { ...values, ...{ profile_name, device_id, os_id } },
+                onSuccess
+              ))(profile_name)}
+        fetchSetOsPanelPry={(profile_name =>
+          (device_id, os_id, os_version_id) =>
+            (values, onSuccess) =>
+              fetchSetOsPanelPry(
+                {
+                  ...values,
+                  ...{ profile_name, device_id, os_id, os_version_id }
+                },
+                onSuccess
+              ))(profile_name)}
+        fetchSetTemplatePry={(profile_name =>
+          (device_id, model_id, os_id, os_version_id, browser_id) =>
+            (values, onSuccess) =>
+              fetchSetTemplatePry(
+                {
+                  ...values,
+                  ...{
+                    profile_name,
+                    device_id,
+                    model_id,
+                    os_id,
+                    os_version_id,
+                    browser_id
+                  }
+                },
+                onSuccess
+              ))(profile_name)}
       />
     </div>
   );
@@ -321,6 +308,7 @@ function mapStateToProps(state, ownProps) {
     models: {
       items: getModels(state),
       byId: getModelById(state),
+      byDeviceId: getModelByDeviceId(state),
       priorities: getModelPriorities(state, profile_name)
     },
     oses: {

@@ -182,14 +182,11 @@ class TableDistribution extends React.Component {
     this.props.fetchArchPrs({
       profile_name: this.props.match.params.profile_name,
       device_id: this.state.device_id,
-      model_id: this.state.model_id,
-      os_id: this.state.os_id,
-      os_version_id: os_version_id
+      os_id: this.state.os_id
     });
     this.props.fetchOsPanelPrs({
       profile_name: this.props.match.params.profile_name,
       device_id: this.state.device_id,
-      model_id: this.state.model_id,
       os_id: this.state.os_id,
       os_version_id: os_version_id
     });
@@ -295,7 +292,7 @@ class TableDistribution extends React.Component {
         model_id: this.state.model_id,
         os_id: this.state.os_id,
         os_version_id: this.state.os_version_id,
-        browser_id: browser_version_id
+        browser_id: this.state.browser_id
       });
       this.setState({ browser_version_id });
     };
@@ -482,6 +479,10 @@ class TableDistribution extends React.Component {
         return this.props.os_versions.byOsId(this.state.os_id);
       }
 
+      case "models": {
+        return this.props.models.byDeviceId(this.state.device_id);
+      }
+
       default: {
         return this.props[currentType].items;
       }
@@ -636,7 +637,6 @@ class TableDistribution extends React.Component {
           items={this.getCurrentTypeItems()}
           action={this.props.fetchSetArchPry(
             this.state.device_id,
-            this.state.model_id,
             this.state.os_id
           )}
           fieldName="arch_id"
@@ -648,7 +648,6 @@ class TableDistribution extends React.Component {
           items={this.getCurrentTypeItems()}
           action={this.props.fetchSetOsPanelPry(
             this.state.device_id,
-            this.state.model_id,
             this.state.os_id,
             this.state.os_version_id
           )}

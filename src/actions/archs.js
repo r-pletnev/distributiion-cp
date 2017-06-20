@@ -81,13 +81,15 @@ function removeArchsSuccess(payload) {
   };
 }
 
-export function fetchArchPriorities({
-  profile_name,
-  device_id,
-  model_id,
-  os_id,
-  os_version_id
-}) {
+export function fetchArchPriorities(
+  {
+    profile_name,
+    device_id,
+    model_id,
+    os_id,
+    os_version_id
+  }
+) {
   const query = arguments[0];
   return dispatch => {
     return GetArchPriorities(query)
@@ -125,7 +127,7 @@ export function fetchSetArchPriority(
 ) {
   const query = arguments[0];
   return dispatch => {
-    return SetArchPriority(query)
+    return SetArchPriority([query])
       .then(_ => {
         dispatch(setArchPrioritySuccess([query]));
         onSuccess();
@@ -134,14 +136,16 @@ export function fetchSetArchPriority(
   };
 }
 
-function setArchPrioritySuccess({
-  profile_name,
-  device_id,
-  model_id,
-  os_id,
-  arch_id,
-  priority
-}) {
+function setArchPrioritySuccess(
+  {
+    profile_name,
+    device_id,
+    model_id,
+    os_id,
+    arch_id,
+    priority
+  }
+) {
   const priorityProp = {
     id: arch_id,
     device_id,
