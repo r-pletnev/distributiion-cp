@@ -259,10 +259,13 @@ const EditDistribution = props => {
                 onSuccess
               ))(profile_name)}
         fetchSetArchPry={(profile_name =>
-          (device_id, os_id) =>
+          (device_id, os_id, os_version_id) =>
             (values, onSuccess) =>
               fetchSetArchPry(
-                { ...values, ...{ profile_name, device_id, os_id } },
+                {
+                  ...values,
+                  ...{ profile_name, device_id, os_id, os_version_id }
+                },
                 onSuccess
               ))(profile_name)}
         fetchSetOsPanelPry={(profile_name =>

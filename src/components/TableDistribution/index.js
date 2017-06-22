@@ -182,7 +182,8 @@ class TableDistribution extends React.Component {
     this.props.fetchArchPrs({
       profile_name: this.props.match.params.profile_name,
       device_id: this.state.device_id,
-      os_id: this.state.os_id
+      os_id: this.state.os_id,
+      os_version_id: this.state.os_version_id
     });
     this.props.fetchOsPanelPrs({
       profile_name: this.props.match.params.profile_name,
@@ -637,7 +638,8 @@ class TableDistribution extends React.Component {
           items={this.getCurrentTypeItems()}
           action={this.props.fetchSetArchPry(
             this.state.device_id,
-            this.state.os_id
+            this.state.os_id,
+            this.state.os_version_id
           )}
           fieldName="arch_id"
         />

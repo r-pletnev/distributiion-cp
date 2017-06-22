@@ -12,6 +12,7 @@ const TableRow = props => {
     <tr key={elm.id}>
       <td className="id">{elm.id}</td>
       <td>{elm.name}</td>
+      <td>{elm.template}</td>
       <ButtonBlock onRemoveClick={onRemove([elm.id])} />
     </tr>
   );
@@ -29,7 +30,7 @@ const EditBrowsers = props => {
     <TableView
       title="Edit Browsers"
       createBtnLabel="Create Browser"
-      headRow={["ID", "Browser name"]}
+      headRow={["#", "Имя браузера", "Шаблон"]}
       rows={rows}
       specialForm={AddBrowserForm}
     />

@@ -122,14 +122,22 @@ function getArchPrioritiesSuccess(payload, { profile_name, ...restArgs }) {
 }
 
 export function fetchSetArchPriority(
-  { profile_name, device_id, model_id, os_id, arch_id, priority },
+  {
+    profile_name,
+    device_id,
+    model_id,
+    os_id,
+    os_version_id,
+    arch_id,
+    priority
+  },
   onSuccess
 ) {
   const query = arguments[0];
   return dispatch => {
     return SetArchPriority([query])
       .then(_ => {
-        dispatch(setArchPrioritySuccess([query]));
+        dispatch(setArchPrioritySuccess(query));
         onSuccess();
       })
       .catch(error => console.error(error));
@@ -142,6 +150,7 @@ function setArchPrioritySuccess(
     device_id,
     model_id,
     os_id,
+    os_version_id,
     arch_id,
     priority
   }
@@ -151,6 +160,7 @@ function setArchPrioritySuccess(
     device_id,
     model_id,
     os_id,
+    os_version_id,
     priority: Number(priority)
   };
 
