@@ -32,21 +32,24 @@ import { fetchAllDomains } from "./actions/domains";
 import EditDomains from "./cabinet/EditDomains";
 import { fetchAllAges } from "./actions/ages";
 import EditAges from "./cabinet/EditAges";
+import EditSearchEngines from "./cabinet/EditSEngines";
+import {
+  fetchAllSearchEngines,
+  fetchGetSearchEnginePriorities
+} from "./actions/search_engines";
+import EditProfileSearchEngines from "./profile/EditProfileSearchEngines";
 
-const render = (Component, rest) =>
-  fns =>
-    store =>
-      props => {
-        const { params } = props.match;
-        const { dispatch, getState } = store;
-        const state = getState();
-        fns.forEach(elm => {
-          const { action, always, path } = elm;
-          const loaded = always ? false : getProp(path, state);
-          if (!loaded) dispatch(action(params));
-        });
-        return <Component />;
-      };
+const render = (Component, rest) => fns => store => props => {
+  const { params } = props.match;
+  const { dispatch, getState } = store;
+  const state = getState();
+  fns.forEach(elm => {
+    const { action, always, path } = elm;
+    const loaded = always ? false : getProp(path, state);
+    if (!loaded) dispatch(action(params));
+  });
+  return <Component />;
+};
 
 export const loadTemplates = render(EditTemplates)([
   { action: fetchAllBrowsers, path: ["browsers.fetchStatus"] },
@@ -141,4 +144,13 @@ export const loadDomains = render(EditDomains)([
 
 export const loadAges = render(EditAges)([
   { action: fetchAllAges, path: ["ages.fetchStatus"] }
+]);
+
+export const loadSearchEngines = render(EditSearchEngines)([
+  { action: fetchAllSearchEngines, path: ["search_engines.fetchStatus"] }
+]);
+
+export const loadSearchEnginePriorites = render(EditProfileSearchEngines)([
+  { action: fetchAllSearchEngines, path: ["search_engines.fetchStatus"] },
+  { action: fetchGetSearchEnginePriorities, always: true }
 ]);

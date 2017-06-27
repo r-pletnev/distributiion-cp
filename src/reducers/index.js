@@ -16,6 +16,7 @@ import favorites from "./favorites";
 import ages from "./ages";
 import ux from "./ux";
 import adblocks from "./adblocks";
+import search_engines from "./search_engines";
 
 export const rootReducer = combineReducers({
   form: FormReducer,
@@ -32,6 +33,7 @@ export const rootReducer = combineReducers({
   os_panels,
   browser_versions,
   browser_panels,
+  search_engines,
   templates,
   profiles,
   ux

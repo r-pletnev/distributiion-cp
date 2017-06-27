@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Table from "../Table";
 import AddModal from "../AddModal";
 
-class TableView extends React.Component {
+export default class TableView extends React.Component {
   constructor(props) {
     super(props);
     this.state = { showCreateModal: false };
@@ -51,7 +51,7 @@ class TableView extends React.Component {
         <div className="table-item-btn">
           <button
             type="button"
-            className="btn btn-success"
+            className={`btn btn-${this.props.createBtnClass}`}
             onClick={this.openCreateModal}
           >
             {createBtnLabel}
@@ -63,15 +63,21 @@ class TableView extends React.Component {
   }
 }
 
+TableView.defaultProps = {
+  createBtnClass: "success"
+};
+
 TableView.propTypes = {
   // table props
   title: PropTypes.string,
   createBtnLabel: PropTypes.string,
+  createBtnClass: PropTypes.string,
   headRow: PropTypes.array,
   rows: PropTypes.array,
 
   // form by itself
   specialForm: PropTypes.func,
+  specialFormProps: PropTypes.object,
 
   // or props for defaultForm
   doubleName: PropTypes.string,
@@ -85,7 +91,4 @@ TableView.propTypes = {
   statusEditForm: PropTypes.bool,
   closeEditForm: PropTypes.func,
   editFormTitle: PropTypes.string
-  // if not null it prefered simple rows
 };
-
-export default TableView;

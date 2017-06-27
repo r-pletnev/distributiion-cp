@@ -87,3 +87,9 @@ export const GET_AGES_URL = "/get_ages";
 
 export const GET_ADBLOCKS_URL = "/get_adblock_priorities";
 export const SET_ADBLOCKS_URL = "/set_adblock_priority";
+
+export const ADD_SEARCH_ENGINES_URL = "/add_search_engines";
+export const GET_SEARCH_ENGINES_URL = "/get_search_engines";
+export const REMOVE_SEARCH_ENGINES_URL = "/remove_search_engines";
+export const GET_SEARCH_ENGINE_PRIORITIES_URL = "/get_se_priorities";
+export const SET_SEARCH_ENGINE_PRIORITIES_URL = "/set_se_priority";

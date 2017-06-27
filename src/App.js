@@ -19,7 +19,7 @@ const App = props => {
     <BrowserRouter>
       <PageLayout>
         <Switch>
-          <Route path="/" exact component={MainPage} />
+          <Route path={urls.home} exact component={MainPage} />
           <Route path={urls.os_panels} render={hooks.loadOsPanels(store)} />
           <Route path={urls.models} render={hooks.loadModels(store)} />
           <Route path={urls.devices} render={hooks.loadDevices(store)} />
@@ -54,6 +54,15 @@ const App = props => {
           />
           <Route path={urls.domains} render={hooks.loadDomains(store)} />
           <Route path={urls.ages} render={hooks.loadAges(store)} />
+          <Route
+            path={urls.search_engines}
+            render={hooks.loadSearchEngines(store)}
+          />
+          <Route
+            path={urls.profile_search_engines}
+            render={hooks.loadSearchEnginePriorites(store)}
+          />
+
           <Route component={NoMatch} />
         </Switch>
       </PageLayout>

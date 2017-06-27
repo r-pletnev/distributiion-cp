@@ -1,4 +1,5 @@
 const urls = {
+  home: "/",
   devices: "/devices",
   screens: "/screens",
   models: "/models",
@@ -15,7 +16,9 @@ const urls = {
   distribution: "/profiles/:profile_name/distribution",
   favorites: "/favorites",
   domains: "/favorites/:favorite_id",
-  ages: "/ages"
+  ages: "/ages",
+  search_engines: "/search_engines",
+  profile_search_engines: "/profiles/:profile_name/search_engine"
 };
 
 export default urls;

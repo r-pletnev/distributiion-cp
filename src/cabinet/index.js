@@ -16,6 +16,12 @@ const items = [
     image: "al-ages"
   },
   {
+    title: "Поисковые системы",
+    text: "Список поисковых систем для посещения",
+    to: urls.search_engines,
+    image: "engines"
+  },
+  {
     title: "Круги интересов",
     text: "Список кругов интересов",
     to: urls.favorites,
